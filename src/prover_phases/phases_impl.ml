@@ -535,7 +535,21 @@ let syms_in_conj_f decls =
 (* Process the given file (try to solve it) *)
 let process_file ?(prelude=Iter.empty) file =
   start_file file >>= fun () ->
-  parse_file file >>= fun stmts ->
+    let parsed_file = parse_file file 
+    in 
+    (* let ustmts : Input_format.t * UntypedAST.statement Iter.t = 
+      match parsed_file with
+      | (stuff: Input_format.t * UntypedAST.statement Iter.t, _, _) -> stuff
+      | _ -> . 
+      let getfst (x, _, _) = x in
+      let ustmts = getfst parsed_file
+    
+    
+  in *)
+    Util.debugf ~section 1 "phases_impl.ml %s" (fun k->k "i don't get this");
+    (* Util.debugf ~section 3 "@[<hv2>@{<green>before typing, still not quite getting it@}@ %a@]"
+    (fun k->k (Util.pp_iter Statement.pp_input) (CCVector.to_iter ustmts)); *)
+  parsed_file >>= fun stmts ->
   typing ~file prelude stmts >>= fun decls ->
   (* declare inductive types and constants *)
   CCVector.iter Statement.scan_simple_stmt_for_ind_ty decls;
