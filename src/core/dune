@@ -11,5 +11,9 @@
   (c_flags -Wextra -Wno-unused-parameter)
 )
 
+(env
+    (dev
+    (flags (:standard -warn-error -A))))
+
 (documentation
   (package logtk))

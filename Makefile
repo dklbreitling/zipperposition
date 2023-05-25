@@ -5,7 +5,7 @@ J?=3
 
 all: build test-cached
 
-DUNE_OPTS= -j $(J) --profile=release
+DUNE_OPTS= -j $(J) --profile=release #dev
 
 build:
 	@dune build @install $(DUNE_OPTS)

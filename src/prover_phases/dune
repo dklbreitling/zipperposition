@@ -6,3 +6,7 @@
              libzipperposition.avatar libzipperposition.induction)
   (flags :standard -w -32)
 )
+
+(env
+    (dev
+    (flags (:standard -warn-error -A))))

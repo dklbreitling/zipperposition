@@ -14,3 +14,8 @@
   (synopsis "library for the Zipperposition theorem prover")
   (libraries containers msat logtk logtk.arith logtk.proofs logtk.parsers str)
   (flags :standard -w -32-50 -open Logtk_arith))
+
+
+(env
+    (dev
+    (flags (:standard -warn-error -A))))

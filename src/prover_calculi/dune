@@ -5,3 +5,8 @@
   (libraries libzipperposition libzipperposition.avatar)
   (flags :standard -w -32)
 )
+
+
+(env
+    (dev
+    (flags (:standard -warn-error -A))))

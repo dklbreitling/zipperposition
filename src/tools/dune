@@ -15,3 +15,7 @@
   (flags :standard -w -32)
   (ocamlopt_flags :standard -Oclassic)
 )
+
+(env
+    (dev
+    (flags (:standard -warn-error -A))))
