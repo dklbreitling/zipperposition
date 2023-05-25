@@ -134,7 +134,7 @@ let get_name = function
 let fpf = Format.fprintf
 
 let pp_form_ pp out (logic, name, role, f, generals) =
-  Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@])."
+  Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml"
     logic pp_name name pp_role role pp f pp_generals generals
 
 let pp pp_t out = function

@@ -1041,7 +1041,7 @@ let flatten ~ctx ~lazy_cnf ~should_define seq : _ Iter.t =
            [Stmt.goal ~attrs ~proof:(proof ()) (F.and_ (flatten_axiom stmt f))]
          | Stmt.NegatedGoal _ -> assert false
        in
-       Util.debugf ~section 2 "@[<2>flatten `@[%a@]`@ into `@[%a@]`@]"
+       Util.debugf ~section 2 "@[<2>flatten `@[%a@]`@ into `@[%a@]`@] cnf.ml"
          (fun k->k pp_stmt stmt (Util.pp_list pp_stmt) new_sts);
        begin match pop_new_defs ~ctx with
          | [] -> new_sts
