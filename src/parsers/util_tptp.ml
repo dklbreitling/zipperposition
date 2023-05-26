@@ -114,7 +114,6 @@ let parse_file ?cache ~recursive f =
 
 
       CCList.iter (fun d -> Printf.printf "%a\n" (fun c -> A.pp STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
-      (* Printf.printf (CCList.pp (A.pp STerm.ZF.pp_inner)) decls; *)
 
       List.iter
         (fun decl -> match decl, names with
