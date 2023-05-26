@@ -46,18 +46,20 @@ val pp_general : general_data CCFormat.printer
 val pp_general_debugf : general_data CCFormat.printer  (* ugly version *)
 val pp_generals : general_data list CCFormat.printer
 
+
 type 'a t =
-  | CNF of name * role * 'a list * optional_info
-  | FOF of name * role * 'a * optional_info
-  | TFF of name * role * 'a * optional_info
-  | THF of name * role * 'a * optional_info (* XXX not parsed yet *)
-  | TypeDecl of name * string * 'a * optional_info  (* type declaration for a symbol *)
-  | NewType of name * string * 'a * optional_info (* declare new type constant... *)
-  | Include of string
-  | IncludeOnly of string * name list   (* include a subset of names *)
+| CNF of name * role * 'a list * optional_info
+| FOF of name * role * 'a * optional_info
+| TFF of name * role * 'a * optional_info
+| THF of name * role * 'a * optional_info (* XXX not parsed yet *)
+| TypeDecl of name * string * 'a * optional_info  (* type declaration for a symbol *)
+| NewType of name * string * 'a * optional_info (* declare new type constant... *)
+| Include of string
+| IncludeOnly of string * name list   (* include a subset of names *)
 (** top level declaration *)
 
 type 'a declaration = 'a t
+val pp_debug :  'a CCFormat.printer -> 'a declaration CCFormat.printer
 
 val get_name : _ t -> name
 (** Find the name of the declaration, or

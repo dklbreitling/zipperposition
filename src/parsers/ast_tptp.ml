@@ -158,4 +158,21 @@ let pp pp_t out = function
   | THF (name, role, f, generals) ->
     pp_form_ pp_t out ("thf", name, role, f, generals)
 
+
+let pp_generals_debug out l = match l with
+| [] -> ()
+| _::_ ->
+  Format.fprintf out ",@ ";
+  Util.pp_list ~sep:", " pp_general_debugf out l
+
+let pp_form_debug_ pp out (logic, name, role, f, generals) =
+  Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml:pp_form_debug_"
+    logic pp_name name pp_role role pp f pp_generals_debug generals
+
+let pp_debug pp_t out toprint = match toprint with
+| THF (name, role, f, generals) ->
+  pp_form_debug_ pp_t out ("thf", name, role, f, generals)
+| _  -> pp pp_t out toprint
+
+
 let to_string ppt = CCFormat.to_string (pp ppt)

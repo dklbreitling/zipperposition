@@ -112,8 +112,8 @@ let parse_file ?cache ~recursive f =
       (* parse declarations from file *)
       let decls = Parse_tptp.parse_declarations Lex_tptp.token buf in
 
+      CCList.iter (fun d -> Printf.printf "%a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
 
-      CCList.iter (fun d -> Printf.printf "%a\n" (fun c -> A.pp STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
 
       List.iter
         (fun decl -> match decl, names with
