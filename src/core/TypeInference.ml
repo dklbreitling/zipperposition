@@ -1071,7 +1071,7 @@ let read_attrs ~file attrs =
   Proof.Src.from_file ?name file, attrs
 
 let infer_statement_exn ?(file="<no file>") ctx st =
-  Util.debugf ~section 30 "@[<2>infer types for @{<yellow>statement@}@ `@[%a@]`@]"
+  Util.debugf ~section 3 "@[<2>infer types for @{<yellow>statement@}@ `@[%a@]`@]"
     (fun k->k A.pp_statement st);
   (* auxiliary statements *)
   let src, attrs = read_attrs ~file st.A.attrs in
