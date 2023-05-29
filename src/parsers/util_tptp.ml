@@ -112,8 +112,7 @@ let parse_file ?cache ~recursive f =
       (* parse declarations from file *)
       let decls = Parse_tptp.parse_declarations Lex_tptp.token buf in
 
-      CCList.iter (fun d -> Printf.printf "%a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
-
+      CCList.iter (fun d -> Printf.printf "Util_tptp:parse_file %a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
 
       List.iter
         (fun decl -> match decl, names with
@@ -219,7 +218,19 @@ let rec looks_like_def f = match PT.view f with
   | _ -> false
 
 let to_ast st =
-  let conv_form name role f =
+  let conv_form name role f info =
+(*     
+    Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml:pp_form_debug_" logic pp_name name pp_role role pp f 
+
+    Format.fprintf "%a\n" (fun c -> A.pp_generals_debug info (CCFormat.of_chan c))  *)
+
+    (* Printf.printf "%a\n" (fun c -> A.pp_generals_debug (CCFormat.of_chan c) info ); *)
+
+    (* Printf.printf "Util_tptp: %a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d *)
+
+    Printf.printf "Util_tptp:to_ast:conv_form %a\n" (fun c -> Format.printf "name %a, info %a" A.pp_name name A.pp_generals_debug) info;
+
+
     let name = A.string_of_name name in
     let attrs = [UA.attr_name name] in
     match role with
@@ -262,17 +273,17 @@ let to_ast st =
     | A.TypeDecl (name,s,ty,info)
     | A.NewType (name,s,ty,info) ->
       conv_decl name s ty info
-    | A.TFF (name,role,f,_)
-    | A.THF (name,role,f,_)
-    | A.FOF (name,role,f,_) ->
-      conv_form name role f
-    | A.CNF (name,role,f,_) ->
+    | A.TFF (name,role,f, info)
+    | A.THF (name,role,f, info)
+    | A.FOF (name,role,f, info) ->
+      conv_form name role f info
+    | A.CNF (name,role,f, info) ->
       assert (not (CCList.is_empty f));
       (* to get correct typing. *)
       let f =
         if List.length f == 1 then List.hd f else PT.or_ f 
       in
-      conv_form name role f
+      conv_form name role f info
   end
 
 (* default function for giving a name to the declaration of a symbol *)

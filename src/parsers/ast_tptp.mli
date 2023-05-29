@@ -45,6 +45,7 @@ val pp_name : name CCFormat.printer
 val pp_general : general_data CCFormat.printer
 val pp_general_debugf : general_data CCFormat.printer  (* ugly version *)
 val pp_generals : general_data list CCFormat.printer
+val pp_generals_debug : general_data list CCFormat.printer  (* ugly version *)
 
 
 type 'a t =
