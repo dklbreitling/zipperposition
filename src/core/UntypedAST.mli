@@ -51,10 +51,14 @@ type statement_view =
   | Lemma of form
   | Goal of form
 
+type simp_annotation =
+| Isabelle of string
+
 type statement = {
   stmt: statement_view;
   attrs: attrs;
   loc: Loc.t option;
+  annotation: simp_annotation option;
 }
 
 val default_attrs : attrs

@@ -44,10 +44,14 @@ type statement_view =
   | Lemma of form
   | Goal of form
 
+type simp_annotation =
+  | Isabelle of string
+
 type statement = {
   stmt: statement_view;
   attrs: attrs;
   loc: Loc.t option;
+  annotation: simp_annotation option;
 }
 
 let default_attrs = []
@@ -69,7 +73,7 @@ let attr_ac = A.str "ac"
 let attr_prefix s = A.app "prefix" [A.quoted s]
 let attr_infix s = A.app "infix" [A.quoted s]
 
-let make_ ?loc ?(attrs=default_attrs) stmt = {loc; stmt; attrs; }
+let make_ ?loc ?(attrs=default_attrs) stmt = {loc; stmt; attrs; annotation = (Some (Isabelle "isabelle_test_annotation"))}
 
 let mk_def def_id def_ty def_rules = {def_id; def_ty; def_rules}
 
@@ -115,6 +119,8 @@ let name st = name_of_attrs st.attrs
 let pp_statement out st =
   let attrs = st.attrs in
   let fpf = Format.fprintf in
+  let annotation = match st.annotation with | Some Isabelle s ->  s | None -> "None" in
+  let pp_anno out anno = fpf out "simp_annotation %s" anno in
   match st.stmt with
   | Include s ->
     fpf out "@[<2>include \"%s\"@]@." (String.escaped s)
@@ -141,7 +147,7 @@ let pp_statement out st =
     in
     fpf out "@[<v>data%a@ %a@]." pp_attrs attrs (Util.pp_list ~sep:" and " pp_data) l
   | Assert f ->
-    fpf out "@[<2>assert%a@ @[%a@]@]." pp_attrs attrs T.pp f
+    fpf out "@[<2>assert%a@ @[%a@]@ [%a]]." pp_attrs attrs T.pp f pp_anno annotation 
   | Lemma f ->
     fpf out "@[<2>lemma%a@ @[%a@]@]." pp_attrs attrs T.pp f
   | Goal f ->
