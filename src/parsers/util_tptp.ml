@@ -219,17 +219,8 @@ let rec looks_like_def f = match PT.view f with
 
 let to_ast st =
   let conv_form name role f info =
-(*     
-    Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml:pp_form_debug_" logic pp_name name pp_role role pp f 
-
-    Format.fprintf "%a\n" (fun c -> A.pp_generals_debug info (CCFormat.of_chan c))  *)
-
-    (* Printf.printf "%a\n" (fun c -> A.pp_generals_debug (CCFormat.of_chan c) info ); *)
-
-    (* Printf.printf "Util_tptp: %a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d *)
 
     Printf.printf "Util_tptp:to_ast:conv_form %a\n" (fun c -> Format.printf "name %a, info %a" A.pp_name name A.pp_generals_debug) info;
-
 
     let name = A.string_of_name name in
     let attrs = [UA.attr_name name] in
@@ -254,7 +245,34 @@ let to_ast st =
     | A.R_plain
     | A.R_finite _
     | A.R_type
-    | A.R_unknown  -> UA.assert_ ~attrs f
+    | A.R_unknown  ->
+      (* TODO: make these checks more efficient *)
+      let check_nrd datum  = 
+        match datum with 
+        | A.GList l -> List.mem (A.GString "isabelle_non_rec_def") l 
+        | _ -> false
+      in
+      let check_rd datum  =
+        match datum with 
+        | A.GList l -> List.mem (A.GString "isabelle_rec_def") l 
+        | _ -> false
+      in
+      let check_simp datum  =
+          match datum with 
+          | A.GList l -> List.mem (A.GString "isabelle_simp") l 
+          | _ -> false
+      in
+      (* TODO: get rank *)
+      let is_non_rec_def info = List.exists check_nrd info in
+      let is_rec_def info = List.exists check_rd info in
+      let is_simp info = List.exists check_simp info in
+      let isabelle_annotation = 
+        if is_non_rec_def info then Some(UA.Isabelle_non_rec_def)
+        else if is_rec_def info then Some(UA.Isabelle_rec_def)
+        else if is_simp info then Some(UA.Isabelle_rec_def)
+        else None
+      in 
+      UA.assert_ ~attrs ~isabelle_annotation f
   and conv_decl name s ty info =
     let name = A.string_of_name name in
     let attr_name = UA.attr_name name in

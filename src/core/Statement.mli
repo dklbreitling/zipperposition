@@ -34,6 +34,11 @@ type attr =
 
 type attrs = attr list
 
+type isabelle_annotation =
+| Isabelle_non_rec_def
+| Isabelle_rec_def
+| Isabelle_simp
+
 type 'ty skolem = ID.t * 'ty
 
 (** polarity for rewrite rules *)

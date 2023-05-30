@@ -51,14 +51,16 @@ type statement_view =
   | Lemma of form
   | Goal of form
 
-type simp_annotation =
-| Isabelle of string
+type isabelle_annotation =
+| Isabelle_non_rec_def
+| Isabelle_rec_def
+| Isabelle_simp
 
 type statement = {
   stmt: statement_view;
   attrs: attrs;
   loc: Loc.t option;
-  annotation: simp_annotation option;
+  isabelle_annotation: isabelle_annotation option;
 }
 
 val default_attrs : attrs
@@ -70,7 +72,7 @@ val decl : ?loc:Loc.t -> ?attrs:attrs -> string -> ty -> statement
 val def : ?loc:Loc.t -> ?attrs:attrs -> def list -> statement
 val data : ?loc:Loc.t -> ?attrs:attrs -> data list -> statement
 val rewrite : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
-val assert_ : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
+val assert_ : ?loc:Loc.t -> ?attrs:attrs -> ?isabelle_annotation:isabelle_annotation option -> term -> statement
 val lemma : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
 val goal : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
 

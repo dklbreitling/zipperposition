@@ -1170,7 +1170,13 @@ let infer_statement_exn ?(file="<no file>") ctx st =
       Stmt.data ~attrs ~proof:(Proof.Step.intro src Proof.R_def) l'
     | A.Assert t ->
       let t = infer_prop_exn ctx t in
-      Stmt.assert_ ~attrs ~proof:(Proof.Step.intro src Proof.R_assert) t
+      let isabelle_annotation = match st.isabelle_annotation with 
+      | Some A.Isabelle_non_rec_def -> Some Stmt.Isabelle_non_rec_def
+      | Some A.Isabelle_rec_def -> Some Stmt.Isabelle_rec_def
+      | Some A.Isabelle_simp -> Some Stmt.Isabelle_simp
+      | None -> None
+      in
+      Stmt.assert_ ~attrs ~proof:(Proof.Step.intro src Proof.R_assert) t (* TODO: add ~isabelle_annotation*)
     | A.Lemma t ->
       let t = infer_prop_exn ctx t in
       Stmt.lemma ~attrs ~proof:(Proof.Step.intro src Proof.R_lemma) [t]

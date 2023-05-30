@@ -90,14 +90,14 @@ let rec pp_general out d = match d with
     Format.fprintf out "[%a]" (Util.pp_list pp_general) l
 
 let rec pp_general_debugf out d = match d with
-  | GString s -> Format.fprintf out "GSstr %s" s
+  | GString s -> Format.fprintf out "GStr %s" s
   | GInt i -> Format.fprintf out "GInt %d" i
   | GVar s -> Format.fprintf out "GVar %s" s
   | GColumn (a, b) -> Format.fprintf out "%a: %a" pp_general_debugf a pp_general_debugf b
   | GNode (f, l) ->
     Format.fprintf out "GNode(%s[%a])" f (Util.pp_list pp_general_debugf) l
   | GList l ->
-    CCFormat.list pp_general_debugf out l
+    Format.fprintf out "GList %a" (Util.pp_list pp_general_debugf) l
 
 let pp_generals out l = match l with
   | [] -> ()
@@ -163,7 +163,7 @@ let pp_generals_debug out l = match l with
 | [] -> ()
 | _::_ ->
   Format.fprintf out ",@ ";
-  Util.pp_list ~sep:", " pp_general_debugf out l
+  Util.pp_list ~sep:"|, |" pp_general_debugf out l
 
 let pp_form_debug_ pp out (logic, name, role, f, generals) =
   Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml:pp_form_debug_"
