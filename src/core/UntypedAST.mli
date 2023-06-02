@@ -56,11 +56,14 @@ type isabelle_annotation =
 | Isabelle_rec_def
 | Isabelle_simp
 
+type isabelle_rank = int
+
 type statement = {
   stmt: statement_view;
   attrs: attrs;
   loc: Loc.t option;
   isabelle_annotation: isabelle_annotation option;
+  isabelle_rank: isabelle_rank option;
 }
 
 val default_attrs : attrs
@@ -72,7 +75,7 @@ val decl : ?loc:Loc.t -> ?attrs:attrs -> string -> ty -> statement
 val def : ?loc:Loc.t -> ?attrs:attrs -> def list -> statement
 val data : ?loc:Loc.t -> ?attrs:attrs -> data list -> statement
 val rewrite : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
-val assert_ : ?loc:Loc.t -> ?attrs:attrs -> ?isabelle_annotation:isabelle_annotation option -> term -> statement
+val assert_ : ?loc:Loc.t -> ?attrs:attrs -> ?isabelle_annotation:isabelle_annotation option -> ?isabelle_rank:isabelle_rank option -> term -> statement
 val lemma : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
 val goal : ?loc:Loc.t -> ?attrs:attrs -> term -> statement
 

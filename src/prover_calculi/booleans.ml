@@ -1764,9 +1764,16 @@ let if_changed proof (mk: ?attrs:Logtk.Statement.attrs -> 'r) s f p =
    | [ x ] when TypedSTerm.equal x p -> [s]
    | _ -> map(fun x -> mk ~proof:(proof s) x) fp *)
 
+let if_changed_assert proof ?isabelle_annotation ?isabelle_rank s f p =
+  let fp = f s p in
+  if fp == [p] then [s] else map(fun x -> assert_ ~proof:(proof s) ?isabelle_annotation x) fp
+
 let map_propositions ~proof f =
   CCVector.flat_map_list(fun s -> match Statement.view s with
-      | Assert p	-> if_changed proof assert_ s f p
+      | Assert p	->
+        let isabelle_annotation = s.isabelle_annotation in 
+        let isabelle_rank = s.isabelle_rank in
+        if_changed_assert proof ~isabelle_annotation ~isabelle_rank s f p
       | Lemma ps	-> if_changed proof lemma s (map%f) ps
       | Goal p	-> if_changed proof goal s f p
       | NegatedGoal(ts, ps)	-> if_changed proof (neg_goal ~skolems:ts) s (map%f) ps
@@ -1811,6 +1818,8 @@ let name_quantifiers stmts =
   let changed = ref false in
   let if_changed (mk: ?attrs:Logtk.Statement.attrs -> 'r) s r = 
     if !changed then (changed := false; mk ~proof:(proof s) r) else s in
+  let if_changed_assert ?isabelle_annotation ?isabelle_rank s r = 
+    if !changed then (changed := false; assert_ ~proof:(proof s) ?isabelle_annotation ?isabelle_rank r) else s in
   let if_changed_list (mk: ?attrs:Logtk.Statement.attrs -> 'l) s r = 
     if !changed then (changed := false; mk ~proof:(proof s) r) else s in
   let name_prop_Qs s = replaceTST(fun t -> match TypedSTerm.view t with
@@ -1839,7 +1848,10 @@ let name_quantifiers stmts =
       | Data ts	-> s
       | Def defs	-> s
       | Rewrite _	-> s
-      | Assert p	-> if_changed assert_ s (name_prop_Qs s p)
+      | Assert p	-> 
+        let isabelle_annotation = s.isabelle_annotation in
+        let isabelle_rank = s.isabelle_rank in
+        if_changed_assert ~isabelle_annotation ~isabelle_rank s (name_prop_Qs s p)
       | Lemma ps	-> if_changed_list lemma s (map (name_prop_Qs s) ps)
       | Goal p	-> if_changed goal s (name_prop_Qs s p)
       | NegatedGoal(ts, ps)	-> if_changed_list (neg_goal ~skolems:ts) s (map (name_prop_Qs s) ps)

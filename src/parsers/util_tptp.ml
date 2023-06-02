@@ -246,7 +246,7 @@ let to_ast st =
     | A.R_finite _
     | A.R_type
     | A.R_unknown  ->
-      (* TODO: make these checks more efficient *)
+      (* @DAVID TODO: make these checks more efficient, maybe only check for axiom/theorem? *)
       let check_nrd datum  = 
         match datum with 
         | A.GList l -> List.mem (A.GString "isabelle_non_rec_def") l 
@@ -262,7 +262,6 @@ let to_ast st =
           | A.GList l -> List.mem (A.GString "isabelle_simp") l 
           | _ -> false
       in
-      (* TODO: get rank *)
       let is_non_rec_def info = List.exists check_nrd info in
       let is_rec_def info = List.exists check_rd info in
       let is_simp info = List.exists check_simp info in
@@ -272,7 +271,22 @@ let to_ast st =
         else if is_simp info then Some(UA.Isabelle_rec_def)
         else None
       in 
-      UA.assert_ ~attrs ~isabelle_annotation f
+      let get_rank info =
+        let get_glists_inner_opt = function | A.GList l -> Some l | _ -> None in
+        let get_rank_opt = function 
+          | A.GNode ("isabelle_rank", l) -> (match List.hd l with 
+                | A.GInt i -> Some i 
+                | _ -> None)
+          | _ -> None
+        in
+        let rank_list = List.filter_map get_glists_inner_opt info 
+          |> List.flatten 
+          |> List.filter_map get_rank_opt
+        in
+        if List.length rank_list > 0 then Some (List.hd rank_list) else None 
+      in
+      let isabelle_rank = get_rank info in
+      UA.assert_ ~attrs ~isabelle_annotation ~isabelle_rank f
   and conv_decl name s ty info =
     let name = A.string_of_name name in
     let attr_name = UA.attr_name name in

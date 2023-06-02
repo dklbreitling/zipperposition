@@ -1170,13 +1170,15 @@ let infer_statement_exn ?(file="<no file>") ctx st =
       Stmt.data ~attrs ~proof:(Proof.Step.intro src Proof.R_def) l'
     | A.Assert t ->
       let t = infer_prop_exn ctx t in
+      (* @DAVID FIXME: There has to be a better way to translate these types from A to Stmt. *)
       let isabelle_annotation = match st.isabelle_annotation with 
       | Some A.Isabelle_non_rec_def -> Some Stmt.Isabelle_non_rec_def
       | Some A.Isabelle_rec_def -> Some Stmt.Isabelle_rec_def
       | Some A.Isabelle_simp -> Some Stmt.Isabelle_simp
       | None -> None
       in
-      Stmt.assert_ ~attrs ~proof:(Proof.Step.intro src Proof.R_assert) t (* TODO: add ~isabelle_annotation*)
+      let isabelle_rank = match st.isabelle_rank with | Some i -> Some i | None -> None in
+      Stmt.assert_ ~attrs ~isabelle_annotation ~isabelle_rank ~proof:(Proof.Step.intro src Proof.R_assert) t
     | A.Lemma t ->
       let t = infer_prop_exn ctx t in
       Stmt.lemma ~attrs ~proof:(Proof.Step.intro src Proof.R_lemma) [t]

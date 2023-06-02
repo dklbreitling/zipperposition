@@ -39,6 +39,8 @@ type isabelle_annotation =
 | Isabelle_rec_def
 | Isabelle_simp
 
+type isabelle_rank = int
+
 type 'ty skolem = ID.t * 'ty
 
 (** polarity for rewrite rules *)
@@ -90,6 +92,8 @@ type ('f, 't, 'ty) t = private {
   view: ('f, 't, 'ty) view;
   attrs: attrs;
   proof : proof;
+  isabelle_annotation: isabelle_annotation option;
+  isabelle_rank: isabelle_rank option;
   mutable name: string option;
 }
 
@@ -122,7 +126,7 @@ val ty_decl : ?attrs:attrs -> proof:proof -> ID.t -> 'ty -> (_, _, 'ty) t
 val def : ?attrs:attrs -> proof:proof -> ('f,'t,'ty) def list -> ('f, 't, 'ty) t
 val rewrite : ?attrs:attrs -> proof:proof -> ('f,'t,'ty) def_rule -> ('f,'t,'ty) t
 val data : ?attrs:attrs -> proof:proof -> 'ty data list -> (_, _, 'ty) t
-val assert_ : ?attrs:attrs -> proof:proof -> 'f -> ('f, _, _) t
+val assert_ : ?attrs:attrs -> ?isabelle_annotation:isabelle_annotation option -> ?isabelle_rank:isabelle_rank option -> proof:proof -> 'f -> ('f, _, _) t
 val lemma : ?attrs:attrs -> proof:proof -> 'f list -> ('f, _, _) t
 val goal : ?attrs:attrs -> proof:proof -> 'f -> ('f, _, _) t
 val neg_goal :

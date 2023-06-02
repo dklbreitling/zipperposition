@@ -44,6 +44,8 @@ type isabelle_annotation =
 | Isabelle_rec_def
 | Isabelle_simp
 
+type isabelle_rank = int
+
 type 'ty skolem = ID.t * 'ty
 
 (** polarity for rewrite rules *)
@@ -95,6 +97,8 @@ type ('f, 't, 'ty) t = {
   view: ('f, 't, 'ty) view;
   attrs: attrs;
   proof: proof;
+  isabelle_annotation: isabelle_annotation option;
+  isabelle_rank: isabelle_rank option;
   mutable name: string option;
 }
 
@@ -114,14 +118,14 @@ let mk_def ?(rewrite=false) id ty rules =
   { def_id=id; def_ty=ty; def_rules=rules; def_rewrite=rewrite; }
 
 let id_n_ = ref 0
-let mk_ ?(attrs=[]) ~proof view: (_,_,_) t =
-  {id=CCRef.incr_then_get id_n_; proof; view; attrs; name=None}
+let mk_ ?(attrs=[]) ?(isabelle_annotation=None) ?(isabelle_rank=None) ~proof view: (_,_,_) t =
+  {id=CCRef.incr_then_get id_n_; proof; view; attrs; isabelle_annotation; isabelle_rank; name=None}
 
 let ty_decl ?attrs ~proof id ty = mk_ ?attrs ~proof (TyDecl (id,ty))
 let def ?attrs ~proof l = mk_ ?attrs ~proof (Def l)
 let rewrite ?attrs ~proof d = mk_ ?attrs ~proof (Rewrite d)
 let data ?attrs ~proof l = mk_ ?attrs ~proof (Data l)
-let assert_ ?attrs ~proof c = mk_ ?attrs ~proof (Assert c)
+let assert_ ?attrs ?isabelle_annotation ?isabelle_rank ~proof c = mk_ ?attrs ?isabelle_annotation ?isabelle_rank ~proof (Assert c)
 let lemma ?attrs ~proof l = mk_ ?attrs ~proof (Lemma l)
 let goal ?attrs ~proof c = mk_ ?attrs ~proof (Goal c)
 let neg_goal ?attrs ~proof ~skolems l = mk_ ?attrs ~proof (NegatedGoal (skolems, l))
@@ -501,7 +505,18 @@ let pp ppf ppt ppty out st =
       in
       fpf out "@[<hv2>data%a@ %a@]." pp_attrs attrs (Util.pp_list ~sep:" and " pp_data) l
     | Assert f ->
-      fpf out "@[<2>assert%a@ @[%a@]@]." pp_attrs attrs ppf f
+      let pp_isa_anno out isabelle_annotation = (* @DAVID FIXME: code duplication *)
+        fpf out "isabelle_annotation %s" (match isabelle_annotation with 
+        | Some Isabelle_non_rec_def -> "isabelle_non_rec_def"
+        | Some Isabelle_rec_def -> "isabelle_rec_def"
+        | Some Isabelle_simp -> "isabelle_simp"
+        | None -> "None")
+      in
+      let pp_isa_rank out isabelle_rank =  (* @DAVID FIXME: code duplication *)
+        fpf out "isabelle_rank %s" (match isabelle_rank with 
+        | Some i -> string_of_int i
+        | None -> "None") in
+      fpf out "@[<2>assert%a@ %a @[%a %a@]@]." pp_attrs attrs pp_isa_anno st.isabelle_annotation pp_isa_rank st.isabelle_rank ppf f
     | Lemma l ->
       fpf out "@[<2>lemma%a@ @[%a@]@]."
         pp_attrs attrs (Util.pp_list ~sep:" && " ppf) l
