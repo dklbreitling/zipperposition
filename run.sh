@@ -41,10 +41,7 @@ $DIR/zipperposition.exe ${1:+"$1"} \
   --select=e-selection7\
   --ho-choice-inst=true\
   --tmp-dir="$3"\
-  --sine=50\
-  --sine-tolerance=2\
-  --sine-depth-max=4\
-  --sine-depth-min=1\
+  --sine=-1\
   --e-max-derived=48\
   --dot /tmp/example.dot \
   --e-encode-lambdas=lift\
