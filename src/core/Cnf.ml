@@ -1032,8 +1032,10 @@ let flatten ~ctx ~lazy_cnf ~should_define seq : _ Iter.t =
            in
            [Stmt.def ~attrs ~proof:(proof ()) l]
          | Stmt.Assert f ->
+           let isabelle_annotation = stmt.isabelle_annotation in
+           let isabelle_rank = stmt.isabelle_rank in
            flatten_axiom stmt f
-           |> List.map (fun f -> Stmt.assert_ ~attrs ~proof:(proof()) f)
+           |> List.map (fun f -> Stmt.assert_ ~attrs ~proof:(proof()) ~isabelle_annotation ~isabelle_rank f)
          | Stmt.Lemma l ->
            List.map
              (fun f -> Stmt.lemma ~attrs ~proof:(proof ()) [F.and_ (flatten_axiom stmt f)]) l
@@ -1143,7 +1145,10 @@ let simplify_and_rename ~ctx ~disable_renaming ~preprocess seq =
              Stmt.rewrite ~attrs ~proof:(proof ()) d
            | Stmt.Assert f ->
              let f = process_form stmt ~is_goal:false f in
-             Stmt.assert_ ~attrs ~proof:(proof ()) f
+             (* @DAVID FIXME: is there a way to avoid duplication of this pattern? *)
+             let isabelle_annotation = stmt.isabelle_annotation in
+             let isabelle_rank = stmt.isabelle_rank in
+             Stmt.assert_ ~attrs ~proof:(proof ()) ~isabelle_annotation ~isabelle_rank f
            | Stmt.Lemma l ->
              let l = List.map (process_form stmt ~is_goal:true) l in
              Stmt.lemma ~attrs ~proof:(proof()) l
@@ -1305,8 +1310,10 @@ let cnf_of_iter ~ctx ?(opts=[]) (seq:Stmt.input_t Iter.t) : _ CCVector.t =
        match stmt.Stmt.view with
        | Stmt.Assert f ->
          let proof = proof_cnf stmt in
+         let isabelle_annotation = stmt.isabelle_annotation in
+         let isabelle_rank = stmt.isabelle_rank in
          List.iter
-           (fun c -> CCVector.push res (Stmt.assert_ ~attrs ~proof c))
+           (fun c -> CCVector.push res (Stmt.assert_ ~attrs ~proof ~isabelle_annotation ~isabelle_rank c))
            (conv_form f)
        | Stmt.Def l ->
          let l =
@@ -1414,8 +1421,10 @@ let convert seq =
         let l = List.map (clause_to_fo ~ctx:t_ctx) l in
         Stmt.lemma ~attrs ~proof l
       | Stmt.Assert c ->
+        let isabelle_annotation = st.isabelle_annotation in
+        let isabelle_rank = st.isabelle_rank in
         let c = clause_to_fo ~ctx:t_ctx c in
-        Stmt.assert_ ~attrs ~proof c
+        Stmt.assert_ ~attrs ~proof ~isabelle_annotation ~isabelle_rank c
       | Stmt.Data l ->
         let l = List.map (Stmt.map_data ~ty:(conv_ty ty_ctx)) l in
         Stmt.data ~attrs ~proof l
