@@ -162,7 +162,7 @@ let pp_statement out st =
       | Some i -> string_of_int i
       | None -> "None")
     in
-    fpf out "@[<2>assert%a@ @[%a@]@ [%a %a]]." pp_attrs attrs T.pp f pp_isa_anno st.isabelle_annotation pp_isa_rank st.isabelle_rank
+    fpf out "@[<2>assert%a@ @[%a@]@ @[%a %a@]]." pp_attrs attrs T.pp f pp_isa_anno st.isabelle_annotation pp_isa_rank st.isabelle_rank
   | Lemma f ->
     fpf out "@[<2>lemma%a@ @[%a@]@]." pp_attrs attrs T.pp f
   | Goal f ->

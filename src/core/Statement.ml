@@ -515,8 +515,9 @@ let pp ppf ppt ppty out st =
       let pp_isa_rank out isabelle_rank =  (* @DAVID FIXME: code duplication *)
         fpf out "isabelle_rank %s" (match isabelle_rank with 
         | Some i -> string_of_int i
-        | None -> "None") in
-      fpf out "@[<2>assert%a@ %a @[%a %a@]@]." pp_attrs attrs pp_isa_anno st.isabelle_annotation pp_isa_rank st.isabelle_rank ppf f
+        | None -> "None") 
+      in
+      fpf out "@[<2>assert%a@ @[%a@] @[%a %a@]@]." pp_attrs attrs ppf f pp_isa_anno st.isabelle_annotation pp_isa_rank st.isabelle_rank
     | Lemma l ->
       fpf out "@[<2>lemma%a@ @[%a@]@]."
         pp_attrs attrs (Util.pp_list ~sep:" && " ppf) l
