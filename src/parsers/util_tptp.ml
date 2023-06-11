@@ -247,28 +247,16 @@ let to_ast st =
     | A.R_type
     | A.R_unknown  ->
       (* @DAVID TODO: make these checks more efficient, maybe only check for axiom/theorem? *)
-      let check_nrd datum  = 
+      let check_gstring s datum =
         match datum with 
-        | A.GList l -> List.mem (A.GString "isabelle_non_rec_def") l 
+        | A.GList l -> List.mem (A.GString s) l 
         | _ -> false
       in
-      let check_rd datum  =
-        match datum with 
-        | A.GList l -> List.mem (A.GString "isabelle_rec_def") l 
-        | _ -> false
-      in
-      let check_simp datum  =
-          match datum with 
-          | A.GList l -> List.mem (A.GString "isabelle_simp") l 
-          | _ -> false
-      in
-      let is_non_rec_def info = List.exists check_nrd info in
-      let is_rec_def info = List.exists check_rd info in
-      let is_simp info = List.exists check_simp info in
+      let has_anno anno = List.exists (check_gstring anno) in
       let isabelle_annotation = 
-        if is_non_rec_def info then Some(UA.Isabelle_non_rec_def)
-        else if is_rec_def info then Some(UA.Isabelle_rec_def)
-        else if is_simp info then Some(UA.Isabelle_rec_def)
+        if has_anno "isabelle_non_rec_def" info then Some(UA.Isabelle_non_rec_def)
+        else if has_anno "isabelle_rec_def" info then Some(UA.Isabelle_rec_def)
+        else if has_anno "isabelle_simp" info then Some(UA.Isabelle_rec_def)
         else None
       in 
       let get_rank info =
