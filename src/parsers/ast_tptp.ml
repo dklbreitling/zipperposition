@@ -163,10 +163,10 @@ let pp_generals_debug out l = match l with
 | [] -> ()
 | _::_ ->
   Format.fprintf out ",@ ";
-  Util.pp_list ~sep:"|, |" pp_general_debugf out l
+  Util.pp_list ~sep:", " pp_general_debugf out l
 
 let pp_form_debug_ pp out (logic, name, role, f, generals) =
-  Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@]). ast_tptp.ml:pp_form_debug_"
+  Format.fprintf out "@[<2>%s(%a,@ %a,@ (@[%a@])%a@])."
     logic pp_name name pp_role role pp f pp_generals_debug generals
 
 let pp_debug pp_t out toprint = match toprint with

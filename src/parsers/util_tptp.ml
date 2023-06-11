@@ -112,7 +112,7 @@ let parse_file ?cache ~recursive f =
       (* parse declarations from file *)
       let decls = Parse_tptp.parse_declarations Lex_tptp.token buf in
 
-      CCList.iter (fun d -> Printf.printf "Util_tptp:parse_file %a\n" (fun c -> A.pp_debug STerm.ZF.pp_inner (CCFormat.of_chan c)) d) decls;
+      Util.debugf ~section 3 "Parsing file: %a" (fun k->k (Util.pp_list (A.pp_debug STerm.ZF.pp_inner)) decls);
 
       List.iter
         (fun decl -> match decl, names with
@@ -220,7 +220,7 @@ let rec looks_like_def f = match PT.view f with
 let to_ast st =
   let conv_form name role f info =
 
-    Printf.printf "Util_tptp:to_ast:conv_form %a\n" (fun c -> Format.printf "name %a, info %a" A.pp_name name A.pp_generals_debug) info;
+    Util.debugf ~section 3 "(@[tptp.to_ast.conv_form@ name %a, info %a@])" (fun c -> c A.pp_name name A.pp_generals_debug info);
 
     let name = A.string_of_name name in
     let attrs = [UA.attr_name name] in
