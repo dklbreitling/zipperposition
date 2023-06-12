@@ -246,7 +246,8 @@ let to_ast st =
     | A.R_finite _
     | A.R_type
     | A.R_unknown  ->
-      (* @DAVID TODO: make these checks more efficient, maybe only check for axiom/theorem? *)
+      (* @DAVID TODO: make these checks more efficient, maybe only check for axiom/theorem? 
+         skip if info empty, possibly write own rec function *)
       let check_gstring s datum =
         match datum with 
         | A.GList l -> List.mem (A.GString s) l 

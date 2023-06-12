@@ -1177,6 +1177,7 @@ let infer_statement_exn ?(file="<no file>") ctx st =
       | Some A.Isabelle_simp -> Some Stmt.Isabelle_simp
       | None -> None
       in
+      (* @DAVID: is this needed? *)
       let isabelle_rank = match st.isabelle_rank with | Some i -> Some i | None -> None in
       Stmt.assert_ ~attrs ~isabelle_annotation ~isabelle_rank ~proof:(Proof.Step.intro src Proof.R_assert) t
     | A.Lemma t ->
