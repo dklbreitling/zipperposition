@@ -214,3 +214,46 @@ module type UNIT_IDX = sig
   val to_dot : t CCFormat.printer
   (** print the index in the DOT format *)
 end
+
+(* @DAVID copy paste of UnitIndex for now *)
+module type ISABELLE_SIMP_IDX = sig
+  type t
+
+  module E : EQUATION
+  (** Module that describes indexed equations *)
+
+  type rhs = E.rhs
+  (** Right hand side of equation *)
+
+  val empty : unit -> t
+
+  val is_empty : t -> bool
+
+  val add : t -> E.t -> t
+  (** Index the given (in)equation *)
+
+  val add_seq : t -> E.t Iter.t -> t
+  val add_list : t -> E.t list -> t
+
+  val remove : t -> E.t -> t
+
+  val remove_seq : t -> E.t Iter.t -> t
+
+  val size : t -> int
+  (** Number of indexed (in)equations *)
+
+  val iter : t -> (term -> E.t -> unit) -> unit
+  (** Iterate on indexed equations *)
+
+  val retrieve :
+    ?subst:subst -> sign:bool ->
+    t Scoped.t -> term Scoped.t ->
+    (term * rhs * E.t * subst) Iter.t
+  (** [retrieve ~sign (idx,si) (t,st) acc] iterates on
+      (in)equations l ?= r of given [sign] and substitutions [subst],
+      such that subst(l, si) = t.
+      It therefore finds generalizations of the query term. *)
+
+  val to_dot : t CCFormat.printer
+  (** print the index in the DOT format *)
+end

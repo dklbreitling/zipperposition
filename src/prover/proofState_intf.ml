@@ -17,6 +17,10 @@ module type S = sig
   module UnitIndex : Index.UNIT_IDX
     with type E.t = (Term.t * Term.t * bool * C.t)
      and type E.rhs = Term.t
+  (* @DAVID copy paste of UnitIndex for now *)
+  module IsabelleSimpIndex : Index.ISABELLE_SIMP_IDX
+    with type E.t = (Term.t * Term.t * bool * C.t)
+      and type E.rhs = Term.t
   module SubsumptionIndex : Index.SUBSUMPTION_IDX with type C.t = C.t
 
   (** {5 Common Interface for Sets} *)

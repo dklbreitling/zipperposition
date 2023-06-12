@@ -115,6 +115,9 @@ module type EQUATION = Index_intf.EQUATION
 
 module type UNIT_IDX = Index_intf.UNIT_IDX
 
+(* @DAVID copy paste of UnitIndex for now *)
+module type ISABELLE_SIMP_IDX = Index_intf.ISABELLE_SIMP_IDX
+
 module BasicEquation = struct
   type t = T.t * T.t
   type rhs = T.t

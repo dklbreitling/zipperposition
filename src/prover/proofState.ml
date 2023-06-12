@@ -47,6 +47,23 @@ module Make(C : Clause.S) : S with module C = C and module Ctx = C.Ctx = struct
         if C.is_oriented_rule c then 2 else 1
     end)
 
+    (* @DAVID copy paste of UnitIndex for now *)
+    module IsabelleSimpIndex =
+      Dtree
+      .Make(struct
+        type t = T.t * T.t * bool * C.t
+        type rhs = T.t
+        let compare (t11,t12,s1,c1) (t21,t22,s2,c2) =
+          let open CCOrd.Infix in
+          T.compare t11 t21
+          <?> (T.compare, t12, t22)
+          <?> (compare, s1, s2)
+          <?> (C.compare, c1, c2)
+        let extract (t1,t2,sign,_) = t1, t2, sign
+        let priority (_,_,_,c) =
+          if C.is_oriented_rule c then 2 else 1
+      end)
+
   module SubsumptionIndex = FV_tree.Make(struct
       type t = C.t
       let compare = C.compare

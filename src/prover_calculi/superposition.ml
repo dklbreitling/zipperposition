@@ -121,6 +121,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
   module TermIndex = PS.TermIndex
   module SubsumIdx = PS.SubsumptionIndex
   module UnitIdx = PS.UnitIndex
+  (* @DAVID copy paste of UnitIndex for now *)
+  module IsabelleSimpIdx = PS.IsabelleSimpIndex
   module Stm = Env.Stm
   module StmQ = Env.StmQ
 

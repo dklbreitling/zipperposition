@@ -38,4 +38,6 @@ module BasicEquation : EQUATION
    and type rhs = Term.t
 
 module type UNIT_IDX = Index_intf.UNIT_IDX
+(* @DAVID copy paste of UnitIndex for now *)
+module type ISABELLE_SIMP_IDX = Index_intf.ISABELLE_SIMP_IDX
 
