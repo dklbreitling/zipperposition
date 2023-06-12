@@ -355,7 +355,10 @@ let rewrite_tst_stmt stmt =
   match Statement.view stmt with
   | Assert f -> 
     (match mk_proof ~stmt_parents (aux f) f with
-     | Some (f', proof) -> Statement.assert_ ~proof:(Proof.S.step proof) f'
+     | Some (f', proof) -> 
+        let isabelle_annotation = stmt.isabelle_annotation in
+        let isabelle_rank = stmt.isabelle_rank in
+        Statement.assert_ ~isabelle_annotation ~isabelle_rank ~proof:(Proof.S.step proof) f'
      | None -> stmt)
   | Lemma fs -> 
     begin match aux_l fs with 
