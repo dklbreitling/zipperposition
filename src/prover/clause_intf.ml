@@ -5,6 +5,15 @@ open Logtk
 type proof_step = Proof.Step.t
 type proof = Proof.S.t
 
+
+type isabelle_annotation =
+  | Isabelle_non_rec_def
+  | Isabelle_rec_def
+  | Isabelle_simp
+
+type isabelle_rank = int
+
+
 module type S = sig
   module Ctx : Ctx.S
 
@@ -85,6 +94,8 @@ module type S = sig
   val create :
     penalty:int ->
     trail:Trail.t ->
+    ?isabelle_annotation:isabelle_annotation option ->
+    ?isabelle_rank:isabelle_rank option ->
     Literal.t list ->
     proof_step ->
     t

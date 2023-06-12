@@ -24,6 +24,9 @@ type 'c sets = {
   c_sos: 'c CCVector.ro_vector; (** set of support *)
 }
 
+type isabelle_annotation = Clause_intf.isabelle_annotation
+type isabelle_rank = Clause_intf.isabelle_rank
+
 (** {2 Type def} *)
 module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
   module Ctx = Ctx
@@ -47,6 +50,8 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
     mutable proof : proof_step; (** Proof of the clause *)
     mutable eligible_res: BV.t option; (* eligible for resolution? *)
     mutable eligible_bool : SClause.TPSet.t option;
+    isabelle_annotation: isabelle_annotation option;
+    isabelle_rank: isabelle_rank option;
   }
 
   type clause = t
@@ -107,7 +112,7 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
   let comes_from_goal c = CCOpt.is_some @@ distance_to_goal c
 
   (* private function for building clauses *)
-  let create_inner ~penalty ~selected ~bool_selected sclause proof =
+  let create_inner ~penalty ~selected ~bool_selected ?(isabelle_annotation=None) ?(isabelle_rank=None) sclause proof =
     (* create the structure *)
     let ord = Ctx.ord () in
     let max_lits = lazy ( BV.to_list @@ Lits.maxlits sclause.lits ~ord ) in
@@ -120,6 +125,8 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
       max_lits;
       eligible_res=None;
       eligible_bool=None;
+      isabelle_annotation=isabelle_annotation;
+      isabelle_rank=isabelle_rank;
     } in
     (* return clause *)
     Util.incr_stat stat_clause_create;
@@ -145,7 +152,7 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
     let bool_selected = lazy (Ctx.bool_select lits) in
     create_inner ~penalty ~selected ~bool_selected (SClause.make ~trail lits) proof
 
-  let create ~penalty ~trail lits proof =
+  let create ~penalty ~trail ?(isabelle_rank) ?(isabelle_annotation) lits proof =
     (* let lits = List.fast_sort (fun l1 l2 -> -CCInt.compare (Lit.hash l1) (Lit.hash l2)) lits in *)
     create_a ~penalty ~trail (Array.of_list lits) proof
 
@@ -163,7 +170,9 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
       (* convert literals *)
       let lits = List.map Ctx.Lit.of_form lits in
       let proof = Stmt.proof_step st in
-      let c = create ~trail:Trail.empty ~penalty:1 lits proof in
+      let isabelle_annotation = st.isabelle_annotation in
+      let isabelle_rank = st.isabelle_rank in
+      let c = create ~trail:Trail.empty ~penalty:1 ~isabelle_rank ~isabelle_annotation lits proof in
       c
     in
     match Stmt.view st with
