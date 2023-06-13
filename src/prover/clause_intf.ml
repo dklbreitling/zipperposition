@@ -6,12 +6,9 @@ type proof_step = Proof.Step.t
 type proof = Proof.S.t
 
 
-type isabelle_annotation =
-  | Isabelle_non_rec_def
-  | Isabelle_rec_def
-  | Isabelle_simp
+type isabelle_annotation = Statement.isabelle_annotation
 
-type isabelle_rank = int
+type isabelle_rank = Statement.isabelle_rank
 
 
 module type S = sig
@@ -108,6 +105,8 @@ module type S = sig
   val create_a :
     penalty:int ->
     trail:Trail.t ->
+    ?isabelle_annotation:isabelle_annotation option ->
+    ?isabelle_rank:isabelle_rank option ->
     Literal.t array ->
     proof_step ->
     t

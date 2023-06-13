@@ -141,7 +141,7 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
     | Literal.False -> true
     | _ -> false
 
-  let create_a ~penalty ~trail lits proof =
+  let create_a ~penalty ~trail ?(isabelle_annotation=None) ?(isabelle_rank=None) lits proof =
     (* remove spurious "false" literals automatically *)
     let lits =
       if CCArray.exists lit_is_false_ lits
@@ -150,11 +150,11 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
     in
     let selected = lazy (Ctx.select lits) in
     let bool_selected = lazy (Ctx.bool_select lits) in
-    create_inner ~penalty ~selected ~bool_selected (SClause.make ~trail lits) proof
+    create_inner ~penalty ~selected ~bool_selected ~isabelle_annotation ~isabelle_rank (SClause.make ~trail lits) proof
 
-  let create ~penalty ~trail ?(isabelle_rank) ?(isabelle_annotation) lits proof =
+  let create ~penalty ~trail ?(isabelle_annotation=None) ?(isabelle_rank=None) lits proof =
     (* let lits = List.fast_sort (fun l1 l2 -> -CCInt.compare (Lit.hash l1) (Lit.hash l2)) lits in *)
-    create_a ~penalty ~trail (Array.of_list lits) proof
+    create_a ~penalty ~trail ~isabelle_annotation ~isabelle_rank (Array.of_list lits) proof
 
   let of_forms ?(penalty=1) ~trail forms proof =
     let lits = List.map Ctx.Lit.of_form forms |> Array.of_list in
@@ -577,10 +577,23 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
           (Iter.of_array_i lits)
       )
     in
-    Format.fprintf out "@[%a@[<2>%a%a@]@]/id:%d/depth:%d/penalty:%d/red:%b"
+    let fpf = Format.fprintf in
+    let pp_isa_anno out isabelle_annotation = (* @DAVID FIXME: code duplication *)
+      fpf out "isabelle_annotation %s" (match isabelle_annotation with 
+      | Some Statement.Isabelle_non_rec_def -> "isabelle_non_rec_def"
+      | Some Statement.Isabelle_rec_def -> "isabelle_rec_def"
+      | Some Statement.Isabelle_simp -> "isabelle_simp"
+      | None -> "None")
+    in
+    let pp_isa_rank out isabelle_rank =  (* @DAVID FIXME: code duplication *)
+      fpf out "isabelle_rank %s" (match isabelle_rank with 
+      | Some i -> string_of_int i
+      | None -> "None") 
+    in
+    Format.fprintf out "@[%a@[<2>%a%a@]@]/id:%d/depth:%d/penalty:%d/red:%b/%a/%a"
       SClause.pp_vars c.sclause pp_lits c.sclause.lits
       SClause.pp_trail c.sclause.trail c.sclause.id
-      (proof_depth c) (penalty c) (is_redundant c);
+      (proof_depth c) (penalty c) (is_redundant c) pp_isa_anno c.isabelle_annotation pp_isa_rank c.isabelle_rank;
     ()
 
   let pp_tstp out c = SClause.pp_tstp out c.sclause
