@@ -257,7 +257,7 @@ let to_ast st =
       let isabelle_annotation = 
         if has_anno "isabelle_non_rec_def" info then Some(UA.Isabelle_non_rec_def)
         else if has_anno "isabelle_rec_def" info then Some(UA.Isabelle_rec_def)
-        else if has_anno "isabelle_simp" info then Some(UA.Isabelle_rec_def)
+        else if has_anno "isabelle_simp" info then Some(UA.Isabelle_simp)
         else None
       in 
       let get_rank info =
