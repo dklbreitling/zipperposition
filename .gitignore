@@ -74,4 +74,6 @@ target/streams/compile/unmanagedJars/$global/streams/export
 proof_rev_a-b_dbgzs1.p
 proof_revab.p
 proof_revab_dbg5.p
+runrevab.sh
+tmp
 
