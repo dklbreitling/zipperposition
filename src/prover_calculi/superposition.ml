@@ -103,6 +103,7 @@ let k_force_limit = Flex_state.create_key ()
 let k_formula_simplify_reflect = Flex_state.create_key ()
 let k_strong_sr = Flex_state.create_key ()
 let k_superpose_w_formulas = Flex_state.create_key ()
+let k_do_isabelle_simp = Flex_state.create_key ()
 
 
 
@@ -2047,8 +2048,12 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       SimplM.return_new new_c
     )
 
+  let do_isabelle_simp _c = () 
+
   let demodulate c = 
     assert (Term.VarSet.for_all (fun v -> HVar.id v >= 0) (Literals.vars (C.lits c) |> Term.VarSet.of_list));
+    if Env.flex_get k_do_isabelle_simp then
+      do_isabelle_simp c;
     ZProf.with_prof prof_demodulate demodulate_ c
 
   let local_rewrite c =
@@ -3329,6 +3334,7 @@ let _force_limit = ref 3
 let _formula_sr = ref true
 let _strong_sr = ref false
 let _superposition_with_formulas = ref false
+let _do_isabelle_simp = ref false
 
 
 let _guard = ref 30
@@ -3419,6 +3425,8 @@ let register ~sup =
   E.flex_add k_local_rw !_local_rw;
   E.flex_add k_destr_eq_res !_destr_eq_res;
   E.flex_add k_strong_sr !_strong_sr;
+
+  E.flex_add k_do_isabelle_simp !_do_isabelle_simp;
 
   let module JPF = JPFull.Make(struct let st = E.flex_state () end) in
   let module JPP = PUnif.Make(struct let st = E.flex_state () end) in
@@ -3537,6 +3545,7 @@ let () =
       "--superposition-with-formulas", Arg.Bool((:=) _superposition_with_formulas), 
         " enable superposition from (negative) formulas into any subterm";
       "--strong-simplify-reflect", Arg.Bool((:=) _strong_sr), " full effort simplify reflect -- tries to find an equation for each pair of subterms";
+      "--do_isabelle_simp", Arg.Bool((:=) _do_isabelle_simp), " enable/disable rewrites against order using isabelle_ tags"
     ];
 
   Params.add_to_mode "best" (fun () ->
