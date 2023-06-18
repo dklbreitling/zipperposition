@@ -60,6 +60,7 @@ let prof_infer_fluidsup_passive = ZProf.make "sup.infer_fluidsup_passive"
 let prof_infer_equality_resolution = ZProf.make "sup.infer_equality_resolution"
 let prof_infer_equality_factoring = ZProf.make "sup.infer_equality_factoring"
 let prof_queues = ZProf.make "sup.queues"
+let prof_isabelle_simp = ZProf.make "sup.isabelle_simp"
 
 let k_sup_at_vars = Flex_state.create_key ()
 let k_sup_in_var_args = Flex_state.create_key ()
@@ -2048,7 +2049,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       SimplM.return_new new_c
     )
 
-  let do_isabelle_simp _c = () 
+  let do_isabelle_simp_ _c = ()
+  let do_isabelle_simp c = ZProf.with_prof prof_isabelle_simp do_isabelle_simp_ c
 
   let demodulate c = 
     assert (Term.VarSet.for_all (fun v -> HVar.id v >= 0) (Literals.vars (C.lits c) |> Term.VarSet.of_list));
