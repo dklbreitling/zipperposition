@@ -145,6 +145,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
   (* let _idx_fv = ref (SubsumIdx.of_signature (Ctx.signature()) ()) *)
 
   let _idx_simpl = ref (UnitIdx.empty ())
+
+  let _idx_isabelle_simp = ref (IsabelleSimpIdx.empty ())
   
   let idx_sup_into () = !_idx_sup_into
   let idx_sup_from () = !_idx_sup_from
@@ -2049,6 +2051,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       SimplM.return_new new_c
     )
 
+  (* @DAVID TODO: completeness is lost when invoking rw_isabelle_simp *)
   let rw_isabelle_simp_ c = SimplM.return_same c
   let rw_isabelle_simp c =
     if Env.flex_get k_rw_isabelle_simp then
@@ -3273,6 +3276,19 @@ module Make(Env : Env.S) : S with module Env = Env = struct
     if Env.flex_get k_immediate_simplification then (
       Env.add_immediate_simpl_rule immediate_subsume
     );
+
+    let populate_isabelle_simp_idx () = 
+      Util.debugf ~section 1 "Calling populate_isabelle_simp_idx" (fun k->k);
+      (* Something like 
+      Env.ProofState.PassiveSet.clauses ()
+      |> C.ClauseSet.iter (fun cl -> match cl.isabelle_annotation with ... *)
+      ()
+    in
+    if Env.flex_get k_rw_isabelle_simp then (
+      (* at this point all clauses are in passive, so can loop over passive and match isabelle_annotation *)
+      Signal.once Env.on_start populate_isabelle_simp_idx);
+    
+
     setup_dot_printers ();
     ()
 end
