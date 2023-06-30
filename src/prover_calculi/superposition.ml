@@ -3277,15 +3277,47 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       Env.add_immediate_simpl_rule immediate_subsume
     );
 
+    
     let populate_isabelle_simp_idx () = 
       Util.debugf ~section 1 "Calling populate_isabelle_simp_idx" (fun k->k);
-      (* Something like 
-      Env.ProofState.PassiveSet.clauses ()
-      |> C.ClauseSet.iter (fun cl -> match cl.isabelle_annotation with ... *)
-      ()
+      
+      (* at this point all clauses should be in passive, but we play it safe *)
+      let init_clauses =
+        C.ClauseSet.to_list (Env.ProofState.ActiveSet.clauses ())
+        @ C.ClauseSet.to_list (Env.ProofState.PassiveSet.clauses ()) 
+      in
+      List.iter 
+        (fun c -> 
+          Util.debugf 1 "...clause %a" (fun k->k C.pp c);
+          match (C.get_isabelle_annotation c) with 
+          | Some Logtk.Statement.Isabelle_non_rec_def  
+          | Some Logtk.Statement.Isabelle_rec_def 
+          | Some Logtk.Statement.Isabelle_simp -> 
+              let idx = !_idx_isabelle_simp in
+              let idx' = match C.lits c with
+                | [| Lit.Equation (l,r,b) |] -> Util.debugf 1 "...adding it" (fun k->k); IsabelleSimpIdx.add idx (l,r,b,c)
+                | _ -> idx 
+              in
+              _idx_isabelle_simp := idx';
+              () 
+          | None -> ()) 
+        init_clauses;
+
+      List.iter 
+      (fun c -> 
+        Util.debugf 1 "... lits %a" (fun k->k Lits.pp (C.lits c))) 
+      init_clauses;
+
+      let _print_idx ~f file idx =
+        CCIO.with_out file
+          (fun oc ->
+              let out = Format.formatter_of_out_channel oc in
+              Format.fprintf out "@[%a@]@." f idx;
+              flush oc)
+      in
+      _print_idx ~f:IsabelleSimpIdx.to_dot "simpindexdotfile" !_idx_isabelle_simp;
     in
     if Env.flex_get k_rw_isabelle_simp then (
-      (* at this point all clauses are in passive, so can loop over passive and match isabelle_annotation *)
       Signal.once Env.on_start populate_isabelle_simp_idx);
     
 

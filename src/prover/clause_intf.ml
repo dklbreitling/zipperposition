@@ -86,6 +86,9 @@ module type S = sig
   (** Returns Some (sym,i) if clause is injectivity axiom for ith argument
       of symbol sym. *)
 
+  val get_isabelle_annotation : t -> isabelle_annotation option
+  val get_isabelle_rank : t -> isabelle_rank option
+
   (** {2 Constructors} *)
 
   val create :

@@ -437,6 +437,10 @@ module Make(Ctx : Ctx.S) : S with module Ctx = Ctx = struct
       )
     ) else None
 
+  let get_isabelle_annotation c = c.isabelle_annotation
+
+  let get_isabelle_rank c = c.isabelle_rank
+
   let proof_depth c =
     Proof.Step.inferences_performed (proof_step c)
 
