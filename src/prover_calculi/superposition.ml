@@ -39,6 +39,7 @@ let stat_semantic_tautology = Util.mk_stat "sup.semantic_tautologies"
 let stat_condensation = Util.mk_stat "sup.condensation"
 let stat_clc = Util.mk_stat "sup.clc"
 let stat_orphan_checks = Util.mk_stat "orphan checks"
+let stat_isabelle_simp_call = Util.mk_stat "sup.isabelle_simp calls"
 
 
 let prof_demodulate = ZProf.make "sup.demodulate"
@@ -2051,8 +2052,203 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       SimplM.return_new new_c
     )
 
+  (** Compute normal form of term w.r.t active set. Clauses used to
+      rewrite are added to the clauses hashset. *)
+  let isabelle_simp_nf (st:demod_state) c t : T.t =
+    (* compute normal form of subterm. If `toplevel` is true, we need an extra check 
+      whether the rewriting clause is smaller than the rewritten clause. *)
+    let rec reduce_at_root ~toplevel t k =
+      (* find equations l=r that match subterm *)
+      let cur_sc = st.demod_sc in
+      assert (cur_sc > 0);
+      let step =
+        IsabelleSimpIdx.retrieve ~sign:true (!_idx_isabelle_simp, cur_sc) (t, 0)
+        |> Iter.find
+          (fun (l, r, (_,_,sign,unit_clause), subst) ->
+              let expand_quant = not @@ Env.flex_get Combinators.k_enable_combinators in
+              let norm t = Lambda.eta_reduce ~expand_quant @@ Lambda.snf t in
+              let norm_b t = T.normalize_bools @@ norm t in
+              (* r' is the subterm is going to be rewritten into *)
+              let r' = norm @@ Subst.FO.apply Subst.Renaming.none subst (r,cur_sc) in
+              (* @DAVID this assert obviously does not hold here, but what implications does this have? *)
+              (* assert (C.is_unit_clause unit_clause);*)
+              (* NOTE: The conditions of Schulz's "braniac" paper cannot be 
+                justified by the standard redundancy criterion.
+                Instead, we check whether the rewriting clause is smaller 
+                than the rewritten clause. *)
+              (* Only perform the rewrite if: *)
+              if (* - The rewriting clause is positive *)
+                sign &&
+                (* - The clause trails are compatible *)
+                C.trail_subsumes unit_clause c &&
+                (* - The clauses are distinct *)
+                not (C.equal unit_clause c) &&
+                (* - The rewriting clause is smaller than the rewritten clause *)
+                (not toplevel ||
+                C.lits c |> CCArray.exists (fun lit -> Lit.Seq.terms lit |> 
+                  Iter.exists (fun s -> Comp.is_Gt_or_Geq (O.compare ord s t))) ||
+                C.lits c |> CCArray.exists (fun lit -> match Literal.View.as_eqn lit with
+                    | Some (litl, litr, true) -> 
+                      T.equal t litl && Comp.is_Gt_or_Geq (O.compare ord litr r') || 
+                      T.equal t litr && Comp.is_Gt_or_Geq (O.compare ord litl r')
+                    | Some (litl, litr, false) -> T.equal t litl || T.equal t litr
+                    | None -> false)
+                ) && 
+                (* - subst(l) > subst(r) *)
+                Comp.is_Gt_or_Geq (O.compare ord
+                  (S.FO.apply Subst.Renaming.none subst (l, cur_sc))
+                  (S.FO.apply Subst.Renaming.none subst (r, cur_sc))) 
+              then (
+                Util.debugf ~section 3
+                  "@[<hv2>demod copy paste isabelle_simp(%d):@ @[<hv>t=%a[%d],@ l=%a[%d],@ r=%a[%d]@],@ subst=@[%a@]@]"
+                  (fun k -> k (C.id c) T.pp t 0 T.pp l cur_sc T.pp r cur_sc S.pp subst);
+
+                let t' = Lambda.eta_expand @@ norm_b t in
+                let l' = Lambda.eta_expand @@ norm_b @@ Subst.FO.apply Subst.Renaming.none subst (l,cur_sc) in               
+                (* sanity checks *)
+                assert (Type.equal (T.ty l) (T.ty r));
+                assert (T.equal l' t');
+                st.demod_clauses <-
+                  (unit_clause,subst,cur_sc) :: st.demod_clauses;
+                st.demod_sc <- 1 + st.demod_sc; (* allocate new scope *)
+                (*Util.incr_stat stat_demodulate_step; (* reduce [rhs] in current scope [cur_sc] *)*)
+                assert (cur_sc < st.demod_sc);
+                (* bind variables not occurring in [rhs] to fresh ones *)
+                let subst = 
+                  (InnerTerm.Seq.vars (r :> InnerTerm.t)) 
+                  |> Iter.fold (fun subst v -> 
+                      if S.mem subst (v, cur_sc) 
+                      then subst 
+                      else S.bind subst (v, cur_sc) 
+                          (InnerTerm.var (HVar.fresh ~ty:(HVar.ty v) ()), cur_sc)) 
+                    subst in
+                Util.debugf ~section 2
+                  "@[<2>demod copy paste isabelle_simp(%d):@ rewrite `@[%a@]`@ into `@[%a@]`@ resulting `@[%a@]`@ nf `@[%a@]` using %a[%d]@]"
+                  (fun k->k (C.id c) T.pp t T.pp r T.pp r' T.pp (Lambda.snf r') Subst.pp subst cur_sc);
+                Some r'
+              ) else (
+              
+              Util.debugf ~section 2 "demod copy paste isabelle_simp of @[%a@] using @[%a@]=@[%a@] failed@."
+              (fun k -> k T.pp t T.pp l T.pp r);
+
+              None))
+      in
+      begin match step with
+        | None -> k t (* not found any match, normal form found *)
+        | Some r' ->
+          (* NOTE: we retraverse the term several times, but this is simpler *)
+          normal_form ~toplevel r' k (* done one rewriting step, continue *)
+      end
+    (* rewrite innermost-leftmost of [subst(t,scope)]. The initial scope is
+        0, but then we normal_form terms in which variables are really the variables
+        of the RHS of a previously applied rule (in context !sc); all those
+        variables are bound to terms in context 0 
+        
+        when rewriting under quantifiers whose bodies are lambdas, we need to
+        force lambda rewriting (force_lam_rw) to rewrite the quantifier body
+        *)
+    and normal_form ~toplevel t k =
+      match T.view t with
+      | T.Const _ -> 
+        Util.debugf 1 "isabelle_simp_nf T.Const term=%a" (fun k->k T.pp t); 
+        reduce_at_root ~toplevel t k
+        | T.App (hd, l) ->
+        Util.debugf 1 "isabelle_simp_nf T.App term=%a" (fun k->k T.pp t); 
+        (* rewrite subterms in call by value. *)
+        let rewrite_args = Env.flex_get k_demod_in_var_args || not (T.is_var hd) in
+        if rewrite_args
+        then
+          normal_form_l l
+            (fun l' ->
+                let t' =
+                  if T.same_l l l'
+                  then t
+                  else T.app hd l'
+                in
+                (* rewrite term at root *)
+                reduce_at_root ~toplevel t' k)
+        else reduce_at_root ~toplevel t k
+        | T.Fun (ty_arg, body) ->
+        Util.debugf 1 "isabelle_simp_nf T.Fun term=%a" (fun k->k T.pp t); 
+        (* reduce under lambdas *)
+        if Env.flex_get k_lambda_demod
+        then normal_form ~toplevel:false body
+              (fun body' ->
+                let u = if T.equal body body' then t else T.fun_ ty_arg body' in
+                reduce_at_root ~toplevel u k)
+        else reduce_at_root ~toplevel t k (* TODO: DemodExt *)
+      | T.Var _ | T.DB _ -> 
+        Util.debugf 1 "isabelle_simp_nf T.Var _ | T.DB _ term=%a" (fun k->k T.pp t); 
+        k t
+      | T.AppBuiltin(Builtin.(ForallConst|ExistsConst) as hd, [_; body]) ->
+        Util.debugf 1 "isabelle_simp_nf T.AppBuiltin (Builtin.(ForallConst|ExistsConst) as hd, [_; body]) term=%a" (fun k->k T.pp t); 
+        if not (Env.flex_get k_quant_demod) then (
+          reduce_at_root ~toplevel t k
+        ) else (
+          let mk_quant = if hd = ForallConst then T.Form.forall else T.Form.exists in
+          let vars,unfolded = T.open_fun body in
+          normal_form ~toplevel:false unfolded
+            (fun unfolded' ->
+              let u = 
+                if T.equal unfolded unfolded' then t 
+                else mk_quant (T.fun_l vars unfolded') in
+              reduce_at_root ~toplevel u k))
+      | T.AppBuiltin (b, l) ->
+        Util.debugf 1 "isabelle_simp_nf T.AppBuiltin (b,l) term=%a" (fun k->k T.pp t); 
+        normal_form_l l
+          (fun l' ->
+              let u =
+                if T.same_l l l' then t else T.app_builtin ~ty:(T.ty t) b l'
+              in
+              reduce_at_root ~toplevel u k)
+    and normal_form_l l k = match l with
+      | [] -> k []
+      | t :: tail ->
+        normal_form ~toplevel:false t
+          (fun t' ->
+              normal_form_l tail
+                (fun l' -> k (t' :: l')))
+    in
+    normal_form ~toplevel:true t (fun t->t)
+  
   (* @DAVID TODO: completeness is lost when invoking rw_isabelle_simp *)
-  let rw_isabelle_simp_ c = SimplM.return_same c
+  let rw_isabelle_simp_ c = (* SimplM.return_same c *)
+    Util.incr_stat stat_isabelle_simp_call;
+    (* state for storing proofs and scope *)
+    let st = {
+      demod_clauses=[];
+      demod_sc=1;
+    } in
+
+    (* demodulate every literal *)
+    let demod_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
+    let lits = Array.mapi demod_lit (C.lits c) in
+    if CCList.is_empty st.demod_clauses then (
+      (* no rewriting performed *)
+      (* Util.debugf ~section 1 "did not demod @[%a@]@." (fun k -> k C.pp c); *)
+      SimplM.return_same c
+    ) else (
+      assert (not (Lits.equal_com lits (C.lits c)));
+      (* construct new clause *)
+      st.demod_clauses <- CCList.uniq ~eq:eq_c_subst st.demod_clauses;
+      let proof =
+        Proof.Step.simp
+          ~rule:(Proof.Rule.mk "demod copy paste isabelle_simp")
+          (C.proof_parent c ::
+          List.rev_map
+            (fun (c,subst,sc) ->
+                C.proof_parent_subst Subst.Renaming.none (c,sc) subst)
+            st.demod_clauses) in
+      let trail = C.trail c in (* we know that demodulating rules have smaller trail *)
+      let new_c = C.create_a ~trail ~penalty:(C.penalty c) lits proof in
+      Util.debugf ~section 3 "@[<hv2>demod copy paste isabelle_simp@ @[%a@]@ into @[%a@]@ using {@[<hv>%a@]}@]"
+        (fun k->
+          let pp_c_s out (c,s,sc) =
+            Format.fprintf out "(@[%a@ :subst %a[%d]@])" C.pp c Subst.pp s sc in
+          k C.pp c C.pp new_c (Util.pp_list pp_c_s) st.demod_clauses);
+      assert(C.lits new_c |> Literals.vars_distinct);
+      SimplM.return_new new_c
+    )
   let rw_isabelle_simp c =
     if Env.flex_get k_rw_isabelle_simp then
       ZProf.with_prof prof_isabelle_simp rw_isabelle_simp_ c
