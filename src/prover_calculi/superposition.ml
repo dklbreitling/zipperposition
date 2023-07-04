@@ -3279,7 +3279,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
 
     
     let populate_isabelle_simp_idx () = 
-      Util.debugf ~section 1 "Calling populate_isabelle_simp_idx" (fun k->k);
+      Util.debugf ~section 3 "Calling populate_isabelle_simp_idx" (fun k->k);
       
       (* at this point all clauses should be in passive, but we play it safe *)
       let init_clauses =
@@ -3288,25 +3288,28 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       in
       List.iter 
         (fun c -> 
-          Util.debugf 1 "...clause %a" (fun k->k C.pp c);
+          Util.debugf 3 "...clause %a" (fun k->k C.pp c);
           match (C.get_isabelle_annotation c) with 
           | Some Logtk.Statement.Isabelle_non_rec_def  
           | Some Logtk.Statement.Isabelle_rec_def 
           | Some Logtk.Statement.Isabelle_simp -> 
-              let idx = !_idx_isabelle_simp in
-              let idx' = match C.lits c with
-                | [| Lit.Equation (l,r,b) |] -> Util.debugf 1 "...adding it" (fun k->k); IsabelleSimpIdx.add idx (l,r,b,c)
-                | _ -> idx 
-              in
-              _idx_isabelle_simp := idx';
-              () 
+              Array.iter
+                (fun l ->
+                  let idx = !_idx_isabelle_simp in
+                  let idx' = match l with
+                    | Lit.Equation (l,r,b) -> Util.debugf 3 "...adding it, left %a, right %a, bool %b" (fun k->k T.pp l T.pp r b); IsabelleSimpIdx.add idx (l,r,b,c)
+                    | _ -> idx (* @DAVID this could be true or false, no need to add?! *)
+                  in
+                  _idx_isabelle_simp := idx')
+                (C.lits c)
           | None -> ()) 
         init_clauses;
 
       List.iter 
       (fun c -> 
-        Util.debugf 1 "... lits %a" (fun k->k Lits.pp (C.lits c))) 
+        Util.debugf 3 "... lits %a" (fun k->k Lits.pp (C.lits c))) 
       init_clauses;
+    
 
       let _print_idx ~f file idx =
         CCIO.with_out file
@@ -3315,7 +3318,12 @@ module Make(Env : Env.S) : S with module Env = Env = struct
               Format.fprintf out "@[%a@]@." f idx;
               flush oc)
       in
-      _print_idx ~f:IsabelleSimpIdx.to_dot "simpindexdotfile" !_idx_isabelle_simp;
+      let[@inline] _idxdebugf ~(section:Util.Section.t) ~f l file idx =
+        if l <= Util.Section.cur_level section then (
+          _print_idx ~f file idx
+        )
+      in
+      _idxdebugf ~section 3 ~f:IsabelleSimpIdx.to_dot "isabelle_simp_index.dot" !_idx_isabelle_simp;
     in
     if Env.flex_get k_rw_isabelle_simp then (
       Signal.once Env.on_start populate_isabelle_simp_idx);
