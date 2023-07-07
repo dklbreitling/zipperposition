@@ -2070,8 +2070,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
               let norm_b t = T.normalize_bools @@ norm t in
               (* r' is the subterm is going to be rewritten into *)
               let r' = norm @@ Subst.FO.apply Subst.Renaming.none subst (r,cur_sc) in
-              (* @DAVID this assert obviously does not hold here, but what implications does this have? *)
-              (* assert (C.is_unit_clause unit_clause);*)
+              (* @DAVID this assert still has to hold *)
+              assert (C.is_unit_clause unit_clause);
               (* NOTE: The conditions of Schulz's "braniac" paper cannot be 
                 justified by the standard redundancy criterion.
                 Instead, we check whether the rewriting clause is smaller 
@@ -3489,15 +3489,13 @@ module Make(Env : Env.S) : S with module Env = Env = struct
           | Some Logtk.Statement.Isabelle_non_rec_def  
           | Some Logtk.Statement.Isabelle_rec_def 
           | Some Logtk.Statement.Isabelle_simp -> 
-              Array.iter
-                (fun l ->
-                  let idx = !_idx_isabelle_simp in
-                  let idx' = match l with
-                    | Lit.Equation (l,r,b) -> Util.debugf 3 "...adding it, left %a, right %a, bool %b" (fun k->k T.pp l T.pp r b); IsabelleSimpIdx.add idx (l,r,b,c)
-                    | _ -> idx (* @DAVID this could be true or false, no need to add?! *)
-                  in
-                  _idx_isabelle_simp := idx')
-                (C.lits c)
+            let idx = !_idx_isabelle_simp in
+            let idx' = match (C.lits c) with
+              | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,c)
+              | _ -> idx (* @DAVID this could be true or false, no need to add?! *)
+            in
+            _idx_isabelle_simp := idx'
+                
           | None -> ()) 
         init_clauses;
 
