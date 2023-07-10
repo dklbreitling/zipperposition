@@ -2056,7 +2056,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       rewrite are added to the clauses hashset. *)
   let isabelle_simp_nf (st:demod_state) c t : T.t =
     (* compute normal form of subterm. If `toplevel` is true, we need an extra check 
-      whether the rewriting clause is smaller than the rewritten clause. *)
+      whether the rewriting clause is smaller than the rewritten clause. 
+      @DAVID TODO: rm toplevel? *)
     let rec reduce_at_root ~toplevel t k =
       (* find equations l=r that match subterm *)
       let cur_sc = st.demod_sc in
@@ -2082,7 +2083,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
                 (* - The clause trails are compatible *)
                 C.trail_subsumes unit_clause c &&
                 (* - The clauses are distinct *)
-                not (C.equal unit_clause c) &&
+                not (C.equal unit_clause c)  (* &&
                 (* - The rewriting clause is smaller than the rewritten clause *)
                 (not toplevel ||
                 C.lits c |> CCArray.exists (fun lit -> Lit.Seq.terms lit |> 
@@ -2097,10 +2098,10 @@ module Make(Env : Env.S) : S with module Env = Env = struct
                 (* - subst(l) > subst(r) *)
                 Comp.is_Gt_or_Geq (O.compare ord
                   (S.FO.apply Subst.Renaming.none subst (l, cur_sc))
-                  (S.FO.apply Subst.Renaming.none subst (r, cur_sc))) 
+                  (S.FO.apply Subst.Renaming.none subst (r, cur_sc)))  *)
               then (
                 Util.debugf ~section 3
-                  "@[<hv2>demod copy paste isabelle_simp(%d):@ @[<hv>t=%a[%d],@ l=%a[%d],@ r=%a[%d]@],@ subst=@[%a@]@]"
+                  "@[<hv2>isabelle_simp(%d):@ @[<hv>t=%a[%d],@ l=%a[%d],@ r=%a[%d]@],@ subst=@[%a@]@]"
                   (fun k -> k (C.id c) T.pp t 0 T.pp l cur_sc T.pp r cur_sc S.pp subst);
 
                 let t' = Lambda.eta_expand @@ norm_b t in
@@ -2123,12 +2124,12 @@ module Make(Env : Env.S) : S with module Env = Env = struct
                           (InnerTerm.var (HVar.fresh ~ty:(HVar.ty v) ()), cur_sc)) 
                     subst in
                 Util.debugf ~section 2
-                  "@[<2>demod copy paste isabelle_simp(%d):@ rewrite `@[%a@]`@ into `@[%a@]`@ resulting `@[%a@]`@ nf `@[%a@]` using %a[%d]@]"
+                  "@[<2>isabelle_simp(%d):@ rewrite `@[%a@]`@ into `@[%a@]`@ resulting `@[%a@]`@ nf `@[%a@]` using %a[%d]@]"
                   (fun k->k (C.id c) T.pp t T.pp r T.pp r' T.pp (Lambda.snf r') Subst.pp subst cur_sc);
                 Some r'
               ) else (
               
-              Util.debugf ~section 2 "demod copy paste isabelle_simp of @[%a@] using @[%a@]=@[%a@] failed@."
+              Util.debugf ~section 2 "isabelle_simp of @[%a@] using @[%a@]=@[%a@] failed@."
               (fun k -> k T.pp t T.pp l T.pp r);
 
               None))
@@ -2211,17 +2212,19 @@ module Make(Env : Env.S) : S with module Env = Env = struct
     in
     normal_form ~toplevel:true t (fun t->t)
   
-  let rw_isabelle_simp_ c = (* SimplM.return_same c *)
+  let rw_isabelle_simp_ c =
     Util.incr_stat stat_isabelle_simp_call;
     (* state for storing proofs and scope *)
     let st = {
       demod_clauses=[];
       demod_sc=1;
     } in
+    
+    Util.debugf ~section 1 "attempting rw_isabelle_simp of @[%a@]@." (fun k -> k C.pp c);
 
     (* rewrite every literal *)
-    let demod_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
-    let lits = Array.mapi demod_lit (C.lits c) in
+    let isabelle_simp_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
+    let lits = Array.mapi isabelle_simp_lit (C.lits c) in
     if CCList.is_empty st.demod_clauses then (
       (* no rewriting performed *)
       Util.debugf ~section 1 "did not rw_isabelle_simp @[%a@]@." (fun k -> k C.pp c);
@@ -2232,7 +2235,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       st.demod_clauses <- CCList.uniq ~eq:eq_c_subst st.demod_clauses;
       let proof =
         Proof.Step.simp
-          ~rule:(Proof.Rule.mk "demod copy paste isabelle_simp")
+          ~rule:(Proof.Rule.mk "isabelle_simp")
           (C.proof_parent c ::
           List.rev_map
             (fun (c,subst,sc) ->
@@ -2240,7 +2243,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
             st.demod_clauses) in
       let trail = C.trail c in (* we know that demodulating rules have smaller trail *)
       let new_c = C.create_a ~trail ~penalty:(C.penalty c) lits proof in
-      Util.debugf ~section 3 "@[<hv2>demod copy paste isabelle_simp@ @[%a@]@ into @[%a@]@ using {@[<hv>%a@]}@]"
+      Util.debugf ~section 3 "@[<hv2>done isabelle_simp@ @[%a@]@ into @[%a@]@ using {@[<hv>%a@]}@]"
         (fun k->
           let pp_c_s out (c,s,sc) =
             Format.fprintf out "(@[%a@ :subst %a[%d]@])" C.pp c Subst.pp s sc in
