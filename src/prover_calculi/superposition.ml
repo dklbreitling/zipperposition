@@ -2211,7 +2211,6 @@ module Make(Env : Env.S) : S with module Env = Env = struct
     in
     normal_form ~toplevel:true t (fun t->t)
   
-  (* @DAVID TODO: completeness is lost when invoking rw_isabelle_simp *)
   let rw_isabelle_simp_ c = (* SimplM.return_same c *)
     Util.incr_stat stat_isabelle_simp_call;
     (* state for storing proofs and scope *)
@@ -2220,12 +2219,12 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       demod_sc=1;
     } in
 
-    (* demodulate every literal *)
+    (* rewrite every literal *)
     let demod_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
     let lits = Array.mapi demod_lit (C.lits c) in
     if CCList.is_empty st.demod_clauses then (
       (* no rewriting performed *)
-      (* Util.debugf ~section 1 "did not demod @[%a@]@." (fun k -> k C.pp c); *)
+      Util.debugf ~section 1 "did not rw_isabelle_simp @[%a@]@." (fun k -> k C.pp c);
       SimplM.return_same c
     ) else (
       assert (not (Lits.equal_com lits (C.lits c)));
@@ -3475,6 +3474,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
 
     
     let populate_isabelle_simp_idx () = 
+      (* @DAVID TODO: completeness is lost when invoking rw_isabelle_simp *)
       Util.debugf ~section 3 "Calling populate_isabelle_simp_idx" (fun k->k);
       
       (* at this point all clauses should be in passive, but we play it safe *)
@@ -3492,7 +3492,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
             let idx = !_idx_isabelle_simp in
             let idx' = match (C.lits c) with
               | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,c)
-              | _ -> idx (* @DAVID this could be true or false, no need to add?! *)
+              | _ -> idx
             in
             _idx_isabelle_simp := idx'
                 
@@ -3504,14 +3504,6 @@ module Make(Env : Env.S) : S with module Env = Env = struct
         Util.debugf 3 "... lits %a" (fun k->k Lits.pp (C.lits c))) 
       init_clauses;
     
-
-      let _print_idx ~f file idx =
-        CCIO.with_out file
-          (fun oc ->
-              let out = Format.formatter_of_out_channel oc in
-              Format.fprintf out "@[%a@]@." f idx;
-              flush oc)
-      in
       let[@inline] _idxdebugf ~(section:Util.Section.t) ~f l file idx =
         if l <= Util.Section.cur_level section then (
           _print_idx ~f file idx
