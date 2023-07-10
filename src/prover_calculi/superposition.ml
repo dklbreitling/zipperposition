@@ -2251,7 +2251,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       assert(C.lits new_c |> Literals.vars_distinct);
       SimplM.return_new new_c
     )
-  let rw_isabelle_simp c =
+  let rw_isabelle_simp c = (*@DAVID maybe don't rw clauses that have isa_anno*)
     if Env.flex_get k_rw_isabelle_simp then
       ZProf.with_prof prof_isabelle_simp rw_isabelle_simp_ c
     else
