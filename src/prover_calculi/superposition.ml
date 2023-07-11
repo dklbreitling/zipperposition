@@ -2072,6 +2072,7 @@ module Make(Env : Env.S) : S with module Env = Env = struct
               (* r' is the subterm is going to be rewritten into *)
               let r' = norm @@ Subst.FO.apply Subst.Renaming.none subst (r,cur_sc) in
               (* @DAVID this assert still has to hold *)
+              Util.debugf ~section 3 " assert (C.is_unit_clause @[%a@]@])" (fun k -> k C.pp unit_clause);
               assert (C.is_unit_clause unit_clause);
               (* NOTE: The conditions of Schulz's "braniac" paper cannot be 
                 justified by the standard redundancy criterion.
@@ -3393,13 +3394,16 @@ module Make(Env : Env.S) : S with module Env = Env = struct
 
     let open SimplM.Infix in
     let rw_simplify c =
-      canonize_variables c
+      Util.debugf ~section 1 "rw_simplify start of @[%a@]@." (fun k -> k C.pp c);
+      let ret_c = canonize_variables c
       >>= rw_isabelle_simp
       >>= demodulate
       >>= basic_simplify
       >>= positive_simplify_reflect
       >>= negative_simplify_reflect
-      >>= formula_simplify_reflect
+      >>= formula_simplify_reflect in
+      Util.debugf ~section 1 "rw_simplify stop of @[%a@]@ with ret_c @[%a@]@." (fun k -> k C.pp c C.pp (SimplM.get ret_c));
+      ret_c
     and active_simplify c =
       condensation c
       >>= contextual_literal_cutting
@@ -3495,7 +3499,11 @@ module Make(Env : Env.S) : S with module Env = Env = struct
             let idx = !_idx_isabelle_simp in
             let idx' = match (C.lits c) with
               | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,c)
-              | _ -> idx
+              | _ -> 
+                let simplified_c = SimplM.get @@ basic_simplify c in 
+                match C.lits simplified_c with 
+                  | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding basic_simplified left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,simplified_c)
+                  | _ -> idx
             in
             _idx_isabelle_simp := idx'
                 
