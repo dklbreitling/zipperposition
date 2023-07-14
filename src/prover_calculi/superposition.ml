@@ -3514,11 +3514,11 @@ module Make(Env : Env.S) : S with module Env = Env = struct
             let idx = !_idx_isabelle_simp in
             let idx' = match (C.lits c) with
               | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,c)
-              | _ -> 
-                let simplified_c = SimplM.get @@ basic_simplify c in 
+              | _ -> idx
+                (* let simplified_c = SimplM.get @@ basic_simplify c in 
                 match C.lits simplified_c with 
                   | [| Lit.Equation (l,r,true) |] -> Util.debugf 3 "...adding basic_simplified left %a = right %a" (fun k->k T.pp l T.pp r); IsabelleSimpIdx.add idx (l,r,true,simplified_c)
-                  | _ -> idx
+                  | _ -> idx *)
             in
             _idx_isabelle_simp := idx'
                 
