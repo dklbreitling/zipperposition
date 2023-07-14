@@ -3396,13 +3396,17 @@ module Make(Env : Env.S) : S with module Env = Env = struct
     let rw_simplify c =
       Util.debugf ~section 1 "rw_simplify start of @[%a@]@." (fun k -> k C.pp c);
       let ret_c = canonize_variables c
-      >>= rw_isabelle_simp
       >>= demodulate
       >>= basic_simplify
       >>= positive_simplify_reflect
       >>= negative_simplify_reflect
       >>= formula_simplify_reflect in
       Util.debugf ~section 1 "rw_simplify stop of @[%a@]@ with ret_c @[%a@]@." (fun k -> k C.pp c C.pp (SimplM.get ret_c));
+      ret_c
+    and rw_isa_simp c =
+      Util.debugf ~section 1 "rw_isa_simp start of @[%a@]@." (fun k -> k C.pp c);
+      let ret_c = rw_isabelle_simp c in
+      Util.debugf ~section 1 "rw_isa_simp stop of @[%a@]@ with ret_c @[%a@]@." (fun k -> k C.pp c C.pp (SimplM.get ret_c));
       ret_c
     and active_simplify c =
       condensation c
@@ -3467,7 +3471,8 @@ module Make(Env : Env.S) : S with module Env = Env = struct
       Env.add_basic_simplify canonize_variables;
       Env.add_basic_simplify basic_simplify;
       Env.add_active_simplify active_simplify;
-      Env.add_backward_simplify backward_simplify
+      Env.add_backward_simplify backward_simplify;
+      Env.add_rw_isabelle_simp rw_isa_simp;
     );
     Env.add_redundant redundant;
     Env.add_backward_redundant backward_redundant;

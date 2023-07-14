@@ -35,6 +35,7 @@ module type S = sig
 
   type active_simplify_rule = simplify_rule
   type rw_simplify_rule = simplify_rule
+  type rw_isabelle_simp_rule = simplify_rule
 
   type backward_simplify_rule = C.t -> C.ClauseSet.t
   (** backward simplification by a unit clause. It returns a set of
@@ -119,6 +120,9 @@ module type S = sig
 
   val add_rw_simplify : rw_simplify_rule -> unit
   (** Add forward rewriting rule *)
+
+  val add_rw_isabelle_simp : rw_isabelle_simp_rule -> unit
+  (** Add isabelle simp rewriting rule *)
 
   val add_active_simplify : active_simplify_rule -> unit
   (** Add simplification w.r.t active set *)

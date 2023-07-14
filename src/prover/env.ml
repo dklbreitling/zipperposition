@@ -83,6 +83,7 @@ module Make(X : sig
 
   type active_simplify_rule = simplify_rule
   type rw_simplify_rule = simplify_rule
+  type rw_isabelle_simp_rule = simplify_rule
 
   type backward_simplify_rule = C.t -> C.ClauseSet.t
   (** backward simplification by a unit clause. It returns a set of
@@ -134,6 +135,7 @@ module Make(X : sig
   let _basic_simplify : simplify_rule list ref = ref []
   let _unary_simplify : simplify_rule list ref = ref []
   let _rw_simplify = ref []
+  let _rw_isabelle_simp = ref []
   let _active_simplify = ref []
   let _backward_simplify = ref []
   let _redundant = ref []
@@ -223,9 +225,11 @@ module Make(X : sig
   let add_clause_elimination_rule ~priority name rule =
     _add_prioritized ~store:_cl_elim_rules ~priority name rule
 
-
   let add_rw_simplify r =
     _rw_simplify := r :: !_rw_simplify
+
+  let add_rw_isabelle_simp r =
+    _rw_isabelle_simp := r :: !_rw_isabelle_simp
 
   let add_active_simplify r =
     _active_simplify := r :: !_active_simplify
@@ -615,6 +619,18 @@ module Make(X : sig
             | [f;g] -> f c >>= g
             | l -> SimplM.app_list l c)
 
+  let rw_isabelle_simp c =
+    let open SimplM.Infix in
+    fix_simpl c
+      ~f:(fun c ->
+          if C.get_flag SClause.flag_persistent c
+          then SimplM.return_same c
+          else match !_rw_isabelle_simp with
+          | [] -> SimplM.return_same c
+          | [f] -> f c
+          | [f;g] -> f c >>= g
+          | l -> SimplM.app_list l c)
+
   let simplify c =
     let open SimplM.Infix in
     let _span = ZProf.enter_prof prof_simplify in
@@ -626,6 +642,7 @@ module Make(X : sig
           (* simplify with unit clauses, then all active clauses *)
           ho_normalize >>=
           rewrite >>=
+          rw_isabelle_simp >>=
           rw_simplify >>=
           unary_simplify >>=
           active_simplify >|= fun c ->
