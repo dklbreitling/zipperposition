@@ -2214,44 +2214,54 @@ module Make(Env : Env.S) : S with module Env = Env = struct
     normal_form ~toplevel:true t (fun t->t)
   
   let rw_isabelle_simp_ c =
-    Util.incr_stat stat_isabelle_simp_call;
-    (* state for storing proofs and scope *)
-    let st = {
-      demod_clauses=[];
-      demod_sc=1;
-    } in
-    
-    Util.debugf ~section 1 "attempting rw_isabelle_simp of @[%a@]@." (fun k -> k C.pp c);
-
-    (* rewrite every literal *)
-    let isabelle_simp_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
-    let lits = Array.mapi isabelle_simp_lit (C.lits c) in
-    if CCList.is_empty st.demod_clauses then (
-      (* no rewriting performed *)
-      Util.debugf ~section 1 "did not rw_isabelle_simp @[%a@]@." (fun k -> k C.pp c);
+    let is_annotated c = match (C.get_isabelle_annotation c) with 
+      | Some Logtk.Statement.Isabelle_non_rec_def  
+      | Some Logtk.Statement.Isabelle_rec_def 
+      | Some Logtk.Statement.Isabelle_simp -> true
+      | None -> false 
+    in
+    if (is_annotated c) then (
+      Util.debugf ~section 1 "skipping annotated rw_isabelle_simp of @[%a@]@." (fun k -> k C.pp c); 
       SimplM.return_same c
     ) else (
-      assert (not (Lits.equal_com lits (C.lits c)));
-      (* construct new clause *)
-      st.demod_clauses <- CCList.uniq ~eq:eq_c_subst st.demod_clauses;
-      let proof =
-        Proof.Step.simp
-          ~rule:(Proof.Rule.mk "isabelle_simp")
-          (C.proof_parent c ::
-          List.rev_map
-            (fun (c,subst,sc) ->
-                C.proof_parent_subst Subst.Renaming.none (c,sc) subst)
-            st.demod_clauses) in
-      let trail = C.trail c in (* we know that demodulating rules have smaller trail *)
-      let new_c = C.create_a ~trail ~penalty:(C.penalty c) lits proof in
-      Util.debugf ~section 3 "@[<hv2>done isabelle_simp@ @[%a@]@ into @[%a@]@ using {@[<hv>%a@]}@]"
-        (fun k->
-          let pp_c_s out (c,s,sc) =
-            Format.fprintf out "(@[%a@ :subst %a[%d]@])" C.pp c Subst.pp s sc in
-          k C.pp c C.pp new_c (Util.pp_list pp_c_s) st.demod_clauses);
-      assert(C.lits new_c |> Literals.vars_distinct);
-      SimplM.return_new new_c
-    )
+      Util.incr_stat stat_isabelle_simp_call;
+      (* state for storing proofs and scope *)
+      let st = {
+        demod_clauses=[];
+        demod_sc=1;
+      } in
+      
+      Util.debugf ~section 1 "attempting rw_isabelle_simp of @[%a@]@." (fun k -> k C.pp c);
+
+      (* rewrite every literal *)
+      let isabelle_simp_lit i lit = Lit.map (fun t -> isabelle_simp_nf st c t) lit in
+      let lits = Array.mapi isabelle_simp_lit (C.lits c) in
+      if CCList.is_empty st.demod_clauses then (
+        (* no rewriting performed *)
+        Util.debugf ~section 1 "did not rw_isabelle_simp @[%a@]@." (fun k -> k C.pp c);
+        SimplM.return_same c
+      ) else (
+        assert (not (Lits.equal_com lits (C.lits c)));
+        (* construct new clause *)
+        st.demod_clauses <- CCList.uniq ~eq:eq_c_subst st.demod_clauses;
+        let proof =
+          Proof.Step.simp
+            ~rule:(Proof.Rule.mk "isabelle_simp")
+            (C.proof_parent c ::
+            List.rev_map
+              (fun (c,subst,sc) ->
+                  C.proof_parent_subst Subst.Renaming.none (c,sc) subst)
+              st.demod_clauses) in
+        let trail = C.trail c in (* we know that demodulating rules have smaller trail *)
+        let new_c = C.create_a ~trail ~penalty:(C.penalty c) lits proof in
+        Util.debugf ~section 3 "@[<hv2>done isabelle_simp@ @[%a@]@ into @[%a@]@ using {@[<hv>%a@]}@]"
+          (fun k->
+            let pp_c_s out (c,s,sc) =
+              Format.fprintf out "(@[%a@ :subst %a[%d]@])" C.pp c Subst.pp s sc in
+            k C.pp c C.pp new_c (Util.pp_list pp_c_s) st.demod_clauses);
+        assert(C.lits new_c |> Literals.vars_distinct);
+        SimplM.return_new new_c
+    ))
   let rw_isabelle_simp c = (*@DAVID maybe don't rw clauses that have isa_anno*)
     if Env.flex_get k_rw_isabelle_simp then
       ZProf.with_prof prof_isabelle_simp rw_isabelle_simp_ c
