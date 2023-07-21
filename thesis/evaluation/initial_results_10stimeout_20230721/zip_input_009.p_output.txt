@@ -1,0 +1,4 @@
+Output for /tmp/test/zip_input_009.p:
+% Timelimit is 10 + 1
+% done 1122 iterations in 9.858s
+% SZS status ResourceOut for '/tmp/test/zip_input_009.p'

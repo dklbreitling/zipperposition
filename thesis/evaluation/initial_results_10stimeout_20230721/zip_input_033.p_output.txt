@@ -1,0 +1,3 @@
+Output for /tmp/test/zip_input_033.p:
+% Timelimit is 10 + 1
+% SZS status ResourceOut

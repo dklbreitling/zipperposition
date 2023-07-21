@@ -1,0 +1,136 @@
+Output for /tmp/test/zip_input_017.p:
+% Timelimit is 10 + 1
+% done 993 iterations in 5.801s
+% SZS status Theorem for '/tmp/test/zip_input_017.p'
+% SZS output start Refutation
+thf(nat_type, type, nat: $tType).
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(a_type, type, a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(zero_zero_nat_type, type, zero_zero_nat: nat).
+thf(sk__63_type, type, sk__63: (nat > $o) > nat).
+thf(count_a_type, type, count_a: multiset_a > a > nat).
+thf(suc_type, type, suc: nat > nat).
+thf(set_mset_a_type, type, set_mset_a: multiset_a > set_a).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(m_type, type, m: multiset_a).
+thf(ord_less_nat_type, type, ord_less_nat: nat > nat > $o).
+thf(x_type, type, x: a).
+thf(ord_less_eq_nat_type, type, ord_less_eq_nat: nat > nat > $o).
+thf(fact_0_count__eq__zero__iff, axiom,
+  (![M:multiset_a,X:a]:
+   ( ( ( count_a @ M @ X ) = ( zero_zero_nat ) ) <=>
+     ( ~( member_a @ X @ ( set_mset_a @ M ) ) ) ))).
+thf(zip_derived_cl1, plain,
+    (![X0 : multiset_a, X1 : a]:
+       (((count_a @ X0 @ X1) = (zero_zero_nat))
+        |  (member_a @ X1 @ (set_mset_a @ X0)))),
+    inference('cnf', [status(esa)], [fact_0_count__eq__zero__iff])).
+thf(conj_0, conjecture,
+  (( ord_less_eq_nat @ ( suc @ zero_zero_nat ) @ ( count_a @ m @ x ) ) <=>
+   ( member_a @ x @ ( set_mset_a @ m ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ( ord_less_eq_nat @ ( suc @ zero_zero_nat ) @ ( count_a @ m @ x ) ) <=>
+      ( member_a @ x @ ( set_mset_a @ m ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1035, plain,
+    ((~ (member_a @ x @ (set_mset_a @ m))
+      | ~ (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_144_nat__induct, axiom,
+  (![P:( nat > $o ),N2:nat]:
+   ( ( P @ zero_zero_nat ) =>
+     ( ( ![N:nat]: ( ( P @ N ) => ( P @ ( suc @ N ) ) ) ) => ( P @ N2 ) ) ))).
+thf(zip_derived_cl246, plain,
+    (![X0 : nat > $o, X1 : nat]:
+       ( (X0 @ (sk__63 @ X0)) | ~ (X0 @ zero_zero_nat) |  (X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_144_nat__induct])).
+thf(zip_derived_cl20158, plain,
+    (![X0 : nat > $o]: ( (X0 @ (sk__63 @ X0)) | ~ (X0 @ zero_zero_nat))),
+    inference('condensation', [status(thm)], [zip_derived_cl246])).
+thf(zip_derived_cl1034, plain,
+    (( (member_a @ x @ (set_mset_a @ m))
+      |  (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_9_count__greater__zero__iff, axiom,
+  (![M:multiset_a,X:a]:
+   ( ( ord_less_nat @ zero_zero_nat @ ( count_a @ M @ X ) ) <=>
+     ( member_a @ X @ ( set_mset_a @ M ) ) ))).
+thf(zip_derived_cl15, plain,
+    (![X0 : multiset_a, X1 : a]:
+       ( (ord_less_nat @ zero_zero_nat @ (count_a @ X0 @ X1))
+        | ~ (member_a @ X1 @ (set_mset_a @ X0)))),
+    inference('cnf', [status(esa)], [fact_9_count__greater__zero__iff])).
+thf(zip_derived_cl9188, plain,
+    (( (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x))
+      |  (ord_less_nat @ zero_zero_nat @ (count_a @ m @ x)))),
+    inference('sup-', [status(thm)], [zip_derived_cl1034, zip_derived_cl15])).
+thf(zip_derived_cl20596, plain,
+    (( ((^[Y0 : nat]:
+           (ord_less_eq_nat @ 
+            ((^[Y1 : nat]: (suc @ ((^[Y2 : nat]: (zero_zero_nat)) @ Y1))) @ 
+             Y0) @ 
+            ((^[Y1 : nat]:
+                (count_a @ ((^[Y2 : nat]: (m)) @ Y1) @ 
+                 ((^[Y2 : nat]: (x)) @ Y1))) @ 
+             Y0))) @ 
+        (sk__63 @ 
+         (^[Y0 : nat]:
+            (ord_less_eq_nat @ 
+             ((^[Y1 : nat]: (suc @ ((^[Y2 : nat]: (zero_zero_nat)) @ Y1))) @ 
+              Y0) @ 
+             ((^[Y1 : nat]:
+                 (count_a @ ((^[Y2 : nat]: (m)) @ Y1) @ 
+                  ((^[Y2 : nat]: (x)) @ Y1))) @ 
+              Y0)))))
+      |  (ord_less_nat @ zero_zero_nat @ (count_a @ m @ x)))),
+    inference('sup+', [status(thm)],
+              [zip_derived_cl20158, zip_derived_cl9188])).
+thf(zip_derived_cl20784, plain,
+    (( (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x))
+      |  (ord_less_nat @ zero_zero_nat @ (count_a @ m @ x)))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl20596])).
+thf(fact_90_Suc__le__eq, axiom,
+  (![M3:nat,N2:nat]:
+   ( ( ord_less_eq_nat @ ( suc @ M3 ) @ N2 ) <=> ( ord_less_nat @ M3 @ N2 ) ))).
+thf(zip_derived_cl130, plain,
+    (![X0 : nat, X1 : nat]:
+       ( (ord_less_eq_nat @ (suc @ X0) @ X1) | ~ (ord_less_nat @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_90_Suc__le__eq])).
+thf(zip_derived_cl20818, plain,
+    ( (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x))),
+    inference('clc', [status(thm)], [zip_derived_cl20784, zip_derived_cl130])).
+thf(zip_derived_cl20819, plain, (~ (member_a @ x @ (set_mset_a @ m))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1035, zip_derived_cl20818])).
+thf(zip_derived_cl20861, plain, (((count_a @ m @ x) = (zero_zero_nat))),
+    inference('sup-', [status(thm)], [zip_derived_cl1, zip_derived_cl20819])).
+thf(zip_derived_cl1034, plain,
+    (( (member_a @ x @ (set_mset_a @ m))
+      |  (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl0, plain,
+    (![X0 : a, X1 : multiset_a]:
+       (~ (member_a @ X0 @ (set_mset_a @ X1))
+        | ((count_a @ X1 @ X0) != (zero_zero_nat)))),
+    inference('cnf', [status(esa)], [fact_0_count__eq__zero__iff])).
+thf(zip_derived_cl9189, plain,
+    (( (ord_less_eq_nat @ (suc @ zero_zero_nat) @ (count_a @ m @ x))
+      | ((count_a @ m @ x) != (zero_zero_nat)))),
+    inference('sup-', [status(thm)], [zip_derived_cl1034, zip_derived_cl0])).
+thf(zip_derived_cl9203, plain,
+    (( (ord_less_eq_nat @ (suc @ zero_zero_nat) @ zero_zero_nat)
+      | ((count_a @ m @ x) != (zero_zero_nat)))),
+    inference('local_rewriting', [status(thm)], [zip_derived_cl9189])).
+thf(fact_110_Suc__n__not__le__n, axiom,
+  (![N2:nat]: ( ~( ord_less_eq_nat @ ( suc @ N2 ) @ N2 ) ))).
+thf(zip_derived_cl163, plain,
+    (![X0 : nat]: ~ (ord_less_eq_nat @ (suc @ X0) @ X0)),
+    inference('cnf', [status(esa)], [fact_110_Suc__n__not__le__n])).
+thf(zip_derived_cl9273, plain, (((count_a @ m @ x) != (zero_zero_nat))),
+    inference('demod', [status(thm)], [zip_derived_cl9203, zip_derived_cl163])).
+thf(zip_derived_cl20879, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl20861, zip_derived_cl9273])).
+
+% SZS output end Refutation

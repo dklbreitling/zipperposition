@@ -1,0 +1,67 @@
+Output for /tmp/test/zip_input_004.p:
+% Timelimit is 10 + 1
+% done 83 iterations in 0.186s
+% SZS status Theorem for '/tmp/test/zip_input_004.p'
+% SZS output start Refutation
+thf(set_a_type, type, set_a: $tType).
+thf(a_type, type, a: $tType).
+thf(nat_type, type, nat: $tType).
+thf('#sk135_type', type, '#sk135': a).
+thf(zero_zero_nat_type, type, zero_zero_nat: nat).
+thf(collect_a_type, type, collect_a: (a > $o) > set_a).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(finite_finite_a_type, type, finite_finite_a: set_a > $o).
+thf(ord_less_nat_type, type, ord_less_nat: nat > nat > $o).
+thf(bot_bot_set_a_type, type, bot_bot_set_a: set_a).
+thf(fact_15_finite_Ointros_I1_J, axiom, (finite_finite_a @ bot_bot_set_a)).
+thf(zip_derived_cl20, plain, ( (finite_finite_a @ bot_bot_set_a)),
+    inference('cnf', [status(esa)], [fact_15_finite_Ointros_I1_J])).
+thf(fact_104_Collect__mem__eq, axiom,
+  (![A2:set_a]:
+   ( ( collect_a @ ( ^[X:a]: ( member_a @ X @ A2 ) ) ) = ( A2 ) ))).
+thf(zip_derived_cl188, plain,
+    (![X0 : set_a]: ((collect_a @ (^[Y0 : a]: (member_a @ Y0 @ X0))) = (X0))),
+    inference('cnf', [status(esa)], [fact_104_Collect__mem__eq])).
+thf(conj_0, conjecture,
+  (finite_finite_a @
+   ( collect_a @ ( ^[X:a]: ( ord_less_nat @ zero_zero_nat @ zero_zero_nat ) ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( finite_finite_a @
+      ( collect_a @
+        ( ^[X:a]: ( ord_less_nat @ zero_zero_nat @ zero_zero_nat ) ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1017, plain,
+    (~ (finite_finite_a @ 
+        (collect_a @ 
+         (^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat))))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1057, plain,
+    (![X0 : set_a]:
+       ((((^[Y0 : a]: (member_a @ Y0 @ X0)))
+          != ((^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat))))
+        | ~ (finite_finite_a @ X0))),
+    inference('ext_sup', [status(thm)],
+              [zip_derived_cl188, zip_derived_cl1017])).
+thf(zip_derived_cl1075, plain,
+    ((((^[Y0 : a]: (member_a @ Y0 @ bot_bot_set_a)))
+       != ((^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat))))),
+    inference('sup-', [status(thm)], [zip_derived_cl20, zip_derived_cl1057])).
+thf(zip_derived_cl1077, plain,
+    (((member_a @ '#sk135' @ bot_bot_set_a)
+       != (ord_less_nat @ zero_zero_nat @ zero_zero_nat))),
+    inference('neg_ext', [status(thm)], [zip_derived_cl1075])).
+thf(fact_6_less__nat__zero__code, axiom,
+  (![N:nat]: ( ~( ord_less_nat @ N @ zero_zero_nat ) ))).
+thf(zip_derived_cl9, plain,
+    (![X0 : nat]: ~ (ord_less_nat @ X0 @ zero_zero_nat)),
+    inference('cnf', [status(esa)], [fact_6_less__nat__zero__code])).
+thf(zip_derived_cl1078, plain, ( (member_a @ '#sk135' @ bot_bot_set_a)),
+    inference('demod', [status(thm)], [zip_derived_cl1077, zip_derived_cl9])).
+thf(fact_217_empty__iff, axiom,
+  (![C:a]: ( ~( member_a @ C @ bot_bot_set_a ) ))).
+thf(zip_derived_cl344, plain, (![X0 : a]: ~ (member_a @ X0 @ bot_bot_set_a)),
+    inference('cnf', [status(esa)], [fact_217_empty__iff])).
+thf(zip_derived_cl1274, plain, ($false),
+    inference('sup-', [status(thm)], [zip_derived_cl1078, zip_derived_cl344])).
+
+% SZS output end Refutation

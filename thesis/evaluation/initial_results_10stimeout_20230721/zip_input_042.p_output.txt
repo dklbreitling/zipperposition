@@ -1,0 +1,41 @@
+Output for /tmp/test/zip_input_042.p:
+% Timelimit is 10 + 1
+% done 552 iterations in 0.659s
+% SZS status Theorem for '/tmp/test/zip_input_042.p'
+% SZS output start Refutation
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(minus_1649712171iset_a_type, type, minus_1649712171iset_a: multiset_a > 
+                                                               multiset_a > multiset_a).
+thf(m_type, type, m: multiset_a).
+thf(n_type, type, n: multiset_a).
+thf(q_type, type, q: multiset_a).
+thf(plus_plus_multiset_a_type, type, plus_plus_multiset_a: multiset_a > 
+                                                           multiset_a > multiset_a).
+thf(conj_0, conjecture,
+  (( minus_1649712171iset_a @ m @ ( plus_plus_multiset_a @ n @ q ) ) =
+   ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ n ) @ q ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( minus_1649712171iset_a @ m @ ( plus_plus_multiset_a @ n @ q ) ) !=
+   ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ n ) @ q )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl908, plain,
+    (((minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q))
+       != (minus_1649712171iset_a @ (minus_1649712171iset_a @ m @ n) @ q))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_29_diff__diff__eq, axiom,
+  (![A:multiset_a,B:multiset_a,C:multiset_a]:
+   ( ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ A @ B ) @ C ) =
+     ( minus_1649712171iset_a @ A @ ( plus_plus_multiset_a @ B @ C ) ) ))).
+thf(zip_derived_cl31, plain,
+    (![X0 : multiset_a, X1 : multiset_a, X2 : multiset_a]:
+       ((minus_1649712171iset_a @ (minus_1649712171iset_a @ X0 @ X1) @ X2)
+         = (minus_1649712171iset_a @ X0 @ (plus_plus_multiset_a @ X1 @ X2)))),
+    inference('cnf', [status(esa)], [fact_29_diff__diff__eq])).
+thf(zip_derived_cl5099, plain,
+    (((minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q))
+       != (minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q)))),
+    inference('demod', [status(thm)], [zip_derived_cl908, zip_derived_cl31])).
+thf(zip_derived_cl5100, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl5099])).
+
+% SZS output end Refutation
