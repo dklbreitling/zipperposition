@@ -1,0 +1,16 @@
+[
+  {
+    "input_file": "zip_input_041",
+    "isabelle_simp": true,
+    "runtime": 30.852138996124268,
+    "exit_code": 0,
+    "refuted": "no, output contains \"ResourceOut\""
+  },
+  {
+    "input_file": "zip_input_041",
+    "isabelle_simp": false,
+    "runtime": 30.841864824295044,
+    "exit_code": 0,
+    "refuted": "no, output contains \"ResourceOut\""
+  }
+]

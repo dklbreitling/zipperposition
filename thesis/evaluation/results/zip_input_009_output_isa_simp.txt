@@ -1,0 +1,5 @@
+% Output for zip_input_009 with isabelle_simp True:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35, ZIP_TMP_DIR is /tmp/zip.
+% done 1049 iterations in 31.964s
+% SZS status ResourceOut for '/tmp/test/zip_input_009.p'
