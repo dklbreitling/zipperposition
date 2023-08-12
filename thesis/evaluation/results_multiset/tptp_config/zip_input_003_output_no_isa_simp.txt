@@ -1,0 +1,56 @@
+% Output for zip_input_003 with isabelle_simp False:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35, ZIP_TMP_DIR is /tmp/zip.
+% done 397 iterations in 1.659s
+% SZS status Theorem for '/tmp/test/zip_input_003.p'
+% SZS output start Refutation
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(nat_type, type, nat: $tType).
+thf(a_type, type, a: $tType).
+thf(sk__238_type, type, sk__238: a).
+thf(m_type, type, m: multiset_a).
+thf(count_a_type, type, count_a: multiset_a > a > nat).
+thf(n_type, type, n: multiset_a).
+thf(conj_0, conjecture,
+  (( ( m ) = ( n ) ) <=>
+   ( ![A2:a]: ( ( count_a @ m @ A2 ) = ( count_a @ n @ A2 ) ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ( ( m ) = ( n ) ) <=>
+      ( ![A2:a]: ( ( count_a @ m @ A2 ) = ( count_a @ n @ A2 ) ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1050, plain,
+    (![X0 : a]: (((count_a @ m @ X0) = (count_a @ n @ X0)) | ((m) = (n)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1051, plain,
+    ((((count_a @ m @ sk__238) != (count_a @ n @ sk__238)) | ((m) != (n)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1176, plain,
+    ((((count_a @ m @ sk__238) != (count_a @ m @ sk__238)) | ((m) != (n)))),
+    inference('local_rewriting', [status(thm)], [zip_derived_cl1051])).
+thf(zip_derived_cl1177, plain, (((m) != (n))),
+    inference('simplify', [status(thm)], [zip_derived_cl1176])).
+thf(zip_derived_cl4075, plain,
+    (![X0 : a]: ((count_a @ m @ X0) = (count_a @ n @ X0))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1050, zip_derived_cl1177])).
+thf(zip_derived_cl4079, plain, (((count_a @ m) = (count_a @ n))),
+    inference('ho_ext_pos_general', [status(thm)], [zip_derived_cl4075])).
+thf(fact_2_count__inject, axiom,
+  (![X:multiset_a,Y:multiset_a]:
+   ( ( ( count_a @ X ) = ( count_a @ Y ) ) <=> ( ( X ) = ( Y ) ) ))).
+thf(zip_derived_cl4, plain,
+    (![X0 : multiset_a, X1 : multiset_a]:
+       (((X1) = (X0)) | ((count_a @ X1) != (count_a @ X0)))),
+    inference('cnf', [status(esa)], [fact_2_count__inject])).
+thf(zip_derived_cl1177, plain, (((m) != (n))),
+    inference('simplify', [status(thm)], [zip_derived_cl1176])).
+thf(zip_derived_cl1178, plain,
+    (![X0 : multiset_a]: (((m) != (X0)) | ((count_a @ n) != (count_a @ X0)))),
+    inference('sup-', [status(thm)], [zip_derived_cl4, zip_derived_cl1177])).
+thf(zip_derived_cl1180, plain, (((count_a @ n) != (count_a @ m))),
+    inference('simplify', [status(thm)], [zip_derived_cl1178])).
+thf(zip_derived_cl4082, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl4079, zip_derived_cl1180])).
+
+% SZS output end Refutation
