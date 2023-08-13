@@ -13,9 +13,9 @@ ulimit -t $TIMELIMIT
 
 $DIR/zipperposition.exe ${1:+"$1"} \
   -i tptp\
-  -o tptp\
+  -o none\
   --timeout "$TIMELIMIT"\
-  --debug.zip.saturate 1\
+  --debug.zip.saturate 0\
   -nc\
   --tptp-def-as-rewrite\
   --rewrite-before-cnf=true \
@@ -42,10 +42,9 @@ $DIR/zipperposition.exe ${1:+"$1"} \
   --ho-choice-inst=true\
   --tmp-dir="$3"\
   --sine=-1\
-  --e-max-derived=48\
-  --dot /tmp/example.dot \
-  --e-encode-lambdas=lift\
   --scan-clause-ac=true\
   --lambdasup=0\
+  --kbo-weight-fun=invfreqrank\
+  --disable-e\
   --rw_isabelle_simp=true\
-  --kbo-weight-fun=invfreqrank "${@:4}"
+  "${@:4}"
