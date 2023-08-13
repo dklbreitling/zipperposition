@@ -1,0 +1,59 @@
+% Output for zip_input_047 with isabelle_simp False:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35, ZIP_TMP_DIR is /tmp/zip.
+% done 181 iterations in 0.161s
+% SZS status Theorem for '/tmp/test/zip_input_047.p'
+% SZS output start Refutation
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(q_type, type, q: multiset_a).
+thf(m_type, type, m: multiset_a).
+thf(minus_1649712171iset_a_type, type, minus_1649712171iset_a: multiset_a > 
+                                                               multiset_a > multiset_a).
+thf(plus_plus_multiset_a_type, type, plus_plus_multiset_a: multiset_a > 
+                                                           multiset_a > multiset_a).
+thf(n_type, type, n: multiset_a).
+thf(conj_0, conjecture,
+  (( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ n ) @ q ) =
+   ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ q ) @ n ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ n ) @ q ) !=
+   ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ m @ q ) @ n )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl859, plain,
+    (((minus_1649712171iset_a @ (minus_1649712171iset_a @ m @ n) @ q)
+       != (minus_1649712171iset_a @ (minus_1649712171iset_a @ m @ q) @ n))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_9_diff__diff__eq, axiom,
+  (![A:multiset_a,B:multiset_a,C:multiset_a]:
+   ( ( minus_1649712171iset_a @ ( minus_1649712171iset_a @ A @ B ) @ C ) =
+     ( minus_1649712171iset_a @ A @ ( plus_plus_multiset_a @ B @ C ) ) ))).
+thf(zip_derived_cl10, plain,
+    (![X0 : multiset_a, X1 : multiset_a, X2 : multiset_a]:
+       ((minus_1649712171iset_a @ (minus_1649712171iset_a @ X0 @ X1) @ X2)
+         = (minus_1649712171iset_a @ X0 @ (plus_plus_multiset_a @ X1 @ X2)))),
+    inference('cnf', [status(esa)], [fact_9_diff__diff__eq])).
+thf(zip_derived_cl10, plain,
+    (![X0 : multiset_a, X1 : multiset_a, X2 : multiset_a]:
+       ((minus_1649712171iset_a @ (minus_1649712171iset_a @ X0 @ X1) @ X2)
+         = (minus_1649712171iset_a @ X0 @ (plus_plus_multiset_a @ X1 @ X2)))),
+    inference('cnf', [status(esa)], [fact_9_diff__diff__eq])).
+thf(zip_derived_cl1297, plain,
+    (((minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q))
+       != (minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ q @ n)))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl859, zip_derived_cl10, zip_derived_cl10])).
+thf(fact_15_add_Ocommute, axiom,
+  (![A2:multiset_a,B2:multiset_a]:
+   ( ( plus_plus_multiset_a @ A2 @ B2 ) = ( plus_plus_multiset_a @ B2 @ A2 ) ))).
+thf(zip_derived_cl16, plain,
+    (![X0 : multiset_a, X1 : multiset_a]:
+       ((plus_plus_multiset_a @ X1 @ X0) = (plus_plus_multiset_a @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_15_add_Ocommute])).
+thf(zip_derived_cl1401, plain,
+    (((minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q))
+       != (minus_1649712171iset_a @ m @ (plus_plus_multiset_a @ n @ q)))),
+    inference('demod', [status(thm)], [zip_derived_cl1297, zip_derived_cl16])).
+thf(zip_derived_cl1402, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl1401])).
+
+% SZS output end Refutation
