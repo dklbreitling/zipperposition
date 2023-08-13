@@ -1,0 +1,912 @@
+{
+    "rev05.p": {
+        "results": [
+            {
+                "runtime": 0.017655372619628906,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.01693415641784668,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.016408205032348633,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.016907453536987305,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.0179443359375,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.009s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.009
+            },
+            {
+                "runtime": 0.016917705535888672,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.009s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.009
+            },
+            {
+                "runtime": 0.01652359962463379,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.016654491424560547,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.016371965408325195,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            },
+            {
+                "runtime": 0.016551971435546875,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.008s\nSZS status Theorem for '/tmp/test/rev05.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.008
+            }
+        ],
+        "average_self_time": 0.008
+    },
+    "rev10.p": {
+        "results": [
+            {
+                "runtime": 0.023673534393310547,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.015s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.015
+            },
+            {
+                "runtime": 0.022775888442993164,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.014s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.014
+            },
+            {
+                "runtime": 0.023021459579467773,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.014s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.014
+            },
+            {
+                "runtime": 0.023439645767211914,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.015s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.015
+            },
+            {
+                "runtime": 0.02355813980102539,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.015s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.015
+            },
+            {
+                "runtime": 0.022922515869140625,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.014s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.014
+            },
+            {
+                "runtime": 0.02449798583984375,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.016s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.016
+            },
+            {
+                "runtime": 0.02376389503479004,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.015s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.015
+            },
+            {
+                "runtime": 0.023671865463256836,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.015s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.015
+            },
+            {
+                "runtime": 0.022475481033325195,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.014s\nSZS status Theorem for '/tmp/test/rev10.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.014
+            }
+        ],
+        "average_self_time": 0.015
+    },
+    "rev15.p": {
+        "results": [
+            {
+                "runtime": 0.04427337646484375,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.035s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.035
+            },
+            {
+                "runtime": 0.0446016788482666,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.036s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.036
+            },
+            {
+                "runtime": 0.04525303840637207,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.037s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.037
+            },
+            {
+                "runtime": 0.04405927658081055,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.036s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.036
+            },
+            {
+                "runtime": 0.04436850547790527,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.036s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.036
+            },
+            {
+                "runtime": 0.04330897331237793,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.035s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.035
+            },
+            {
+                "runtime": 0.05034208297729492,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.042s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.042
+            },
+            {
+                "runtime": 0.04548954963684082,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.037s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.037
+            },
+            {
+                "runtime": 0.04396319389343262,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.035s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.035
+            },
+            {
+                "runtime": 0.04365873336791992,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.035s\nSZS status Theorem for '/tmp/test/rev15.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.035
+            }
+        ],
+        "average_self_time": 0.036
+    },
+    "rev20.p": {
+        "results": [
+            {
+                "runtime": 0.10133647918701172,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.093s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.093
+            },
+            {
+                "runtime": 0.0950767993927002,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.086s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.086
+            },
+            {
+                "runtime": 0.09561491012573242,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.087s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.087
+            },
+            {
+                "runtime": 0.09787416458129883,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.089s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.089
+            },
+            {
+                "runtime": 0.09482598304748535,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.086s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.086
+            },
+            {
+                "runtime": 0.09455418586730957,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.086s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.086
+            },
+            {
+                "runtime": 0.09546780586242676,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.087s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.087
+            },
+            {
+                "runtime": 0.09595656394958496,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.087s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.087
+            },
+            {
+                "runtime": 0.10052490234375,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.092s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.092
+            },
+            {
+                "runtime": 0.09976601600646973,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.091s\nSZS status Theorem for '/tmp/test/rev20.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.091
+            }
+        ],
+        "average_self_time": 0.088
+    },
+    "rev25.p": {
+        "results": [
+            {
+                "runtime": 0.20407676696777344,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.195s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.195
+            },
+            {
+                "runtime": 0.20126891136169434,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.192s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.192
+            },
+            {
+                "runtime": 0.1993715763092041,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.191s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.191
+            },
+            {
+                "runtime": 0.20348334312438965,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.195s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.195
+            },
+            {
+                "runtime": 0.2770993709564209,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.268s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.268
+            },
+            {
+                "runtime": 0.1991429328918457,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.190s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.19
+            },
+            {
+                "runtime": 0.19786524772644043,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.189s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.189
+            },
+            {
+                "runtime": 0.20233535766601562,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.194s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.194
+            },
+            {
+                "runtime": 0.19929742813110352,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.190s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.19
+            },
+            {
+                "runtime": 0.20143580436706543,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.192s\nSZS status Theorem for '/tmp/test/rev25.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.192
+            }
+        ],
+        "average_self_time": 0.2
+    },
+    "rev30.p": {
+        "results": [
+            {
+                "runtime": 0.3947319984436035,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.385s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.385
+            },
+            {
+                "runtime": 0.38911938667297363,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.380s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.38
+            },
+            {
+                "runtime": 0.4022238254547119,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.393s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.393
+            },
+            {
+                "runtime": 0.3910696506500244,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.382s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.382
+            },
+            {
+                "runtime": 0.38895320892333984,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.380s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.38
+            },
+            {
+                "runtime": 0.38859987258911133,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.380s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.38
+            },
+            {
+                "runtime": 0.393998384475708,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.384s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.384
+            },
+            {
+                "runtime": 0.3897097110748291,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.381s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.381
+            },
+            {
+                "runtime": 0.3860287666320801,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.377s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.377
+            },
+            {
+                "runtime": 0.3921375274658203,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.383s\nSZS status Theorem for '/tmp/test/rev30.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.383
+            }
+        ],
+        "average_self_time": 0.382
+    },
+    "rev35.p": {
+        "results": [
+            {
+                "runtime": 0.7195327281951904,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.710s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.71
+            },
+            {
+                "runtime": 0.7155807018280029,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.706s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.706
+            },
+            {
+                "runtime": 0.699486494064331,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.689s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.689
+            },
+            {
+                "runtime": 0.7033226490020752,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.694s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.694
+            },
+            {
+                "runtime": 0.7016358375549316,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.692s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.692
+            },
+            {
+                "runtime": 0.7220826148986816,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.712s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.712
+            },
+            {
+                "runtime": 0.697014570236206,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.687s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.687
+            },
+            {
+                "runtime": 0.6915173530578613,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.682s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.682
+            },
+            {
+                "runtime": 0.6946556568145752,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.685s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.685
+            },
+            {
+                "runtime": 0.6952793598175049,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 0.686s\nSZS status Theorem for '/tmp/test/rev35.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 0.686
+            }
+        ],
+        "average_self_time": 0.694
+    },
+    "rev40.p": {
+        "results": [
+            {
+                "runtime": 1.296539306640625,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.286s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.286
+            },
+            {
+                "runtime": 1.3344793319702148,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.324s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.324
+            },
+            {
+                "runtime": 1.319469928741455,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.309s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.309
+            },
+            {
+                "runtime": 1.316884994506836,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.306s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.306
+            },
+            {
+                "runtime": 1.3236372470855713,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.313s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.313
+            },
+            {
+                "runtime": 1.3118915557861328,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.301s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.301
+            },
+            {
+                "runtime": 1.2918548583984375,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.282s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.282
+            },
+            {
+                "runtime": 1.3087217807769775,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.298s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.298
+            },
+            {
+                "runtime": 1.4942893981933594,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.484s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.484
+            },
+            {
+                "runtime": 1.302110195159912,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.292s\nSZS status Theorem for '/tmp/test/rev40.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.292
+            }
+        ],
+        "average_self_time": 1.32
+    },
+    "rev45.p": {
+        "results": [
+            {
+                "runtime": 1.9467241764068604,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.935s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.935
+            },
+            {
+                "runtime": 1.9649760723114014,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.953s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.953
+            },
+            {
+                "runtime": 1.9360265731811523,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.925s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.925
+            },
+            {
+                "runtime": 1.9239845275878906,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.913s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.913
+            },
+            {
+                "runtime": 1.957263708114624,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.946s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.946
+            },
+            {
+                "runtime": 1.9313836097717285,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.920s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.92
+            },
+            {
+                "runtime": 1.9403533935546875,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.929s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.929
+            },
+            {
+                "runtime": 1.9248805046081543,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.914s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.914
+            },
+            {
+                "runtime": 1.9566400051116943,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.946s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.946
+            },
+            {
+                "runtime": 1.9449775218963623,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 1.934s\nSZS status Theorem for '/tmp/test/rev45.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 1.934
+            }
+        ],
+        "average_self_time": 1.932
+    },
+    "rev50.p": {
+        "results": [
+            {
+                "runtime": 2.9822518825531006,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.970s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.97
+            },
+            {
+                "runtime": 2.942122220993042,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.930s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.93
+            },
+            {
+                "runtime": 2.9728269577026367,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.961s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.961
+            },
+            {
+                "runtime": 2.972832679748535,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.961s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.961
+            },
+            {
+                "runtime": 2.9865217208862305,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.974s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.974
+            },
+            {
+                "runtime": 3.138399600982666,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 3.126s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 3.126
+            },
+            {
+                "runtime": 3.0074961185455322,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.996s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.996
+            },
+            {
+                "runtime": 2.986635684967041,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.975s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.975
+            },
+            {
+                "runtime": 2.99783992767334,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.986s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.986
+            },
+            {
+                "runtime": 2.996610641479492,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 2.985s\nSZS status Theorem for '/tmp/test/rev50.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 2.985
+            }
+        ],
+        "average_self_time": 2.986
+    },
+    "rev55.p": {
+        "results": [
+            {
+                "runtime": 4.3516199588775635,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.338s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.338
+            },
+            {
+                "runtime": 4.475671291351318,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.463s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.463
+            },
+            {
+                "runtime": 4.724935531616211,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.712s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.712
+            },
+            {
+                "runtime": 4.394909858703613,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.382s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.382
+            },
+            {
+                "runtime": 4.337289333343506,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.324s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.324
+            },
+            {
+                "runtime": 4.340814113616943,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.327s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.327
+            },
+            {
+                "runtime": 4.376485109329224,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.363s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.363
+            },
+            {
+                "runtime": 4.494685411453247,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.481s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.481
+            },
+            {
+                "runtime": 4.985131740570068,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.970s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.97
+            },
+            {
+                "runtime": 4.958534240722656,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 4.946s\nSZS status Theorem for '/tmp/test/rev55.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 4.946
+            }
+        ],
+        "average_self_time": 4.531
+    },
+    "rev60.p": {
+        "results": [
+            {
+                "runtime": 6.580338478088379,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 6.565s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 6.565
+            },
+            {
+                "runtime": 6.895978689193726,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 6.881s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 6.881
+            },
+            {
+                "runtime": 7.992886304855347,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.977s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.977
+            },
+            {
+                "runtime": 8.41521143913269,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 8.397s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 8.397
+            },
+            {
+                "runtime": 7.659672260284424,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.643s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.643
+            },
+            {
+                "runtime": 7.691292762756348,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.671s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.671
+            },
+            {
+                "runtime": 8.020586013793945,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.998s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.998
+            },
+            {
+                "runtime": 7.270082235336304,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.254s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.254
+            },
+            {
+                "runtime": 6.764624357223511,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 6.750s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 6.75
+            },
+            {
+                "runtime": 7.261179208755493,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 7.246s\nSZS status Theorem for '/tmp/test/rev60.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 7.246
+            }
+        ],
+        "average_self_time": 7.438
+    },
+    "rev70.p": {
+        "results": [
+            {
+                "runtime": 14.744861364364624,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 14.724s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 14.724
+            },
+            {
+                "runtime": 15.30009937286377,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 15.279s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 15.279
+            },
+            {
+                "runtime": 15.412734508514404,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 15.394s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 15.394
+            },
+            {
+                "runtime": 12.827193975448608,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 12.809s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 12.809
+            },
+            {
+                "runtime": 12.28291654586792,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 12.265s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 12.265
+            },
+            {
+                "runtime": 12.844350099563599,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 12.826s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 12.826
+            },
+            {
+                "runtime": 14.744563102722168,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 14.727s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 14.727
+            },
+            {
+                "runtime": 14.207706451416016,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 14.189s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 14.189
+            },
+            {
+                "runtime": 14.024914979934692,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 14.007s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 14.007
+            },
+            {
+                "runtime": 12.726364374160767,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 12.708s\nSZS status Theorem for '/tmp/test/rev70.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 12.708
+            }
+        ],
+        "average_self_time": 13.893
+    },
+    "rev80.p": {
+        "results": [
+            {
+                "runtime": 22.165666341781616,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 22.142s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 22.142
+            },
+            {
+                "runtime": 22.77745246887207,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 22.755s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 22.755
+            },
+            {
+                "runtime": 23.941916704177856,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 23.919s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 23.919
+            },
+            {
+                "runtime": 24.561229705810547,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 24.539s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 24.539
+            },
+            {
+                "runtime": 24.50854206085205,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 24.485s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 24.485
+            },
+            {
+                "runtime": 23.82565665245056,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 23.803s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 23.803
+            },
+            {
+                "runtime": 23.60184097290039,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 23.579s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 23.579
+            },
+            {
+                "runtime": 23.728897094726562,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 23.706s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 23.706
+            },
+            {
+                "runtime": 24.413742780685425,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 24.390s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 24.39
+            },
+            {
+                "runtime": 25.15839719772339,
+                "exit_code": 0,
+                "output": "% Timelimit is 30\ndone 5 iterations in 25.134s\nSZS status Theorem for '/tmp/test/rev80.p'\nSZS output start Refutation\n\nSZS output end Refutation\n",
+                "self_time": 25.134
+            }
+        ],
+        "average_self_time": 23.845
+    }
+}
