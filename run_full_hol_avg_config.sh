@@ -6,7 +6,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 echo "% ZIP_TIMELIMIT is $ZIP_TIMELIMIT"
-: ${ZIP_TMP_DIR:="/tmp/zip"}
 : ${ZIP_TIMELIMIT:=30.000}
 ZIP_ULIMIT=$(echo "$ZIP_TIMELIMIT + 5" | bc)
 ZIP_ULIMIT=${ZIP_ULIMIT%.*}

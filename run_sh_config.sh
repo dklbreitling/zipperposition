@@ -35,7 +35,6 @@ $DIR/zipperposition.exe ${1:+"$1"} \
   --ho-prim-enum=none\
   --ho-elim-leibniz=0\
   --interpret-bool-funs=true\
-  --tmp-dir="$ZIP_TMP_DIR"\
   --ho-unif-level=pragmatic-framework\
   --select=bb+e-selection2\
   --post-cnf-lambda-lifting=true\
