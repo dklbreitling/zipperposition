@@ -48,7 +48,6 @@ $DIR/zipperposition.exe ${1:+"$1"} \
   --e-encode-lambdas=lift\
   --scan-clause-ac=true\
   --lambdasup=0\
-  --rw_isabelle_simp=true\
   --kbo-weight-fun=invfreqrank\
   --disable-e\
   "${@:2}"
