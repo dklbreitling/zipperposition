@@ -1,0 +1,5 @@
+% Output for zip_input_032 with isabelle_simp True:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is ZIP_ULIMIT_IF, ZIP_TMP_DIR is .
+Stack overflow
+

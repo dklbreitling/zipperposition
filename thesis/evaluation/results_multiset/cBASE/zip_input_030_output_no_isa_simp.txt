@@ -1,0 +1,76 @@
+% Output for zip_input_030 with isabelle_simp False:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is ZIP_ULIMIT_IF, ZIP_TMP_DIR is .
+% done 332 iterations in 0.510s
+% SZS status Theorem for 'infiles_multiset/zip_input_030.p'
+% SZS output start Refutation
+thf(nat_type, type, nat: $tType).
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(a_type, type, a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(a2_type, type, a2: multiset_a).
+thf(sk__1_type, type, sk__1: multiset_a > multiset_a > a).
+thf(thesis_type, type, thesis: $o).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(set_mset_a_type, type, set_mset_a: multiset_a > set_a).
+thf(zero_zero_nat_type, type, zero_zero_nat: nat).
+thf(zero_zero_multiset_a_type, type, zero_zero_multiset_a: multiset_a).
+thf(count_a_type, type, count_a: multiset_a > a > nat).
+thf(fact_52_zero__multiset_Orep__eq, axiom,
+  (![A3:a]: ( ( count_a @ zero_zero_multiset_a @ A3 ) = ( zero_zero_nat ) ))).
+thf(zip_derived_cl25, plain,
+    (![X0 : a]: ((count_a @ zero_zero_multiset_a @ X0) = (zero_zero_nat))),
+    inference('cnf', [status(esa)], [fact_52_zero__multiset_Orep__eq])).
+thf(fact_5_count__eq__zero__iff, axiom,
+  (![M:multiset_a,X:a]:
+   ( ( ( count_a @ M @ X ) = ( zero_zero_nat ) ) <=>
+     ( ~( member_a @ X @ ( set_mset_a @ M ) ) ) ))).
+thf(zip_derived_cl2, plain,
+    (![X0 : multiset_a, X1 : a]:
+       (((count_a @ X0 @ X1) = (zero_zero_nat))
+        |  (member_a @ X1 @ (set_mset_a @ X0)))),
+    inference('cnf', [status(esa)], [fact_5_count__eq__zero__iff])).
+thf(fact_0_that, axiom,
+  (![X:a]: ( ( member_a @ X @ ( set_mset_a @ a2 ) ) => ( thesis ) ))).
+thf(zip_derived_cl0, plain,
+    (![X0 : a]: ( (thesis) | ~ (member_a @ X0 @ (set_mset_a @ a2)))),
+    inference('cnf', [status(esa)], [fact_0_that])).
+thf(conj_1, conjecture, (thesis)).
+thf(zf_stmt_0, negated_conjecture, (~( thesis )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl463, plain, (~ (thesis)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl464, plain,
+    (![X0 : a]: ~ (member_a @ X0 @ (set_mset_a @ a2))),
+    inference('demod', [status(thm)], [zip_derived_cl0, zip_derived_cl463])).
+thf(zip_derived_cl473, plain,
+    (![X0 : a]: ((count_a @ a2 @ X0) = (zero_zero_nat))),
+    inference('sup-', [status(thm)], [zip_derived_cl2, zip_derived_cl464])).
+thf(fact_62_multiset__eq__iff, axiom,
+  (![M2:multiset_a,N2:multiset_a]:
+   ( ( ( M2 ) = ( N2 ) ) <=>
+     ( ![A3:a]: ( ( count_a @ M2 @ A3 ) = ( count_a @ N2 @ A3 ) ) ) ))).
+thf(zip_derived_cl32, plain,
+    (![X0 : multiset_a, X1 : multiset_a]:
+       (((X1) = (X0))
+        | ((count_a @ X1 @ (sk__1 @ X0 @ X1))
+            != (count_a @ X0 @ (sk__1 @ X0 @ X1))))),
+    inference('cnf', [status(esa)], [fact_62_multiset__eq__iff])).
+thf(zip_derived_cl1766, plain,
+    (![X0 : multiset_a]:
+       (((count_a @ X0 @ (sk__1 @ a2 @ X0)) != (zero_zero_nat))
+        | ((X0) = (a2)))),
+    inference('sup-', [status(thm)], [zip_derived_cl473, zip_derived_cl32])).
+thf(zip_derived_cl2162, plain,
+    ((((zero_zero_nat) != (zero_zero_nat)) | ((zero_zero_multiset_a) = (a2)))),
+    inference('sup-', [status(thm)], [zip_derived_cl25, zip_derived_cl1766])).
+thf(zip_derived_cl2166, plain, (((zero_zero_multiset_a) = (a2))),
+    inference('simplify', [status(thm)], [zip_derived_cl2162])).
+thf(fact_6_assms, axiom, (( a2 ) != ( zero_zero_multiset_a ))).
+thf(zip_derived_cl3, plain, (((a2) != (zero_zero_multiset_a))),
+    inference('cnf', [status(esa)], [fact_6_assms])).
+thf(zip_derived_cl2167, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl2166, zip_derived_cl3])).
+
+% SZS output end Refutation

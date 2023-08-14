@@ -1,0 +1,51 @@
+% Output for zip_input_007 with isabelle_simp False:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is ZIP_ULIMIT_IF, ZIP_TMP_DIR is .
+% done 127 iterations in 0.673s
+% SZS status Theorem for 'infiles_multiset/zip_input_007.p'
+% SZS output start Refutation
+thf(set_a_type, type, set_a: $tType).
+thf(nat_type, type, nat: $tType).
+thf(a_type, type, a: $tType).
+thf(ord_less_nat_type, type, ord_less_nat: nat > nat > $o).
+thf(sk__1_type, type, sk__1: (a > $o) > a).
+thf(finite_finite_a_type, type, finite_finite_a: set_a > $o).
+thf(zero_zero_nat_type, type, zero_zero_nat: nat).
+thf(collect_a_type, type, collect_a: (a > $o) > set_a).
+thf(conj_0, conjecture,
+  (finite_finite_a @
+   ( collect_a @ ( ^[X:a]: ( ord_less_nat @ zero_zero_nat @ zero_zero_nat ) ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( finite_finite_a @
+      ( collect_a @
+        ( ^[X:a]: ( ord_less_nat @ zero_zero_nat @ zero_zero_nat ) ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl466, plain,
+    (~ (finite_finite_a @ 
+        (collect_a @ 
+         (^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat))))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_31_not__finite__existsD, axiom,
+  (![P:( a > $o )]:
+   ( ( ~( finite_finite_a @ ( collect_a @ P ) ) ) =>
+     ( ?[X_1:a]: ( P @ X_1 ) ) ))).
+thf(zip_derived_cl14, plain,
+    (![X0 : a > $o]:
+       ( (X0 @ (sk__1 @ X0)) |  (finite_finite_a @ (collect_a @ X0)))),
+    inference('cnf', [status(esa)], [fact_31_not__finite__existsD])).
+thf(zip_derived_cl1439, plain,
+    ( ((^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat)) @ 
+       (sk__1 @ (^[Y0 : a]: (ord_less_nat @ zero_zero_nat @ zero_zero_nat))))),
+    inference('sup+', [status(thm)], [zip_derived_cl466, zip_derived_cl14])).
+thf(zip_derived_cl1478, plain,
+    ( (ord_less_nat @ zero_zero_nat @ zero_zero_nat)),
+    inference('ho_norm', [status(thm)], [zip_derived_cl1439])).
+thf(fact_0_less__nat__zero__code, axiom,
+  (![N:nat]: ( ~( ord_less_nat @ N @ zero_zero_nat ) ))).
+thf(zip_derived_cl0, plain,
+    (![X0 : nat]: ~ (ord_less_nat @ X0 @ zero_zero_nat)),
+    inference('cnf', [status(esa)], [fact_0_less__nat__zero__code])).
+thf(zip_derived_cl1516, plain, ($false),
+    inference('sup-', [status(thm)], [zip_derived_cl1478, zip_derived_cl0])).
+
+% SZS output end Refutation

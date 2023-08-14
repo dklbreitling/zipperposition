@@ -1,0 +1,5 @@
+% Output for zip_input_015 with isabelle_simp False:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is ZIP_ULIMIT_IF, ZIP_TMP_DIR is .
+% done 5119 iterations in 29.886s
+% SZS status ResourceOut for 'infiles_multiset/zip_input_015.p'

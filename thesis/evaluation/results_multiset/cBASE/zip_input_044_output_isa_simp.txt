@@ -1,0 +1,35 @@
+% Output for zip_input_044 with isabelle_simp True:
+% ZIP_TIMELIMIT is 
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is ZIP_ULIMIT_IF, ZIP_TMP_DIR is .
+% done 1 iterations in 0.049s
+% SZS status Theorem for 'infiles_multiset/zip_input_044.p'
+% SZS output start Refutation
+thf(multiset_a_type, type, multiset_a: $tType).
+thf(minus_1649712171iset_a_type, type, minus_1649712171iset_a: multiset_a > 
+                                                               multiset_a > multiset_a).
+thf(zero_zero_multiset_a_type, type, zero_zero_multiset_a: multiset_a).
+thf(a2_type, type, a2: multiset_a).
+thf(conj_0, conjecture,
+  (( minus_1649712171iset_a @ a2 @ a2 ) = ( zero_zero_multiset_a ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( minus_1649712171iset_a @ a2 @ a2 ) != ( zero_zero_multiset_a )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl439, plain,
+    (((minus_1649712171iset_a @ a2 @ a2) != (zero_zero_multiset_a))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_2_cancel__comm__monoid__add__class_Odiff__cancel, axiom,
+  (![A2:multiset_a]:
+   ( ( minus_1649712171iset_a @ A2 @ A2 ) = ( zero_zero_multiset_a ) ))).
+thf(zip_derived_cl3, plain,
+    (![X0 : multiset_a]:
+       ((minus_1649712171iset_a @ X0 @ X0) = (zero_zero_multiset_a))),
+    inference('cnf', [status(esa)],
+              [fact_2_cancel__comm__monoid__add__class_Odiff__cancel])).
+thf(zip_derived_cl441, plain,
+    (((zero_zero_multiset_a) != (zero_zero_multiset_a))),
+    inference('isabelle_simp', [status(thm)],
+              [zip_derived_cl439, zip_derived_cl3])).
+thf(zip_derived_cl442, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl441])).
+
+% SZS output end Refutation
