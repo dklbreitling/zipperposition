@@ -1,0 +1,66 @@
+% Output for zip_input_078 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 0 iterations in 0.102s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_078.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(a_type, type, a: $tType).
+thf(b_type, type, b: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(restrict_a_b_type, type, restrict_a_b: set_a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(bot_bot_set_a_type, type, bot_bot_set_a: set_a).
+thf(insert_a_type, type, insert_a: a > set_a > set_a).
+thf(minus_minus_set_a_type, type, minus_minus_set_a: set_a > set_a > set_a).
+thf(update_a_b_type, type, update_a_b: a > b > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(map_of_a_b_type, type, map_of_a_b: list_P459903278od_a_b > a > option_b).
+thf(x_type, type, x: a).
+thf(y_type, type, y: b).
+thf(al_type, type, al: list_P459903278od_a_b).
+thf(option_b_type, type, option_b: $tType).
+thf(d_type, type, d: set_a).
+thf(conj_1, conjecture,
+  (( map_of_a_b @ ( update_a_b @ x @ y @ ( restrict_a_b @ d @ al ) ) ) =
+   ( map_of_a_b @
+     ( update_a_b @
+       x @ y @ 
+       ( restrict_a_b @
+         ( minus_minus_set_a @ d @ ( insert_a @ x @ bot_bot_set_a ) ) @ al ) ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( map_of_a_b @ ( update_a_b @ x @ y @ ( restrict_a_b @ d @ al ) ) ) !=
+   ( map_of_a_b @
+     ( update_a_b @
+       x @ y @ 
+       ( restrict_a_b @
+         ( minus_minus_set_a @ d @ ( insert_a @ x @ bot_bot_set_a ) ) @ al ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl1036, plain,
+    (((map_of_a_b @ (update_a_b @ x @ y @ (restrict_a_b @ d @ al)))
+       != (map_of_a_b @ 
+           (update_a_b @ x @ y @ 
+            (restrict_a_b @ 
+             (minus_minus_set_a @ d @ (insert_a @ x @ bot_bot_set_a)) @ al))))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_2_update__restr, axiom,
+  (![X:a,Y:b,D:set_a,Al:list_P459903278od_a_b]:
+   ( ( map_of_a_b @ ( update_a_b @ X @ Y @ ( restrict_a_b @ D @ Al ) ) ) =
+     ( map_of_a_b @
+       ( update_a_b @
+         X @ Y @ 
+         ( restrict_a_b @
+           ( minus_minus_set_a @ D @ ( insert_a @ X @ bot_bot_set_a ) ) @ Al ) ) ) ))).
+thf(zip_derived_cl2, plain,
+    (![X0 : a, X1 : b, X2 : set_a, X3 : list_P459903278od_a_b]:
+       ((map_of_a_b @ (update_a_b @ X0 @ X1 @ (restrict_a_b @ X2 @ X3)))
+         = (map_of_a_b @ 
+            (update_a_b @ X0 @ X1 @ 
+             (restrict_a_b @ 
+              (minus_minus_set_a @ X2 @ (insert_a @ X0 @ bot_bot_set_a)) @ X3))))),
+    inference('cnf', [status(esa)], [fact_2_update__restr])).
+thf(zip_derived_cl1078, plain,
+    (((map_of_a_b @ (update_a_b @ x @ y @ (restrict_a_b @ d @ al)))
+       != (map_of_a_b @ (update_a_b @ x @ y @ (restrict_a_b @ d @ al))))),
+    inference('demod', [status(thm)], [zip_derived_cl1036, zip_derived_cl2])).
+thf(zip_derived_cl1079, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl1078])).
+
+% SZS output end Refutation

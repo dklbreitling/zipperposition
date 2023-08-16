@@ -1,0 +1,4 @@
+% Output for zip_input_011 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 948 iterations in 30.868s
+% SZS status ResourceOut for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_011.p'

@@ -1,0 +1,49 @@
+% Output for zip_input_064 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 802 iterations in 19.653s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_064.p'
+% SZS output start Refutation
+thf(option_a_type, type, option_a: $tType).
+thf(list_P1687733484od_b_a_type, type, list_P1687733484od_b_a: $tType).
+thf(set_b_type, type, set_b: $tType).
+thf(b_type, type, b: $tType).
+thf(al_type, type, al: list_P1687733484od_b_a).
+thf(a2_type, type, a2: set_b).
+thf(k_type, type, k: b).
+thf(map_of_b_a_type, type, map_of_b_a: list_P1687733484od_b_a > b > option_a).
+thf(restrict_b_a_type, type, restrict_b_a: set_b > list_P1687733484od_b_a > list_P1687733484od_b_a).
+thf(restrict_map_b_a_type, type, restrict_map_b_a: (b > option_a) > set_b > b > option_a).
+thf(conj_0, conjecture,
+  (( map_of_b_a @ ( restrict_b_a @ a2 @ al ) @ k ) =
+   ( restrict_map_b_a @ ( map_of_b_a @ al ) @ a2 @ k ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( map_of_b_a @ ( restrict_b_a @ a2 @ al ) @ k ) !=
+   ( restrict_map_b_a @ ( map_of_b_a @ al ) @ a2 @ k )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1122, plain,
+    (((map_of_b_a @ (restrict_b_a @ a2 @ al) @ k)
+       != (restrict_map_b_a @ (map_of_b_a @ al) @ a2 @ k))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_0_restr__conv_H, axiom,
+  (![A:set_b,Al:list_P1687733484od_b_a]:
+   ( ( map_of_b_a @ ( restrict_b_a @ A @ Al ) ) =
+     ( restrict_map_b_a @ ( map_of_b_a @ Al ) @ A ) ))).
+thf(zip_derived_cl0, plain,
+    (![X0 : list_P1687733484od_b_a, X1 : set_b]:
+       ((map_of_b_a @ (restrict_b_a @ X1 @ X0))
+         = (restrict_map_b_a @ (map_of_b_a @ X0) @ X1))),
+    inference('cnf', [status(esa)], [fact_0_restr__conv_H])).
+thf(zip_derived_cl1386, plain,
+    (![X0 : list_P1687733484od_b_a, X1 : set_b, X2 : b]:
+       ((map_of_b_a @ (restrict_b_a @ X1 @ X0) @ X2)
+         = (restrict_map_b_a @ (map_of_b_a @ X0) @ X1 @ X2))),
+    inference('ho_complete_eq', [status(thm)], [zip_derived_cl0])).
+thf(zip_derived_cl25998, plain,
+    (((restrict_map_b_a @ (map_of_b_a @ al) @ a2 @ k)
+       != (restrict_map_b_a @ (map_of_b_a @ al) @ a2 @ k))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1122, zip_derived_cl1386])).
+thf(zip_derived_cl25999, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl25998])).
+
+% SZS output end Refutation
