@@ -1,0 +1,114 @@
+% Output for zip_input_080 with isabelle_simp True:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 2 iterations in 0.052s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_080.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(a_type, type, a: $tType).
+thf(product_prod_a_b_type, type, product_prod_a_b: $tType).
+thf(a2_type, type, a2: set_a).
+thf(a3_type, type, a3: a).
+thf(produc273986347_a_b_o_type, type, produc273986347_a_b_o: (a > b > $o) > 
+                                                             product_prod_a_b > $o).
+thf(restrict_a_b_type, type, restrict_a_b: set_a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(delete_a_b_type, type, delete_a_b: a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(b_type, type, b: $tType).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(ps_type, type, ps: list_P459903278od_a_b).
+thf(filter1201810725od_a_b_type, type, filter1201810725od_a_b: (product_prod_a_b > $o) > 
+                                                               list_P459903278od_a_b > list_P459903278od_a_b).
+thf(conj_0, conjecture,
+  (( restrict_a_b @ a2 @ ( delete_a_b @ a3 @ ps ) ) =
+   ( delete_a_b @ a3 @ ( restrict_a_b @ a2 @ ps ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( restrict_a_b @ a2 @ ( delete_a_b @ a3 @ ps ) ) !=
+   ( delete_a_b @ a3 @ ( restrict_a_b @ a2 @ ps ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl342, plain,
+    (((restrict_a_b @ a2 @ (delete_a_b @ a3 @ ps))
+       != (delete_a_b @ a3 @ (restrict_a_b @ a2 @ ps)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_18_delete__eq, axiom,
+  (![K2:a,X_1:list_P459903278od_a_b]:
+   ( ( delete_a_b @ K2 @ X_1 ) =
+     ( filter1201810725od_a_b @
+       ( produc273986347_a_b_o @ ( ^[K3:a,Uu:b]: ( ( K2 ) != ( K3 ) ) ) ) @ 
+       X_1 ) ))).
+thf(zip_derived_cl11, plain,
+    (![X0 : a, X1 : list_P459903278od_a_b]:
+       ((delete_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (((X0) != (Y0))))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_18_delete__eq])).
+thf(fact_1_restrict__eq, axiom,
+  (![A:set_a,X_1:list_P459903278od_a_b]:
+   ( ( restrict_a_b @ A @ X_1 ) =
+     ( filter1201810725od_a_b @
+       ( produc273986347_a_b_o @ ( ^[K2:a,V:b]: ( member_a @ K2 @ A ) ) ) @ 
+       X_1 ) ))).
+thf(zip_derived_cl1, plain,
+    (![X0 : set_a, X1 : list_P459903278od_a_b]:
+       ((restrict_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (member_a @ Y0 @ X0))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_1_restrict__eq])).
+thf(fact_95_filter__filter, axiom,
+  (![P:( product_prod_a_b > $o ),Q:( product_prod_a_b > $o ),
+     Xs:list_P459903278od_a_b]:
+   ( ( filter1201810725od_a_b @ P @ ( filter1201810725od_a_b @ Q @ Xs ) ) =
+     ( filter1201810725od_a_b @
+       ( ^[X2:product_prod_a_b]: ( ( P @ X2 ) & ( Q @ X2 ) ) ) @ Xs ) ))).
+thf(zip_derived_cl48, plain,
+    (![X0 : product_prod_a_b > $o, X1 : product_prod_a_b > $o, 
+       X2 : list_P459903278od_a_b]:
+       ((filter1201810725od_a_b @ X0 @ (filter1201810725od_a_b @ X1 @ X2))
+         = (filter1201810725od_a_b @ 
+            (^[Y0 : product_prod_a_b]: (((X0 @ Y0) & (X1 @ Y0)))) @ X2))),
+    inference('cnf', [status(esa)], [fact_95_filter__filter])).
+thf(zip_derived_cl1, plain,
+    (![X0 : set_a, X1 : list_P459903278od_a_b]:
+       ((restrict_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (member_a @ Y0 @ X0))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_1_restrict__eq])).
+thf(zip_derived_cl11, plain,
+    (![X0 : a, X1 : list_P459903278od_a_b]:
+       ((delete_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (((X0) != (Y0))))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_18_delete__eq])).
+thf(zip_derived_cl48, plain,
+    (![X0 : product_prod_a_b > $o, X1 : product_prod_a_b > $o, 
+       X2 : list_P459903278od_a_b]:
+       ((filter1201810725od_a_b @ X0 @ (filter1201810725od_a_b @ X1 @ X2))
+         = (filter1201810725od_a_b @ 
+            (^[Y0 : product_prod_a_b]: (((X0 @ Y0) & (X1 @ Y0)))) @ X2))),
+    inference('cnf', [status(esa)], [fact_95_filter__filter])).
+thf(zip_derived_cl343, plain,
+    (((filter1201810725od_a_b @ 
+       (^[Y0 : product_prod_a_b]:
+          (((produc273986347_a_b_o @ 
+            (^[Y1 : a,Y2 : b]: (member_a @ Y1 @ a2)) @ Y0) &
+            (produc273986347_a_b_o @ (^[Y1 : a,Y2 : b]: (((a3) != (Y1)))) @ 
+            Y0)))) @ 
+       ps)
+       != (filter1201810725od_a_b @ 
+           (^[Y0 : product_prod_a_b]:
+              (((produc273986347_a_b_o @ 
+                (^[Y1 : a,Y2 : b]: (((a3) != (Y1)))) @ Y0) &
+                (produc273986347_a_b_o @ 
+                (^[Y1 : a,Y2 : b]: (member_a @ Y1 @ a2)) @ Y0)))) @ 
+           ps))),
+    inference('isabelle_simp', [status(thm)],
+              [zip_derived_cl342, zip_derived_cl11, zip_derived_cl1, 
+               zip_derived_cl48, zip_derived_cl1, zip_derived_cl11, 
+               zip_derived_cl48])).
+thf(zip_derived_cl344, plain, ($false),
+    inference('eq_res', [status(thm)], [zip_derived_cl343])).
+
+% SZS output end Refutation

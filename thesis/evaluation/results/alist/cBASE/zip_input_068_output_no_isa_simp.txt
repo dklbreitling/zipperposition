@@ -1,0 +1,203 @@
+% Output for zip_input_068 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 1686 iterations in 24.673s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_068.p'
+% SZS output start Refutation
+thf(a_type, type, a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(option_b_type, type, option_b: $tType).
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(a2_type, type, a2: set_a).
+thf(zip_internal_ite_option_b_type, type, zip_internal_ite_option_b: 
+    $o > option_b > option_b > option_b).
+thf(map_of_a_b_type, type, map_of_a_b: list_P459903278od_a_b > a > option_b).
+thf(al_type, type, al: list_P459903278od_a_b).
+thf(none_b_type, type, none_b: option_b).
+thf(restrict_map_a_b_type, type, restrict_map_a_b: (a > option_b) > set_a > a > option_b).
+thf(member_a2_type, type, member_a2: a > set_a > $o).
+thf(x_type, type, x: a).
+thf(nil_Product_prod_a_b_type, type, nil_Product_prod_a_b: list_P459903278od_a_b).
+thf(fun_upd_a_option_b_type, type, fun_upd_a_option_b: (a > option_b) > a > 
+                                                       option_b > a > option_b).
+thf(restrict_a_b_type, type, restrict_a_b: set_a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf('#sk16377_type', type, '#sk16377': a > (a > option_b) > a).
+thf(fact_18_restrict__out, axiom,
+  (![X:a,A:set_a,M:( a > option_b )]:
+   ( ( ~( member_a2 @ X @ A ) ) =>
+     ( ( restrict_map_a_b @ M @ A @ X ) = ( none_b ) ) ))).
+thf(zip_derived_cl15, plain,
+    (![X0 : a, X1 : set_a, X2 : a > option_b]:
+       ( (member_a2 @ X0 @ X1)
+        | ((restrict_map_a_b @ X2 @ X1 @ X0) = (none_b)))),
+    inference('cnf', [status(esa)], [fact_18_restrict__out])).
+thf(fact_0_restr__conv, axiom,
+  (![A:set_a,Al:list_P459903278od_a_b,K:a]:
+   ( ( map_of_a_b @ ( restrict_a_b @ A @ Al ) @ K ) =
+     ( restrict_map_a_b @ ( map_of_a_b @ Al ) @ A @ K ) ))).
+thf(zip_derived_cl0, plain,
+    (![X0 : list_P459903278od_a_b, X1 : set_a, X2 : a]:
+       ((map_of_a_b @ (restrict_a_b @ X1 @ X0) @ X2)
+         = (restrict_map_a_b @ (map_of_a_b @ X0) @ X1 @ X2))),
+    inference('cnf', [status(esa)], [fact_0_restr__conv])).
+thf(zip_derived_cl668, plain,
+    (![X0 : a, X1 : list_P459903278od_a_b, X2 : set_a]:
+       (((map_of_a_b @ (restrict_a_b @ X2 @ X1) @ X0) = (none_b))
+        |  (member_a2 @ X0 @ X2))),
+    inference('sup+', [status(thm)], [zip_derived_cl15, zip_derived_cl0])).
+thf(fact_17_map__of_Osimps_I1_J, axiom,
+  (![X2:a]: ( ( map_of_a_b @ nil_Product_prod_a_b @ X2 ) = ( none_b ) ))).
+thf(zip_derived_cl14, plain,
+    (![X0 : a]: ((map_of_a_b @ nil_Product_prod_a_b @ X0) = (none_b))),
+    inference('cnf', [status(esa)], [fact_17_map__of_Osimps_I1_J])).
+thf(fact_5_fun__upd__apply, axiom,
+  (![F:( a > option_b ),X2:a,Y:option_b,Z:a]:
+   ( ( fun_upd_a_option_b @ F @ X2 @ Y @ Z ) =
+     ( zip_internal_ite_option_b @ ( ( Z ) = ( X2 ) ) @ Y @ ( F @ Z ) ) ))).
+thf(zip_derived_cl5, plain,
+    (![X0 : a, X1 : a, X2 : option_b, X3 : a > option_b]:
+       ((fun_upd_a_option_b @ X3 @ X1 @ X2 @ X0)
+         = (zip_internal_ite_option_b @ (((X0) = (X1))) @ X2 @ (X3 @ X0)))),
+    inference('cnf', [status(esa)], [fact_5_fun__upd__apply])).
+thf(zip_derived_cl446, plain,
+    (![X0 : a, X1 : option_b, X2 : a]:
+       ((fun_upd_a_option_b @ 
+         (^[Y0 : a]:
+            (map_of_a_b @ ((^[Y1 : a]: (nil_Product_prod_a_b)) @ Y0) @ 
+             ((^[Y1 : a]: (Y1)) @ Y0))) @ 
+         X2 @ X1 @ X0)
+         = (zip_internal_ite_option_b @ (((X0) = (X2))) @ X1 @ none_b))),
+    inference('sup+', [status(thm)], [zip_derived_cl14, zip_derived_cl5])).
+thf(zip_derived_cl451, plain,
+    (![X0 : a, X1 : option_b, X2 : a]:
+       ((fun_upd_a_option_b @ (map_of_a_b @ nil_Product_prod_a_b) @ X2 @ 
+         X1 @ X0)
+         = (zip_internal_ite_option_b @ (((X0) = (X2))) @ X1 @ none_b))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl446])).
+thf(fact_172_fun__upd__triv, axiom,
+  (![F2:( a > option_b ),X:a]:
+   ( ( fun_upd_a_option_b @ F2 @ X @ ( F2 @ X ) ) = ( F2 ) ))).
+thf(zip_derived_cl60, plain,
+    (![X0 : a > option_b, X1 : a]:
+       ((fun_upd_a_option_b @ X0 @ X1 @ (X0 @ X1)) = (X0))),
+    inference('cnf', [status(esa)], [fact_172_fun__upd__triv])).
+thf(fact_325_fun__upd__eqD, axiom,
+  (![F2:( a > option_b ),X:a,Y3:option_b,G:( a > option_b ),Z2:option_b]:
+   ( ( ( fun_upd_a_option_b @ F2 @ X @ Y3 ) =
+       ( fun_upd_a_option_b @ G @ X @ Z2 ) ) =>
+     ( ( Y3 ) = ( Z2 ) ) ))).
+thf(zip_derived_cl111, plain,
+    (![X0 : option_b, X1 : option_b, X2 : a > option_b, X3 : a, 
+       X4 : a > option_b]:
+       (((X1) = (X0))
+        | ((fun_upd_a_option_b @ X4 @ X3 @ X1)
+            != (fun_upd_a_option_b @ X2 @ X3 @ X0)))),
+    inference('cnf', [status(esa)], [fact_325_fun__upd__eqD])).
+thf(conj_1, conjecture,
+  (( map_of_a_b @ ( restrict_a_b @ a2 @ al ) @ x ) = ( none_b ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( map_of_a_b @ ( restrict_a_b @ a2 @ al ) @ x ) != ( none_b )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl282, plain,
+    (((map_of_a_b @ (restrict_a_b @ a2 @ al) @ x) != (none_b))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl2609, plain,
+    (![X0 : option_b, X1 : a, X2 : a > option_b, X3 : a > option_b]:
+       (((X0) != (none_b))
+        | ((fun_upd_a_option_b @ X2 @ X1 @ 
+            (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x))
+            != (fun_upd_a_option_b @ X3 @ X1 @ X0)))),
+    inference('sup-', [status(thm)], [zip_derived_cl111, zip_derived_cl282])).
+thf(zip_derived_cl2675, plain,
+    (![X1 : a, X2 : a > option_b, X3 : a > option_b]:
+       ((fun_upd_a_option_b @ X2 @ X1 @ 
+         (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x))
+         != (fun_upd_a_option_b @ X3 @ X1 @ none_b))),
+    inference('simplify', [status(thm)], [zip_derived_cl2609])).
+thf(zip_derived_cl8117, plain,
+    (![X0 : a, X1 : a > option_b]:
+       ((fun_upd_a_option_b @ X1 @ X0 @ 
+         (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x))
+         != ((^[Y0 : a]: (none_b))))),
+    inference('sup-', [status(thm)], [zip_derived_cl60, zip_derived_cl2675])).
+thf(zip_derived_cl9142, plain,
+    (![X0 : a, X1 : a > option_b]:
+       ((fun_upd_a_option_b @ (^[Y0 : a]: (X1 @ Y0)) @ X0 @ 
+         (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x) @ ('#sk16377' @ X0 @ X1))
+         != (none_b))),
+    inference('neg_ext', [status(thm)], [zip_derived_cl8117])).
+thf(zip_derived_cl9143, plain,
+    (![X0 : a, X1 : a > option_b]:
+       ((fun_upd_a_option_b @ X1 @ X0 @ 
+         (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x) @ ('#sk16377' @ X0 @ X1))
+         != (none_b))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl9142])).
+thf(zip_derived_cl13996, plain,
+    (![X0 : a]:
+       ((zip_internal_ite_option_b @ 
+         ((('#sk16377' @ X0 @ (map_of_a_b @ nil_Product_prod_a_b)) = (X0))) @ 
+         (map_of_a_b @ (restrict_a_b @ a2 @ al) @ x) @ none_b) != (none_b))),
+    inference('sup-', [status(thm)], [zip_derived_cl451, zip_derived_cl9143])).
+thf(zip_derived_cl21022, plain,
+    (![X0 : a]:
+       (((zip_internal_ite_option_b @ 
+          ((('#sk16377' @ X0 @ (map_of_a_b @ nil_Product_prod_a_b)) = (X0))) @ 
+          none_b @ none_b) != (none_b))
+        |  (member_a2 @ x @ a2))),
+    inference('sup-', [status(thm)], [zip_derived_cl668, zip_derived_cl13996])).
+thf(zip_derived_cl14, plain,
+    (![X0 : a]: ((map_of_a_b @ nil_Product_prod_a_b @ X0) = (none_b))),
+    inference('cnf', [status(esa)], [fact_17_map__of_Osimps_I1_J])).
+thf(zip_derived_cl60, plain,
+    (![X0 : a > option_b, X1 : a]:
+       ((fun_upd_a_option_b @ X0 @ X1 @ (X0 @ X1)) = (X0))),
+    inference('cnf', [status(esa)], [fact_172_fun__upd__triv])).
+thf(zip_derived_cl1502, plain,
+    (![X0 : a]:
+       ((fun_upd_a_option_b @ 
+         (^[Y0 : a]:
+            (map_of_a_b @ ((^[Y1 : a]: (nil_Product_prod_a_b)) @ Y0) @ 
+             ((^[Y1 : a]: (Y1)) @ Y0))) @ 
+         X0 @ none_b)
+         = ((^[Y0 : a]:
+               (map_of_a_b @ ((^[Y1 : a]: (nil_Product_prod_a_b)) @ Y0) @ 
+                ((^[Y1 : a]: (Y1)) @ Y0)))))),
+    inference('sup+', [status(thm)], [zip_derived_cl14, zip_derived_cl60])).
+thf(zip_derived_cl1506, plain,
+    (![X0 : a]:
+       ((fun_upd_a_option_b @ (map_of_a_b @ nil_Product_prod_a_b) @ X0 @ 
+         none_b) = (map_of_a_b @ nil_Product_prod_a_b))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl1502])).
+thf(zip_derived_cl2483, plain,
+    (![X0 : a, X1 : a]:
+       ((fun_upd_a_option_b @ (map_of_a_b @ nil_Product_prod_a_b) @ X0 @ 
+         none_b @ X1) = (map_of_a_b @ nil_Product_prod_a_b @ X1))),
+    inference('ho_complete_eq', [status(thm)], [zip_derived_cl1506])).
+thf(zip_derived_cl14, plain,
+    (![X0 : a]: ((map_of_a_b @ nil_Product_prod_a_b @ X0) = (none_b))),
+    inference('cnf', [status(esa)], [fact_17_map__of_Osimps_I1_J])).
+thf(zip_derived_cl2484, plain,
+    (![X0 : a, X1 : a]:
+       ((fun_upd_a_option_b @ (map_of_a_b @ nil_Product_prod_a_b) @ X0 @ 
+         none_b @ X1) = (none_b))),
+    inference('demod', [status(thm)], [zip_derived_cl2483, zip_derived_cl14])).
+thf(zip_derived_cl451, plain,
+    (![X0 : a, X1 : option_b, X2 : a]:
+       ((fun_upd_a_option_b @ (map_of_a_b @ nil_Product_prod_a_b) @ X2 @ 
+         X1 @ X0)
+         = (zip_internal_ite_option_b @ (((X0) = (X2))) @ X1 @ none_b))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl446])).
+thf(zip_derived_cl14004, plain,
+    (![X0 : a, X1 : a]:
+       ((none_b)
+         = (zip_internal_ite_option_b @ (((X1) = (X0))) @ none_b @ none_b))),
+    inference('sup+', [status(thm)], [zip_derived_cl2484, zip_derived_cl451])).
+thf(conj_0, axiom, (~( member_a2 @ x @ a2 ))).
+thf(zip_derived_cl277, plain, (~ (member_a2 @ x @ a2)),
+    inference('cnf', [status(esa)], [conj_0])).
+thf(zip_derived_cl21114, plain, (((none_b) != (none_b))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl21022, zip_derived_cl14004, zip_derived_cl277])).
+thf(zip_derived_cl21115, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl21114])).
+
+% SZS output end Refutation

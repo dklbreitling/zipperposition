@@ -1,0 +1,45 @@
+% Output for zip_input_075 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 14 iterations in 0.039s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_075.p'
+% SZS output start Refutation
+thf(a_type, type, a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(y_type, type, y: a).
+thf(member_a2_type, type, member_a2: a > set_a > $o).
+thf(x_type, type, x: a).
+thf(d_type, type, d: set_a).
+thf(conj_1, conjecture,
+  (( member_a2 @ y @ d ) <=> ( ( ( x ) != ( y ) ) & ( member_a2 @ y @ d ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ( member_a2 @ y @ d ) <=>
+      ( ( ( x ) != ( y ) ) & ( member_a2 @ y @ d ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl146, plain,
+    ((~ (member_a2 @ y @ d) | ((x) = (y)) | ~ (member_a2 @ y @ d))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl151, plain, ((((x) = (y)) | ~ (member_a2 @ y @ d))),
+    inference('simplify', [status(thm)], [zip_derived_cl146])).
+thf(zip_derived_cl144, plain, ((((x) != (y)) |  (member_a2 @ y @ d))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl149, plain, ((((x) != (y)) |  (member_a2 @ x @ d))),
+    inference('local_rewriting', [status(thm)], [zip_derived_cl144])).
+thf(fact_1__092_060open_062x_A_092_060notin_062_AD_092_060close_062, axiom,
+  (~( member_a2 @ x @ d ))).
+thf(zip_derived_cl2, plain, (~ (member_a2 @ x @ d)),
+    inference('cnf', [status(esa)],
+              [fact_1__092_060open_062x_A_092_060notin_062_AD_092_060close_062])).
+thf(zip_derived_cl150, plain, (((x) != (y))),
+    inference('clc', [status(thm)], [zip_derived_cl149, zip_derived_cl2])).
+thf(zip_derived_cl152, plain, (~ (member_a2 @ y @ d)),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl151, zip_derived_cl150])).
+thf(zip_derived_cl145, plain,
+    (( (member_a2 @ y @ d) |  (member_a2 @ y @ d))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl158, plain, ( (member_a2 @ y @ d)),
+    inference('simplify', [status(thm)], [zip_derived_cl145])).
+thf(zip_derived_cl159, plain, ($false),
+    inference('demod', [status(thm)], [zip_derived_cl152, zip_derived_cl158])).
+
+% SZS output end Refutation

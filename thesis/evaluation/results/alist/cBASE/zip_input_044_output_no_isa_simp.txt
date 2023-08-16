@@ -1,0 +1,89 @@
+% Output for zip_input_044 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 1153 iterations in 4.704s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_044.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(a_type, type, a: $tType).
+thf(nat_type, type, nat: $tType).
+thf(product_prod_a_b_type, type, product_prod_a_b: $tType).
+thf(ord_less_eq_nat_type, type, ord_less_eq_nat: nat > nat > $o).
+thf(k_type, type, k: a).
+thf(size_s1782262682od_a_b_type, type, size_s1782262682od_a_b: list_P459903278od_a_b > nat).
+thf(filter1201810725od_a_b_type, type, filter1201810725od_a_b: (product_prod_a_b > $o) > 
+                                                               list_P459903278od_a_b > list_P459903278od_a_b).
+thf(ord_less_nat_type, type, ord_less_nat: nat > nat > $o).
+thf(produc273986347_a_b_o_type, type, produc273986347_a_b_o: (a > b > $o) > 
+                                                             product_prod_a_b > $o).
+thf(delete_a_b_type, type, delete_a_b: a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(al_type, type, al: list_P459903278od_a_b).
+thf(b_type, type, b: $tType).
+thf(fact_24_AList_Odelete__eq, axiom,
+  (![K3:a,X_1:list_P459903278od_a_b]:
+   ( ( delete_a_b @ K3 @ X_1 ) =
+     ( filter1201810725od_a_b @
+       ( produc273986347_a_b_o @ ( ^[K4:a,Uu:b]: ( ( K3 ) != ( K4 ) ) ) ) @ 
+       X_1 ) ))).
+thf(zip_derived_cl6, plain,
+    (![X0 : a, X1 : list_P459903278od_a_b]:
+       ((delete_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (((X0) != (Y0))))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_24_AList_Odelete__eq])).
+thf(fact_194_length__filter__le, axiom,
+  (![P:( product_prod_a_b > $o ),Xs2:list_P459903278od_a_b]:
+   ( ord_less_eq_nat @
+     ( size_s1782262682od_a_b @ ( filter1201810725od_a_b @ P @ Xs2 ) ) @ 
+     ( size_s1782262682od_a_b @ Xs2 ) ))).
+thf(zip_derived_cl48, plain,
+    (![X0 : product_prod_a_b > $o, X1 : list_P459903278od_a_b]:
+        (ord_less_eq_nat @ 
+         (size_s1782262682od_a_b @ (filter1201810725od_a_b @ X0 @ X1)) @ 
+         (size_s1782262682od_a_b @ X1))),
+    inference('cnf', [status(esa)], [fact_194_length__filter__le])).
+thf(fact_430_leD, axiom,
+  (![Y2:nat,X2:nat]:
+   ( ( ord_less_eq_nat @ Y2 @ X2 ) => ( ~( ord_less_nat @ X2 @ Y2 ) ) ))).
+thf(zip_derived_cl132, plain,
+    (![X0 : nat, X1 : nat]:
+       (~ (ord_less_nat @ X0 @ X1) | ~ (ord_less_eq_nat @ X1 @ X0))),
+    inference('cnf', [status(esa)], [fact_430_leD])).
+thf(zip_derived_cl3915, plain,
+    (![X0 : list_P459903278od_a_b, X1 : product_prod_a_b > $o]:
+       ~ (ord_less_nat @ (size_s1782262682od_a_b @ X0) @ 
+          (size_s1782262682od_a_b @ (filter1201810725od_a_b @ X1 @ X0)))),
+    inference('sup-', [status(thm)], [zip_derived_cl48, zip_derived_cl132])).
+thf(zip_derived_cl9891, plain,
+    (![X0 : list_P459903278od_a_b, X1 : a]:
+       ~ (ord_less_nat @ (size_s1782262682od_a_b @ X0) @ 
+          (size_s1782262682od_a_b @ (delete_a_b @ X1 @ X0)))),
+    inference('sup-', [status(thm)], [zip_derived_cl6, zip_derived_cl3915])).
+thf(fact_495_linorder__not__less, axiom,
+  (![X2:nat,Y2:nat]:
+   ( ( ~( ord_less_nat @ X2 @ Y2 ) ) <=> ( ord_less_eq_nat @ Y2 @ X2 ) ))).
+thf(zip_derived_cl154, plain,
+    (![X0 : nat, X1 : nat]:
+       ( (ord_less_eq_nat @ X0 @ X1) |  (ord_less_nat @ X1 @ X0))),
+    inference('cnf', [status(esa)], [fact_495_linorder__not__less])).
+thf(conj_0, conjecture,
+  (ord_less_eq_nat @
+   ( size_s1782262682od_a_b @ ( delete_a_b @ k @ al ) ) @ 
+   ( size_s1782262682od_a_b @ al ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ord_less_eq_nat @
+      ( size_s1782262682od_a_b @ ( delete_a_b @ k @ al ) ) @ 
+      ( size_s1782262682od_a_b @ al ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl216, plain,
+    (~ (ord_less_eq_nat @ (size_s1782262682od_a_b @ (delete_a_b @ k @ al)) @ 
+        (size_s1782262682od_a_b @ al))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl2692, plain,
+    ( (ord_less_nat @ (size_s1782262682od_a_b @ al) @ 
+       (size_s1782262682od_a_b @ (delete_a_b @ k @ al)))),
+    inference('sup-', [status(thm)], [zip_derived_cl154, zip_derived_cl216])).
+thf(zip_derived_cl9929, plain, ($false),
+    inference('sup+', [status(thm)], [zip_derived_cl9891, zip_derived_cl2692])).
+
+% SZS output end Refutation
