@@ -1,0 +1,25 @@
+% Output for zip_input_073 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 1 iterations in 0.006s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_073.p'
+% SZS output start Refutation
+thf(a_type, type, a: $tType).
+thf(y_type, type, y: a).
+thf(x_type, type, x: a).
+thf(conj_0, conjecture, (( ( y ) != ( x ) ) <=> ( ( x ) != ( y ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ( ( y ) != ( x ) ) <=> ( ( x ) != ( y ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl48, plain, ((((x) = (y)) | ((y) = (x)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl50, plain, (((x) = (y))),
+    inference('simplify', [status(thm)], [zip_derived_cl48])).
+thf(zip_derived_cl47, plain, ((((x) != (y)) | ((y) != (x)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl49, plain, (((x) != (y))),
+    inference('simplify', [status(thm)], [zip_derived_cl47])).
+thf(zip_derived_cl51, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl50, zip_derived_cl49])).
+
+% SZS output end Refutation
