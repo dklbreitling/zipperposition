@@ -1,0 +1,51 @@
+% Output for zip_input_002 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 507 iterations in 3.112s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_002.p'
+% SZS output start Refutation
+thf(option_a_type, type, option_a: $tType).
+thf(list_P1687733484od_b_a_type, type, list_P1687733484od_b_a: $tType).
+thf(b_type, type, b: $tType).
+thf(a_type, type, a: $tType).
+thf(v_type, type, v: a).
+thf(update_b_a_type, type, update_b_a: b > a > list_P1687733484od_b_a > list_P1687733484od_b_a).
+thf(k2_type, type, k2: b).
+thf(al_type, type, al: list_P1687733484od_b_a).
+thf(k_type, type, k: b).
+thf(some_a_type, type, some_a: a > option_a).
+thf(fun_upd_b_option_a_type, type, fun_upd_b_option_a: (b > option_a) > b > 
+                                                       option_a > b > option_a).
+thf(map_of_b_a_type, type, map_of_b_a: list_P1687733484od_b_a > b > option_a).
+thf(conj_0, conjecture,
+  (( map_of_b_a @ ( update_b_a @ k @ v @ al ) @ k2 ) =
+   ( fun_upd_b_option_a @ ( map_of_b_a @ al ) @ k @ ( some_a @ v ) @ k2 ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( map_of_b_a @ ( update_b_a @ k @ v @ al ) @ k2 ) !=
+   ( fun_upd_b_option_a @ ( map_of_b_a @ al ) @ k @ ( some_a @ v ) @ k2 )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl945, plain,
+    (((map_of_b_a @ (update_b_a @ k @ v @ al) @ k2)
+       != (fun_upd_b_option_a @ (map_of_b_a @ al) @ k @ (some_a @ v) @ k2))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_1_update__conv_H, axiom,
+  (![K:b,V:a,Al:list_P1687733484od_b_a]:
+   ( ( map_of_b_a @ ( update_b_a @ K @ V @ Al ) ) =
+     ( fun_upd_b_option_a @ ( map_of_b_a @ Al ) @ K @ ( some_a @ V ) ) ))).
+thf(zip_derived_cl1, plain,
+    (![X0 : list_P1687733484od_b_a, X1 : b, X2 : a]:
+       ((map_of_b_a @ (update_b_a @ X1 @ X2 @ X0))
+         = (fun_upd_b_option_a @ (map_of_b_a @ X0) @ X1 @ (some_a @ X2)))),
+    inference('cnf', [status(esa)], [fact_1_update__conv_H])).
+thf(zip_derived_cl962, plain,
+    (![X0 : list_P1687733484od_b_a, X1 : b, X2 : a, X3 : b]:
+       ((map_of_b_a @ (update_b_a @ X1 @ X2 @ X0) @ X3)
+         = (fun_upd_b_option_a @ (map_of_b_a @ X0) @ X1 @ (some_a @ X2) @ X3))),
+    inference('ho_complete_eq', [status(thm)], [zip_derived_cl1])).
+thf(zip_derived_cl8244, plain,
+    (((fun_upd_b_option_a @ (map_of_b_a @ al) @ k @ (some_a @ v) @ k2)
+       != (fun_upd_b_option_a @ (map_of_b_a @ al) @ k @ (some_a @ v) @ k2))),
+    inference('demod', [status(thm)], [zip_derived_cl945, zip_derived_cl962])).
+thf(zip_derived_cl8245, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl8244])).
+
+% SZS output end Refutation
