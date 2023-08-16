@@ -1,0 +1,91 @@
+% Output for zip_input_065 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 1394 iterations in 19.531s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_065.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(a_type, type, a: $tType).
+thf(list_a_type, type, list_a: $tType).
+thf(product_prod_a_b_type, type, product_prod_a_b: $tType).
+thf(a2_type, type, a2: set_a).
+thf(restrict_a_b_type, type, restrict_a_b: set_a > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(al_type, type, al: list_P459903278od_a_b).
+thf(b_type, type, b: $tType).
+thf(map_Pr2017900442_a_b_a_type, type, map_Pr2017900442_a_b_a: (product_prod_a_b > a) > 
+                                                               list_P459903278od_a_b > list_a).
+thf(distinct_a_type, type, distinct_a: list_a > $o).
+thf(produc273986347_a_b_o_type, type, produc273986347_a_b_o: (a > b > $o) > 
+                                                             product_prod_a_b > $o).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(filter1201810725od_a_b_type, type, filter1201810725od_a_b: (product_prod_a_b > $o) > 
+                                                               list_P459903278od_a_b > list_P459903278od_a_b).
+thf(product_fst_a_b_type, type, product_fst_a_b: product_prod_a_b > a).
+thf(fact_40_AList_Orestrict__eq, axiom,
+  (![A2:set_a,X_1:list_P459903278od_a_b]:
+   ( ( restrict_a_b @ A2 @ X_1 ) =
+     ( filter1201810725od_a_b @
+       ( produc273986347_a_b_o @ ( ^[K2:a,V2:b]: ( member_a @ K2 @ A2 ) ) ) @ 
+       X_1 ) ))).
+thf(zip_derived_cl45, plain,
+    (![X0 : set_a, X1 : list_P459903278od_a_b]:
+       ((restrict_a_b @ X0 @ X1)
+         = (filter1201810725od_a_b @ 
+            (produc273986347_a_b_o @ (^[Y0 : a,Y1 : b]: (member_a @ Y0 @ X0))) @ 
+            X1))),
+    inference('cnf', [status(esa)], [fact_40_AList_Orestrict__eq])).
+thf(conj_0, axiom,
+  (distinct_a @ ( map_Pr2017900442_a_b_a @ product_fst_a_b @ al ))).
+thf(zip_derived_cl1220, plain,
+    ( (distinct_a @ (map_Pr2017900442_a_b_a @ product_fst_a_b @ al))),
+    inference('cnf', [status(esa)], [conj_0])).
+thf(fact_178_distinct__map__filter, axiom,
+  (![F:( product_prod_a_b > a ),Xs:list_P459903278od_a_b,
+     P2:( product_prod_a_b > $o )]:
+   ( ( distinct_a @ ( map_Pr2017900442_a_b_a @ F @ Xs ) ) =>
+     ( distinct_a @
+       ( map_Pr2017900442_a_b_a @ F @ ( filter1201810725od_a_b @ P2 @ Xs ) ) ) ))).
+thf(zip_derived_cl233, plain,
+    (![X0 : product_prod_a_b > a, X1 : list_P459903278od_a_b, 
+       X2 : product_prod_a_b > $o]:
+       (~ (distinct_a @ (map_Pr2017900442_a_b_a @ X0 @ X1))
+        |  (distinct_a @ 
+            (map_Pr2017900442_a_b_a @ X0 @ (filter1201810725od_a_b @ X2 @ X1))))),
+    inference('cnf', [status(esa)], [fact_178_distinct__map__filter])).
+thf(conj_1, conjecture,
+  (distinct_a @
+   ( map_Pr2017900442_a_b_a @ product_fst_a_b @ ( restrict_a_b @ a2 @ al ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( distinct_a @
+      ( map_Pr2017900442_a_b_a @ product_fst_a_b @ ( restrict_a_b @ a2 @ al ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl1221, plain,
+    (~ (distinct_a @ 
+        (map_Pr2017900442_a_b_a @ product_fst_a_b @ (restrict_a_b @ a2 @ al)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl11769, plain,
+    (![X0 : list_P459903278od_a_b, X1 : product_prod_a_b > $o]:
+       (((filter1201810725od_a_b @ (^[Y0 : product_prod_a_b]: (X1 @ Y0)) @ X0)
+          != (restrict_a_b @ a2 @ al))
+        | ~ (distinct_a @ 
+             (map_Pr2017900442_a_b_a @ 
+              (^[Y0 : product_prod_a_b]: (product_fst_a_b @ Y0)) @ X0)))),
+    inference('ext_sup', [status(thm)],
+              [zip_derived_cl233, zip_derived_cl1221])).
+thf(zip_derived_cl11801, plain,
+    (![X0 : list_P459903278od_a_b, X1 : product_prod_a_b > $o]:
+       (((filter1201810725od_a_b @ X1 @ X0) != (restrict_a_b @ a2 @ al))
+        | ~ (distinct_a @ (map_Pr2017900442_a_b_a @ product_fst_a_b @ X0)))),
+    inference('ho_norm', [status(thm)], [zip_derived_cl11769])).
+thf(zip_derived_cl15878, plain,
+    (![X0 : product_prod_a_b > $o]:
+       ((filter1201810725od_a_b @ X0 @ al) != (restrict_a_b @ a2 @ al))),
+    inference('sup-', [status(thm)],
+              [zip_derived_cl1220, zip_derived_cl11801])).
+thf(zip_derived_cl15925, plain,
+    (![X0 : set_a]: ((restrict_a_b @ X0 @ al) != (restrict_a_b @ a2 @ al))),
+    inference('sup-', [status(thm)], [zip_derived_cl45, zip_derived_cl15878])).
+thf(zip_derived_cl15975, plain, ($false),
+    inference('eq_res', [status(thm)], [zip_derived_cl15925])).
+
+% SZS output end Refutation

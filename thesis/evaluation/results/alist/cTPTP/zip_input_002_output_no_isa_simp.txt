@@ -1,0 +1,3 @@
+% Output for zip_input_002 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% SZS status ResourceOut

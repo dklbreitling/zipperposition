@@ -1,0 +1,77 @@
+% Output for zip_input_016 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 670 iterations in 4.881s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/alist/zip_input_016.p'
+% SZS output start Refutation
+thf(a_type, type, a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(set_option_b_type, type, set_option_b: $tType).
+thf(option_b_type, type, option_b: $tType).
+thf(b_type, type, b: $tType).
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(a2_type, type, a2: set_a).
+thf(some_b_type, type, some_b: b > option_b).
+thf(x_type, type, x: a).
+thf(image_a_option_b_type, type, image_a_option_b: (a > option_b) > set_a > set_option_b).
+thf(al_type, type, al: list_P459903278od_a_b).
+thf(update_a_b_type, type, update_a_b: a > b > list_P459903278od_a_b > list_P459903278od_a_b).
+thf(y_type, type, y: b).
+thf(map_of_a_b_type, type, map_of_a_b: list_P459903278od_a_b > a > option_b).
+thf(member_a2_type, type, member_a2: a > set_a > $o).
+thf(fun_upd_a_option_b_type, type, fun_upd_a_option_b: (a > option_b) > a > 
+                                                       option_b > a > option_b).
+thf(fact_164_image__map__upd, axiom,
+  (![X2:a,A:set_a,M2:( a > option_b ),Y2:b]:
+   ( ( ~( member_a2 @ X2 @ A ) ) =>
+     ( ( image_a_option_b @
+         ( fun_upd_a_option_b @ M2 @ X2 @ ( some_b @ Y2 ) ) @ A ) =
+       ( image_a_option_b @ M2 @ A ) ) ))).
+thf(zip_derived_cl254, plain,
+    (![X0 : a, X1 : set_a, X2 : a > option_b, X3 : b]:
+       ( (member_a2 @ X0 @ X1)
+        | ((image_a_option_b @ 
+            (fun_upd_a_option_b @ X2 @ X0 @ (some_b @ X3)) @ X1)
+            = (image_a_option_b @ X2 @ X1)))),
+    inference('cnf', [status(esa)], [fact_164_image__map__upd])).
+thf(conj_1, conjecture,
+  (( image_a_option_b @ ( map_of_a_b @ ( update_a_b @ x @ y @ al ) ) @ a2 ) =
+   ( image_a_option_b @ ( map_of_a_b @ al ) @ a2 ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( image_a_option_b @ ( map_of_a_b @ ( update_a_b @ x @ y @ al ) ) @ a2 ) !=
+   ( image_a_option_b @ ( map_of_a_b @ al ) @ a2 )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl1050, plain,
+    (((image_a_option_b @ (map_of_a_b @ (update_a_b @ x @ y @ al)) @ a2)
+       != (image_a_option_b @ (map_of_a_b @ al) @ a2))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_8_update__conv_H, axiom,
+  (![K:a,V:b,Al:list_P459903278od_a_b]:
+   ( ( map_of_a_b @ ( update_a_b @ K @ V @ Al ) ) =
+     ( fun_upd_a_option_b @ ( map_of_a_b @ Al ) @ K @ ( some_b @ V ) ) ))).
+thf(zip_derived_cl8, plain,
+    (![X0 : list_P459903278od_a_b, X1 : a, X2 : b]:
+       ((map_of_a_b @ (update_a_b @ X1 @ X2 @ X0))
+         = (fun_upd_a_option_b @ (map_of_a_b @ X0) @ X1 @ (some_b @ X2)))),
+    inference('cnf', [status(esa)], [fact_8_update__conv_H])).
+thf(zip_derived_cl2704, plain,
+    (((image_a_option_b @ 
+       (fun_upd_a_option_b @ (map_of_a_b @ al) @ x @ (some_b @ y)) @ a2)
+       != (image_a_option_b @ (map_of_a_b @ al) @ a2))),
+    inference('demod', [status(thm)], [zip_derived_cl1050, zip_derived_cl8])).
+thf(zip_derived_cl9042, plain,
+    ((((image_a_option_b @ (map_of_a_b @ al) @ a2)
+        != (image_a_option_b @ (map_of_a_b @ al) @ a2))
+      |  (member_a2 @ x @ a2))),
+    inference('sup-', [status(thm)], [zip_derived_cl254, zip_derived_cl2704])).
+thf(conj_0, axiom, (~( member_a2 @ x @ a2 ))).
+thf(zip_derived_cl1049, plain, (~ (member_a2 @ x @ a2)),
+    inference('cnf', [status(esa)], [conj_0])).
+thf(zip_derived_cl9080, plain,
+    (((image_a_option_b @ (map_of_a_b @ al) @ a2)
+       != (image_a_option_b @ (map_of_a_b @ al) @ a2))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl9042, zip_derived_cl1049])).
+thf(zip_derived_cl9081, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl9080])).
+
+% SZS output end Refutation
