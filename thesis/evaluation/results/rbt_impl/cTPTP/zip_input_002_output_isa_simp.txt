@@ -1,0 +1,30 @@
+% Output for zip_input_002 with isabelle_simp True:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 9 iterations in 0.159s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_002.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(rBT_Empty_a_b_type, type, rBT_Empty_a_b: rBT_rbt_a_b).
+thf(thesis_type, type, thesis: $o).
+thf(t_type, type, t: rBT_rbt_a_b).
+thf(conj_0, conjecture, (thesis)).
+thf(zf_stmt_0, negated_conjecture, (~( thesis )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1308, plain, (~ (thesis)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_1_that_I1_J, axiom, (( ( t ) = ( rBT_Empty_a_b ) ) => ( thesis ))).
+thf(zip_derived_cl1, plain, (( (thesis) | ((t) != (rBT_Empty_a_b)))),
+    inference('cnf', [status(esa)], [fact_1_that_I1_J])).
+thf(fact_8_Empty, axiom, (( t ) = ( rBT_Empty_a_b ))).
+thf(zip_derived_cl15, plain, (((t) = (rBT_Empty_a_b))),
+    inference('cnf', [status(esa)], [fact_8_Empty])).
+thf(zip_derived_cl1334, plain,
+    (( (thesis) | ((rBT_Empty_a_b) != (rBT_Empty_a_b)))),
+    inference('demod', [status(thm)], [zip_derived_cl1, zip_derived_cl15])).
+thf(zip_derived_cl1335, plain, ( (thesis)),
+    inference('simplify', [status(thm)], [zip_derived_cl1334])).
+thf(zip_derived_cl1336, plain, ($false),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1308, zip_derived_cl1335])).
+
+% SZS output end Refutation
