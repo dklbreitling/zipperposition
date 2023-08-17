@@ -1,0 +1,16 @@
+[
+  {
+    "input_file": "zip_input_004",
+    "isabelle_simp": true,
+    "runtime": 1.2457568645477295,
+    "exit_code": 0,
+    "refuted": "yes, output contains \"Refutation\""
+  },
+  {
+    "input_file": "zip_input_004",
+    "isabelle_simp": false,
+    "runtime": 1.3544378280639648,
+    "exit_code": 0,
+    "refuted": "yes, output contains \"Refutation\""
+  }
+]
