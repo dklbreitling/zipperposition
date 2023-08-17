@@ -1,0 +1,37 @@
+% Output for zip_input_017 with isabelle_simp True:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 33 iterations in 0.287s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_017.p'
+% SZS output start Refutation
+thf(option_b_type, type, option_b: $tType).
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(a_type, type, a: $tType).
+thf(less_type, type, less: a > a > $o).
+thf(sk__329_type, type, sk__329: a).
+thf(none_b_type, type, none_b: option_b).
+thf(rBT_Empty_a_b_type, type, rBT_Empty_a_b: rBT_rbt_a_b).
+thf(rBT_rbt_lookup_a_b_type, type, rBT_rbt_lookup_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > a > option_b).
+thf(conj_0, conjecture,
+  (![X:a]: ( ( rBT_rbt_lookup_a_b @ less @ rBT_Empty_a_b @ X ) = ( none_b ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ![X:a]:
+      ( ( rBT_rbt_lookup_a_b @ less @ rBT_Empty_a_b @ X ) = ( none_b ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1212, plain,
+    (((rBT_rbt_lookup_a_b @ less @ rBT_Empty_a_b @ sk__329) != (none_b))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_17_ord_Orbt__lookup_Osimps_I1_J, axiom,
+  (![Less2:( a > a > $o ),K2:a]:
+   ( ( rBT_rbt_lookup_a_b @ Less2 @ rBT_Empty_a_b @ K2 ) = ( none_b ) ))).
+thf(zip_derived_cl25, plain,
+    (![X0 : a > a > $o, X1 : a]:
+       ((rBT_rbt_lookup_a_b @ X0 @ rBT_Empty_a_b @ X1) = (none_b))),
+    inference('cnf', [status(esa)], [fact_17_ord_Orbt__lookup_Osimps_I1_J])).
+thf(zip_derived_cl1259, plain, (((none_b) != (none_b))),
+    inference('isabelle_simp', [status(thm)],
+              [zip_derived_cl1212, zip_derived_cl25])).
+thf(zip_derived_cl1260, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl1259])).
+
+% SZS output end Refutation

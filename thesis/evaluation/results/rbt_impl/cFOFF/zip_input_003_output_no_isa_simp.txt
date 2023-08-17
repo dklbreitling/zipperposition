@@ -1,0 +1,77 @@
+% Output for zip_input_003 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 433 iterations in 1.341s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_003.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(rBT_color_type, type, rBT_color: $tType).
+thf(a_type, type, a: $tType).
+thf(b_type, type, b: $tType).
+thf(c_type, type, c: rBT_color).
+thf(x25_type, type, x25: rBT_rbt_a_b).
+thf(rBT_B_type, type, rBT_B: rBT_color).
+thf(x22_type, type, x22: rBT_rbt_a_b).
+thf(rBT_Branch_a_b_type, type, rBT_Branch_a_b: rBT_color > rBT_rbt_a_b > a > 
+                                               b > rBT_rbt_a_b > rBT_rbt_a_b).
+thf(x24_type, type, x24: b).
+thf(thesis_type, type, thesis: $o).
+thf(x23_type, type, x23: a).
+thf(rBT_R_type, type, rBT_R: rBT_color).
+thf(t_type, type, t: rBT_rbt_a_b).
+thf(fact_3_Branch, axiom,
+  (( t ) = ( rBT_Branch_a_b @ c @ x22 @ x23 @ x24 @ x25 ))).
+thf(zip_derived_cl3, plain,
+    (((t) = (rBT_Branch_a_b @ c @ x22 @ x23 @ x24 @ x25))),
+    inference('cnf', [status(esa)], [fact_3_Branch])).
+thf(fact_8_color_Oexhaust, axiom,
+  (![Y:rBT_color]: ( ( ( Y ) != ( rBT_R ) ) => ( ( Y ) = ( rBT_B ) ) ))).
+thf(zip_derived_cl13, plain,
+    (![X0 : rBT_color]: (((X0) = (rBT_B)) | ((X0) = (rBT_R)))),
+    inference('cnf', [status(esa)], [fact_8_color_Oexhaust])).
+thf(zip_derived_cl3, plain,
+    (((t) = (rBT_Branch_a_b @ c @ x22 @ x23 @ x24 @ x25))),
+    inference('cnf', [status(esa)], [fact_3_Branch])).
+thf(zip_derived_cl2441, plain,
+    ((((t) = (rBT_Branch_a_b @ rBT_R @ x22 @ x23 @ x24 @ x25))
+      | ((c) = (rBT_B)))),
+    inference('sup+', [status(thm)], [zip_derived_cl13, zip_derived_cl3])).
+thf(fact_2_Red, axiom,
+  (![L:rBT_rbt_a_b,K:a,V:b,R:rBT_rbt_a_b]:
+   ( ( ( t ) = ( rBT_Branch_a_b @ rBT_R @ L @ K @ V @ R ) ) => ( thesis ) ))).
+thf(zip_derived_cl2, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ( (thesis) | ((t) != (rBT_Branch_a_b @ rBT_R @ X0 @ X1 @ X2 @ X3)))),
+    inference('cnf', [status(esa)], [fact_2_Red])).
+thf(conj_0, conjecture, (thesis)).
+thf(zf_stmt_0, negated_conjecture, (~( thesis )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl1363, plain, (~ (thesis)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1490, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ((t) != (rBT_Branch_a_b @ rBT_R @ X0 @ X1 @ X2 @ X3))),
+    inference('demod', [status(thm)], [zip_derived_cl2, zip_derived_cl1363])).
+thf(zip_derived_cl2465, plain, (((c) = (rBT_B))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl2441, zip_derived_cl1490])).
+thf(zip_derived_cl4780, plain,
+    (((t) = (rBT_Branch_a_b @ rBT_B @ x22 @ x23 @ x24 @ x25))),
+    inference('demod', [status(thm)], [zip_derived_cl3, zip_derived_cl2465])).
+thf(fact_1_Black, axiom,
+  (![L:rBT_rbt_a_b,K:a,V:b,R:rBT_rbt_a_b]:
+   ( ( ( t ) = ( rBT_Branch_a_b @ rBT_B @ L @ K @ V @ R ) ) => ( thesis ) ))).
+thf(zip_derived_cl1, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ( (thesis) | ((t) != (rBT_Branch_a_b @ rBT_B @ X0 @ X1 @ X2 @ X3)))),
+    inference('cnf', [status(esa)], [fact_1_Black])).
+thf(zip_derived_cl1363, plain, (~ (thesis)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1438, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ((t) != (rBT_Branch_a_b @ rBT_B @ X0 @ X1 @ X2 @ X3))),
+    inference('demod', [status(thm)], [zip_derived_cl1, zip_derived_cl1363])).
+thf(zip_derived_cl4781, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl4780, zip_derived_cl1438])).
+
+% SZS output end Refutation
