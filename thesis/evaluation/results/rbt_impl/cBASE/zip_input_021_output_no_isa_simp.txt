@@ -1,0 +1,225 @@
+% Output for zip_input_021 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 278 iterations in 0.907s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_021.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(rBT_rbt_sorted_a_b_type, type, rBT_rbt_sorted_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > $o).
+thf(rBT_rbt_lookup_a_b_type, type, rBT_rbt_lookup_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > a > option_b).
+thf(rBT_entries_a_b_type, type, rBT_entries_a_b: rBT_rbt_a_b > list_P459903278od_a_b).
+thf(t1_type, type, t1: rBT_rbt_a_b).
+thf(t2_type, type, t2: rBT_rbt_a_b).
+thf(less_type, type, less: a > a > $o).
+thf(map_of_a_b_type, type, map_of_a_b: list_P459903278od_a_b > a > option_b).
+thf(a_type, type, a: $tType).
+thf(option_b_type, type, option_b: $tType).
+thf(conj_0, conjecture,
+  (( ( rBT_entries_a_b @ t1 ) = ( rBT_entries_a_b @ t2 ) ) <=>
+   ( ( rBT_rbt_lookup_a_b @ less @ t1 ) = ( rBT_rbt_lookup_a_b @ less @ t2 ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( ( ( rBT_entries_a_b @ t1 ) = ( rBT_entries_a_b @ t2 ) ) <=>
+      ( ( rBT_rbt_lookup_a_b @ less @ t1 ) =
+        ( rBT_rbt_lookup_a_b @ less @ t2 ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl573, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1) = (rBT_rbt_lookup_a_b @ less @ t2))
+      | ((rBT_entries_a_b @ t1) = (rBT_entries_a_b @ t2)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl573, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1) = (rBT_rbt_lookup_a_b @ less @ t2))
+      | ((rBT_entries_a_b @ t1) = (rBT_entries_a_b @ t2)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_33_map__of__entries, axiom,
+  (![T:rBT_rbt_a_b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ T ) =>
+     ( ( map_of_a_b @ ( rBT_entries_a_b @ T ) ) =
+       ( rBT_rbt_lookup_a_b @ less @ T ) ) ))).
+thf(zip_derived_cl35, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((map_of_a_b @ (rBT_entries_a_b @ X0))
+          = (rBT_rbt_lookup_a_b @ less @ X0))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_33_map__of__entries])).
+thf(zip_derived_cl1497, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t2))
+        = (rBT_rbt_lookup_a_b @ less @ t1))
+      | ((rBT_entries_a_b @ t1) = (rBT_entries_a_b @ t2))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t2))),
+    inference('sup+', [status(thm)], [zip_derived_cl573, zip_derived_cl35])).
+thf(fact_36_assms_I2_J, axiom, (rBT_rbt_sorted_a_b @ less @ t2)).
+thf(zip_derived_cl38, plain, ( (rBT_rbt_sorted_a_b @ less @ t2)),
+    inference('cnf', [status(esa)], [fact_36_assms_I2_J])).
+thf(zip_derived_cl1501, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t2))
+        = (rBT_rbt_lookup_a_b @ less @ t1))
+      | ((rBT_entries_a_b @ t1) = (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl1497, zip_derived_cl38])).
+thf(zip_derived_cl35, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((map_of_a_b @ (rBT_entries_a_b @ X0))
+          = (rBT_rbt_lookup_a_b @ less @ X0))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_33_map__of__entries])).
+thf(zip_derived_cl35, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((map_of_a_b @ (rBT_entries_a_b @ X0))
+          = (rBT_rbt_lookup_a_b @ less @ X0))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_33_map__of__entries])).
+thf(zip_derived_cl574, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1) != (rBT_rbt_lookup_a_b @ less @ t2))
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1496, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1)
+        != (map_of_a_b @ (rBT_entries_a_b @ t2)))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t2)
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('sup-', [status(thm)], [zip_derived_cl35, zip_derived_cl574])).
+thf(zip_derived_cl38, plain, ( (rBT_rbt_sorted_a_b @ less @ t2)),
+    inference('cnf', [status(esa)], [fact_36_assms_I2_J])).
+thf(zip_derived_cl1502, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1)
+        != (map_of_a_b @ (rBT_entries_a_b @ t2)))
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl1496, zip_derived_cl38])).
+thf(zip_derived_cl1503, plain,
+    ((((rBT_rbt_lookup_a_b @ less @ t1)
+        != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('local_rewriting', [status(thm)], [zip_derived_cl1502])).
+thf(zip_derived_cl1507, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t1))
+        != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t1)
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('sup-', [status(thm)], [zip_derived_cl35, zip_derived_cl1503])).
+thf(fact_37_assms_I1_J, axiom, (rBT_rbt_sorted_a_b @ less @ t1)).
+thf(zip_derived_cl39, plain, ( (rBT_rbt_sorted_a_b @ less @ t1)),
+    inference('cnf', [status(esa)], [fact_37_assms_I1_J])).
+thf(zip_derived_cl1511, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t1))
+        != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+      | ((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl1507, zip_derived_cl39])).
+thf(zip_derived_cl1512, plain,
+    (((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2))),
+    inference('simplify', [status(thm)], [zip_derived_cl1511])).
+thf(zip_derived_cl1521, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t2))
+       = (rBT_rbt_lookup_a_b @ less @ t1))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1501, zip_derived_cl1512])).
+thf(zip_derived_cl1522, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t2))
+        = (rBT_rbt_lookup_a_b @ less @ t2))
+      | ((rBT_entries_a_b @ t1) = (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl573, zip_derived_cl1521])).
+thf(zip_derived_cl1512, plain,
+    (((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2))),
+    inference('simplify', [status(thm)], [zip_derived_cl1511])).
+thf(zip_derived_cl1523, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t2))
+       = (rBT_rbt_lookup_a_b @ less @ t2))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1522, zip_derived_cl1512])).
+thf(zip_derived_cl1521, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t2))
+       = (rBT_rbt_lookup_a_b @ less @ t1))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1501, zip_derived_cl1512])).
+thf(zip_derived_cl35, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((map_of_a_b @ (rBT_entries_a_b @ X0))
+          = (rBT_rbt_lookup_a_b @ less @ X0))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_33_map__of__entries])).
+thf(zip_derived_cl1524, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t1))
+        = (map_of_a_b @ (rBT_entries_a_b @ t2)))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t1))),
+    inference('sup+', [status(thm)], [zip_derived_cl1521, zip_derived_cl35])).
+thf(zip_derived_cl39, plain, ( (rBT_rbt_sorted_a_b @ less @ t1)),
+    inference('cnf', [status(esa)], [fact_37_assms_I1_J])).
+thf(zip_derived_cl1526, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t1))
+       = (map_of_a_b @ (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl1524, zip_derived_cl39])).
+thf(zip_derived_cl1544, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t1))
+       = (rBT_rbt_lookup_a_b @ less @ t2))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1523, zip_derived_cl1526])).
+thf(zip_derived_cl1521, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t2))
+       = (rBT_rbt_lookup_a_b @ less @ t1))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1501, zip_derived_cl1512])).
+thf(zip_derived_cl1526, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t1))
+       = (map_of_a_b @ (rBT_entries_a_b @ t2)))),
+    inference('demod', [status(thm)], [zip_derived_cl1524, zip_derived_cl39])).
+thf(zip_derived_cl1543, plain,
+    (((map_of_a_b @ (rBT_entries_a_b @ t1))
+       = (rBT_rbt_lookup_a_b @ less @ t1))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1521, zip_derived_cl1526])).
+thf(fact_25_entries__eqI, axiom,
+  (![T1:rBT_rbt_a_b,T22:rBT_rbt_a_b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ T1 ) =>
+     ( ( rBT_rbt_sorted_a_b @ less @ T22 ) =>
+       ( ( ( rBT_rbt_lookup_a_b @ less @ T1 ) =
+           ( rBT_rbt_lookup_a_b @ less @ T22 ) ) =>
+         ( ( rBT_entries_a_b @ T1 ) = ( rBT_entries_a_b @ T22 ) ) ) ) ))).
+thf(zip_derived_cl27, plain,
+    (![X0 : rBT_rbt_a_b, X1 : rBT_rbt_a_b]:
+       (~ (rBT_rbt_sorted_a_b @ less @ X0)
+        | ((rBT_rbt_lookup_a_b @ less @ X0)
+            != (rBT_rbt_lookup_a_b @ less @ X1))
+        | ((rBT_entries_a_b @ X0) = (rBT_entries_a_b @ X1))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X1))),
+    inference('cnf', [status(esa)], [fact_25_entries__eqI])).
+thf(zip_derived_cl1547, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((rBT_rbt_lookup_a_b @ less @ X0)
+          != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+        | ~ (rBT_rbt_sorted_a_b @ less @ t1)
+        | ((rBT_entries_a_b @ X0) = (rBT_entries_a_b @ t1))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('sup-', [status(thm)], [zip_derived_cl1543, zip_derived_cl27])).
+thf(zip_derived_cl39, plain, ( (rBT_rbt_sorted_a_b @ less @ t1)),
+    inference('cnf', [status(esa)], [fact_37_assms_I1_J])).
+thf(zip_derived_cl1560, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((rBT_rbt_lookup_a_b @ less @ X0)
+          != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+        | ((rBT_entries_a_b @ X0) = (rBT_entries_a_b @ t1))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('demod', [status(thm)], [zip_derived_cl1547, zip_derived_cl39])).
+thf(zip_derived_cl1746, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t1))
+        != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t2)
+      | ((rBT_entries_a_b @ t2) = (rBT_entries_a_b @ t1)))),
+    inference('sup-', [status(thm)], [zip_derived_cl1544, zip_derived_cl1560])).
+thf(zip_derived_cl38, plain, ( (rBT_rbt_sorted_a_b @ less @ t2)),
+    inference('cnf', [status(esa)], [fact_36_assms_I2_J])).
+thf(zip_derived_cl1754, plain,
+    ((((map_of_a_b @ (rBT_entries_a_b @ t1))
+        != (map_of_a_b @ (rBT_entries_a_b @ t1)))
+      | ((rBT_entries_a_b @ t2) = (rBT_entries_a_b @ t1)))),
+    inference('demod', [status(thm)], [zip_derived_cl1746, zip_derived_cl38])).
+thf(zip_derived_cl1755, plain,
+    (((rBT_entries_a_b @ t2) = (rBT_entries_a_b @ t1))),
+    inference('simplify', [status(thm)], [zip_derived_cl1754])).
+thf(zip_derived_cl1512, plain,
+    (((rBT_entries_a_b @ t1) != (rBT_entries_a_b @ t2))),
+    inference('simplify', [status(thm)], [zip_derived_cl1511])).
+thf(zip_derived_cl1756, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl1755, zip_derived_cl1512])).
+
+% SZS output end Refutation

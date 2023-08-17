@@ -1,0 +1,65 @@
+% Output for zip_input_056 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 662 iterations in 3.807s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_056.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(a_type, type, a: $tType).
+thf(b_type, type, b: $tType).
+thf(less_type, type, less: a > a > $o).
+thf(t_type, type, t: rBT_rbt_a_b).
+thf(rBT_rbt_insert_a_b_type, type, rBT_rbt_insert_a_b: (a > a > $o) > a > 
+                                                       b > rBT_rbt_a_b > rBT_rbt_a_b).
+thf(rBT_rbt_sorted_a_b_type, type, rBT_rbt_sorted_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > $o).
+thf(v_type, type, v: b).
+thf(rBT_rb894920950ey_a_b_type, type, rBT_rb894920950ey_a_b: (a > a > $o) > 
+                                                             (a > b > b > b) > 
+                                                             a > b > 
+                                                             rBT_rbt_a_b > rBT_rbt_a_b).
+thf(k_type, type, k: a).
+thf(conj_1, conjecture,
+  (rBT_rbt_sorted_a_b @ less @ ( rBT_rbt_insert_a_b @ less @ k @ v @ t ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( rBT_rbt_sorted_a_b @ less @ ( rBT_rbt_insert_a_b @ less @ k @ v @ t ) )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl375, plain,
+    (~ (rBT_rbt_sorted_a_b @ less @ (rBT_rbt_insert_a_b @ less @ k @ v @ t))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_210_ord_Orbt__insert__def, axiom,
+  (![Less2:( a > a > $o ),X_1:a,X_2:b,X_3:rBT_rbt_a_b]:
+   ( ( rBT_rbt_insert_a_b @ Less2 @ X_1 @ X_2 @ X_3 ) =
+     ( rBT_rb894920950ey_a_b @
+       Less2 @ ( ^[Uu:a,Uv:b,Nv:b]: ( Nv ) ) @ X_1 @ X_2 @ X_3 ) ))).
+thf(zip_derived_cl187, plain,
+    (![X0 : a > a > $o, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ((rBT_rbt_insert_a_b @ X0 @ X1 @ X2 @ X3)
+         = (rBT_rb894920950ey_a_b @ X0 @ (^[Y0 : a,Y1 : b,Y2 : b]: (Y2)) @ 
+            X1 @ X2 @ X3))),
+    inference('cnf', [status(esa)], [fact_210_ord_Orbt__insert__def])).
+thf(fact_22_rbt__insertwk__rbt__sorted, axiom,
+  (![T:rBT_rbt_a_b,F:( a > b > b > b ),K:a,X:b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ T ) =>
+     ( rBT_rbt_sorted_a_b @
+       less @ ( rBT_rb894920950ey_a_b @ less @ F @ K @ X @ T ) ) ))).
+thf(zip_derived_cl21, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a > b > b > b, X2 : a, X3 : b]:
+       (~ (rBT_rbt_sorted_a_b @ less @ X0)
+        |  (rBT_rbt_sorted_a_b @ less @ 
+            (rBT_rb894920950ey_a_b @ less @ X1 @ X2 @ X3 @ X0)))),
+    inference('cnf', [status(esa)], [fact_22_rbt__insertwk__rbt__sorted])).
+thf(zip_derived_cl5119, plain,
+    (![X0 : rBT_rbt_a_b, X1 : b, X2 : a]:
+       ( (rBT_rbt_sorted_a_b @ less @ 
+          (rBT_rbt_insert_a_b @ less @ X2 @ X1 @ X0))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('sup+', [status(thm)], [zip_derived_cl187, zip_derived_cl21])).
+thf(zip_derived_cl5172, plain, (~ (rBT_rbt_sorted_a_b @ less @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl375, zip_derived_cl5119])).
+thf(conj_0, axiom, (rBT_rbt_sorted_a_b @ less @ t)).
+thf(zip_derived_cl374, plain, ( (rBT_rbt_sorted_a_b @ less @ t)),
+    inference('cnf', [status(esa)], [conj_0])).
+thf(zip_derived_cl5178, plain, ($false),
+    inference('demod', [status(thm)], [zip_derived_cl5172, zip_derived_cl374])).
+
+% SZS output end Refutation

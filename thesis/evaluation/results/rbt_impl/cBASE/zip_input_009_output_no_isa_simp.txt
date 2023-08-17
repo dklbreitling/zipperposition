@@ -1,0 +1,123 @@
+% Output for zip_input_009 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 871 iterations in 20.645s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_009.p'
+% SZS output start Refutation
+thf(a_type, type, a: $tType).
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(list_a_type, type, list_a: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(rBT_rbt_less_a_b_type, type, rBT_rbt_less_a_b: (a > a > $o) > a > 
+                                                   rBT_rbt_a_b > $o).
+thf(k_type, type, k: a).
+thf(rBT_Empty_a_b_type, type, rBT_Empty_a_b: rBT_rbt_a_b).
+thf(set_a2_type, type, set_a2: list_a > set_a).
+thf(less_type, type, less: a > a > $o).
+thf(member_a_type, type, member_a: a > set_a > $o).
+thf(nil_a_type, type, nil_a: list_a).
+thf(cons_a_type, type, cons_a: a > list_a > list_a).
+thf(sk__1_type, type, sk__1: rBT_rbt_a_b > a > a).
+thf(rBT_keys_a_b_type, type, rBT_keys_a_b: rBT_rbt_a_b > list_a).
+thf(sk__107_type, type, sk__107: list_a > a > list_a).
+thf(append_a_type, type, append_a: list_a > list_a > list_a).
+thf(sk__108_type, type, sk__108: list_a > a > list_a).
+thf(conj_0, conjecture, (rBT_rbt_less_a_b @ less @ k @ rBT_Empty_a_b)).
+thf(zf_stmt_0, negated_conjecture,
+  (~( rBT_rbt_less_a_b @ less @ k @ rBT_Empty_a_b )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl367, plain,
+    (~ (rBT_rbt_less_a_b @ less @ k @ rBT_Empty_a_b)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_116_keys__simps_I1_J, axiom,
+  (( rBT_keys_a_b @ rBT_Empty_a_b ) = ( nil_a ))).
+thf(zip_derived_cl99, plain, (((rBT_keys_a_b @ rBT_Empty_a_b) = (nil_a))),
+    inference('cnf', [status(esa)], [fact_116_keys__simps_I1_J])).
+thf(fact_8_rbt__less__prop, axiom,
+  (![K:a,T:rBT_rbt_a_b]:
+   ( ( rBT_rbt_less_a_b @ less @ K @ T ) <=>
+     ( ![X2:a]:
+       ( ( member_a @ X2 @ ( set_a2 @ ( rBT_keys_a_b @ T ) ) ) =>
+         ( less @ X2 @ K ) ) ) ))).
+thf(zip_derived_cl9, plain,
+    (![X0 : a, X1 : rBT_rbt_a_b]:
+       ( (rBT_rbt_less_a_b @ less @ X0 @ X1)
+        |  (member_a @ (sk__1 @ X1 @ X0) @ (set_a2 @ (rBT_keys_a_b @ X1))))),
+    inference('cnf', [status(esa)], [fact_8_rbt__less__prop])).
+thf(fact_340_split__list, axiom,
+  (![X3:a,Xs:list_a]:
+   ( ( member_a @ X3 @ ( set_a2 @ Xs ) ) =>
+     ( ?[Ys2:list_a,Zs2:list_a]:
+       ( ( Xs ) = ( append_a @ Ys2 @ ( cons_a @ X3 @ Zs2 ) ) ) ) ))).
+thf(zip_derived_cl260, plain,
+    (![X0 : list_a, X1 : a]:
+       (((X0)
+          = (append_a @ (sk__107 @ X0 @ X1) @ 
+             (cons_a @ X1 @ (sk__108 @ X0 @ X1))))
+        | ~ (member_a @ X1 @ (set_a2 @ X0)))),
+    inference('cnf', [status(esa)], [fact_340_split__list])).
+thf(fact_231_append__assoc, axiom,
+  (![Xs:list_a,Ys:list_a,Zs:list_a]:
+   ( ( append_a @ ( append_a @ Xs @ Ys ) @ Zs ) =
+     ( append_a @ Xs @ ( append_a @ Ys @ Zs ) ) ))).
+thf(zip_derived_cl212, plain,
+    (![X0 : list_a, X1 : list_a, X2 : list_a]:
+       ((append_a @ (append_a @ X0 @ X1) @ X2)
+         = (append_a @ X0 @ (append_a @ X1 @ X2)))),
+    inference('cnf', [status(esa)], [fact_231_append__assoc])).
+thf(fact_123_Nil__is__append__conv, axiom,
+  (![Xs:list_a,Ys:list_a]:
+   ( ( ( nil_a ) = ( append_a @ Xs @ Ys ) ) <=>
+     ( ( ( Ys ) = ( nil_a ) ) & ( ( Xs ) = ( nil_a ) ) ) ))).
+thf(zip_derived_cl108, plain,
+    (![X0 : list_a, X1 : list_a]:
+       (((X0) = (nil_a)) | ((nil_a) != (append_a @ X1 @ X0)))),
+    inference('cnf', [status(esa)], [fact_123_Nil__is__append__conv])).
+thf(zip_derived_cl4306, plain,
+    (![X0 : list_a, X1 : list_a, X2 : list_a]:
+       (((nil_a) != (append_a @ X2 @ (append_a @ X1 @ X0)))
+        | ((X0) = (nil_a)))),
+    inference('sup-', [status(thm)], [zip_derived_cl212, zip_derived_cl108])).
+thf(zip_derived_cl9868, plain,
+    (![X0 : list_a, X1 : a, X2 : list_a]:
+       (((nil_a) != (append_a @ X2 @ X0))
+        | ~ (member_a @ X1 @ (set_a2 @ X0))
+        | ((cons_a @ X1 @ (sk__108 @ X0 @ X1)) = (nil_a)))),
+    inference('sup-', [status(thm)], [zip_derived_cl260, zip_derived_cl4306])).
+thf(fact_238_list_Odistinct_I1_J, axiom,
+  (![X212:a,X222:list_a]: ( ( nil_a ) != ( cons_a @ X212 @ X222 ) ))).
+thf(zip_derived_cl214, plain,
+    (![X0 : a, X1 : list_a]: ((nil_a) != (cons_a @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_238_list_Odistinct_I1_J])).
+thf(zip_derived_cl9912, plain,
+    (![X0 : list_a, X1 : a, X2 : list_a]:
+       (((nil_a) != (append_a @ X2 @ X0)) | ~ (member_a @ X1 @ (set_a2 @ X0)))),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl9868, zip_derived_cl214])).
+thf(zip_derived_cl9997, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : list_a]:
+       ( (rBT_rbt_less_a_b @ less @ X1 @ X0)
+        | ((nil_a) != (append_a @ X2 @ (rBT_keys_a_b @ X0))))),
+    inference('sup-', [status(thm)], [zip_derived_cl9, zip_derived_cl9912])).
+thf(zip_derived_cl22600, plain,
+    (![X0 : list_a, X1 : a]:
+       (((nil_a) != (append_a @ X0 @ nil_a))
+        |  (rBT_rbt_less_a_b @ less @ X1 @ rBT_Empty_a_b))),
+    inference('sup-', [status(thm)], [zip_derived_cl99, zip_derived_cl9997])).
+thf(fact_242_append_Oright__neutral, axiom,
+  (![A:list_a]: ( ( append_a @ A @ nil_a ) = ( A ) ))).
+thf(zip_derived_cl216, plain,
+    (![X0 : list_a]: ((append_a @ X0 @ nil_a) = (X0))),
+    inference('cnf', [status(esa)], [fact_242_append_Oright__neutral])).
+thf(zip_derived_cl22644, plain,
+    (![X0 : list_a, X1 : a]:
+       (((nil_a) != (X0)) |  (rBT_rbt_less_a_b @ less @ X1 @ rBT_Empty_a_b))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl22600, zip_derived_cl216])).
+thf(zip_derived_cl22645, plain,
+    (![X1 : a]:  (rBT_rbt_less_a_b @ less @ X1 @ rBT_Empty_a_b)),
+    inference('simplify', [status(thm)], [zip_derived_cl22644])).
+thf(zip_derived_cl22717, plain, ($false),
+    inference('demod', [status(thm)],
+              [zip_derived_cl367, zip_derived_cl22645])).
+
+% SZS output end Refutation

@@ -1,0 +1,56 @@
+% Output for zip_input_004 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 32 iterations in 0.060s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_004.p'
+% SZS output start Refutation
+thf(list_P459903278od_a_b_type, type, list_P459903278od_a_b: $tType).
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(list_a_type, type, list_a: $tType).
+thf(rBT_keys_a_b_type, type, rBT_keys_a_b: rBT_rbt_a_b > list_a).
+thf(map_Pr2017900442_a_b_a_type, type, map_Pr2017900442_a_b_a: (product_prod_a_b > a) > 
+                                                               list_P459903278od_a_b > list_a).
+thf(product_fst_a_b_type, type, product_fst_a_b: product_prod_a_b > a).
+thf(nil_a_type, type, nil_a: list_a).
+thf(rBT_entries_a_b_type, type, rBT_entries_a_b: rBT_rbt_a_b > list_P459903278od_a_b).
+thf(a_type, type, a: $tType).
+thf(product_prod_a_b_type, type, product_prod_a_b: $tType).
+thf(nil_Product_prod_a_b_type, type, nil_Product_prod_a_b: list_P459903278od_a_b).
+thf(rBT_Empty_a_b_type, type, rBT_Empty_a_b: rBT_rbt_a_b).
+thf(fact_6_entries_Osimps_I1_J, axiom,
+  (( rBT_entries_a_b @ rBT_Empty_a_b ) = ( nil_Product_prod_a_b ))).
+thf(zip_derived_cl9, plain,
+    (((rBT_entries_a_b @ rBT_Empty_a_b) = (nil_Product_prod_a_b))),
+    inference('cnf', [status(esa)], [fact_6_entries_Osimps_I1_J])).
+thf(fact_8_keys__def, axiom,
+  (![T2:rBT_rbt_a_b]:
+   ( ( rBT_keys_a_b @ T2 ) =
+     ( map_Pr2017900442_a_b_a @ product_fst_a_b @ ( rBT_entries_a_b @ T2 ) ) ))).
+thf(zip_derived_cl10, plain,
+    (![X0 : rBT_rbt_a_b]:
+       ((rBT_keys_a_b @ X0)
+         = (map_Pr2017900442_a_b_a @ product_fst_a_b @ (rBT_entries_a_b @ X0)))),
+    inference('cnf', [status(esa)], [fact_8_keys__def])).
+thf(zip_derived_cl277, plain,
+    (((rBT_keys_a_b @ rBT_Empty_a_b)
+       = (map_Pr2017900442_a_b_a @ product_fst_a_b @ nil_Product_prod_a_b))),
+    inference('sup+', [status(thm)], [zip_derived_cl9, zip_derived_cl10])).
+thf(fact_256_list_Osimps_I8_J, axiom,
+  (![F:( product_prod_a_b > a )]:
+   ( ( map_Pr2017900442_a_b_a @ F @ nil_Product_prod_a_b ) = ( nil_a ) ))).
+thf(zip_derived_cl125, plain,
+    (![X0 : product_prod_a_b > a]:
+       ((map_Pr2017900442_a_b_a @ X0 @ nil_Product_prod_a_b) = (nil_a))),
+    inference('cnf', [status(esa)], [fact_256_list_Osimps_I8_J])).
+thf(zip_derived_cl280, plain, (((rBT_keys_a_b @ rBT_Empty_a_b) = (nil_a))),
+    inference('demod', [status(thm)], [zip_derived_cl277, zip_derived_cl125])).
+thf(conj_0, conjecture, (( rBT_keys_a_b @ rBT_Empty_a_b ) = ( nil_a ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( rBT_keys_a_b @ rBT_Empty_a_b ) != ( nil_a )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl188, plain, (((rBT_keys_a_b @ rBT_Empty_a_b) != (nil_a))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl281, plain, ($false),
+    inference('simplify_reflect-', [status(thm)],
+              [zip_derived_cl280, zip_derived_cl188])).
+
+% SZS output end Refutation

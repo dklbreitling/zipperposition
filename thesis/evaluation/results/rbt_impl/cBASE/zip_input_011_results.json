@@ -1,0 +1,16 @@
+[
+  {
+    "input_file": "zip_input_011",
+    "isabelle_simp": true,
+    "runtime": 0.2713503837585449,
+    "exit_code": 0,
+    "refuted": "unclear, something went wrong"
+  },
+  {
+    "input_file": "zip_input_011",
+    "isabelle_simp": false,
+    "runtime": 0.27170491218566895,
+    "exit_code": 0,
+    "refuted": "unclear, something went wrong"
+  }
+]

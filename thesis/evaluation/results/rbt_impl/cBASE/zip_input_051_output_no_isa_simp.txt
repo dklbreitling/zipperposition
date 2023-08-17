@@ -1,0 +1,250 @@
+% Output for zip_input_051 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 2448 iterations in 14.794s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_051.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(a_type, type, a: $tType).
+thf(b_type, type, b: $tType).
+thf(rBT_color_type, type, rBT_color: $tType).
+thf(rBT_is_rbt_a_b_type, type, rBT_is_rbt_a_b: (a > a > $o) > rBT_rbt_a_b > $o).
+thf(t_type, type, t: rBT_rbt_a_b).
+thf(x_type, type, x: b).
+thf(rBT_rb894920950ey_a_b_type, type, rBT_rb894920950ey_a_b: (a > a > $o) > 
+                                                             (a > b > b > b) > 
+                                                             a > b > 
+                                                             rBT_rbt_a_b > rBT_rbt_a_b).
+thf(rBT_inv2_a_b_type, type, rBT_inv2_a_b: rBT_rbt_a_b > $o).
+thf(f_type, type, f: a > b > b > b).
+thf(rBT_inv1l_a_b_type, type, rBT_inv1l_a_b: rBT_rbt_a_b > $o).
+thf(rBT_rbt_ins_a_b_type, type, rBT_rbt_ins_a_b: (a > a > $o) > 
+                                                 (a > b > b > b) > a > b > 
+                                                 rBT_rbt_a_b > rBT_rbt_a_b).
+thf(rBT_rbt_sorted_a_b_type, type, rBT_rbt_sorted_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > $o).
+thf(rBT_inv1_a_b_type, type, rBT_inv1_a_b: rBT_rbt_a_b > $o).
+thf(rBT_paint_a_b_type, type, rBT_paint_a_b: rBT_color > rBT_rbt_a_b > rBT_rbt_a_b).
+thf(rBT_B_type, type, rBT_B: rBT_color).
+thf(k_type, type, k: a).
+thf(less_type, type, less: a > a > $o).
+thf(rBT_color_of_a_b_type, type, rBT_color_of_a_b: rBT_rbt_a_b > rBT_color).
+thf(fact_82_ord_Orbt__insert__with__key__def, axiom,
+  (![Less2:( a > a > $o ),F2:( a > b > b > b ),K2:a,V2:b,T2:rBT_rbt_a_b]:
+   ( ( rBT_rb894920950ey_a_b @ Less2 @ F2 @ K2 @ V2 @ T2 ) =
+     ( rBT_paint_a_b @
+       rBT_B @ ( rBT_rbt_ins_a_b @ Less2 @ F2 @ K2 @ V2 @ T2 ) ) ))).
+thf(zip_derived_cl68, plain,
+    (![X0 : a > a > $o, X1 : a > b > b > b, X2 : a, X3 : b, X4 : rBT_rbt_a_b]:
+       ((rBT_rb894920950ey_a_b @ X0 @ X1 @ X2 @ X3 @ X4)
+         = (rBT_paint_a_b @ rBT_B @ 
+            (rBT_rbt_ins_a_b @ X0 @ X1 @ X2 @ X3 @ X4)))),
+    inference('cnf', [status(esa)],
+              [fact_82_ord_Orbt__insert__with__key__def])).
+thf(fact_499_paint__inv1, axiom,
+  (![T:rBT_rbt_a_b]:
+   ( ( rBT_inv1l_a_b @ T ) =>
+     ( rBT_inv1_a_b @ ( rBT_paint_a_b @ rBT_B @ T ) ) ))).
+thf(zip_derived_cl257, plain,
+    (![X0 : rBT_rbt_a_b]:
+       ( (rBT_inv1_a_b @ (rBT_paint_a_b @ rBT_B @ X0))
+        | ~ (rBT_inv1l_a_b @ X0))),
+    inference('cnf', [status(esa)], [fact_499_paint__inv1])).
+thf(zip_derived_cl1679, plain,
+    (![X0 : rBT_rbt_a_b, X1 : b, X2 : a, X3 : a > b > b > b, X4 : a > a > $o]:
+       ( (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ X4 @ X3 @ X2 @ X1 @ X0))
+        | ~ (rBT_inv1l_a_b @ (rBT_rbt_ins_a_b @ X4 @ X3 @ X2 @ X1 @ X0)))),
+    inference('sup+', [status(thm)], [zip_derived_cl68, zip_derived_cl257])).
+thf(fact_18_ord_Oins__inv1__inv2_I4_J, axiom,
+  (![T:rBT_rbt_a_b,Less:( a > a > $o ),F:( a > b > b > b ),K:a,X3:b]:
+   ( ( rBT_inv1_a_b @ T ) =>
+     ( ( rBT_inv2_a_b @ T ) =>
+       ( rBT_inv1l_a_b @ ( rBT_rbt_ins_a_b @ Less @ F @ K @ X3 @ T ) ) ) ))).
+thf(zip_derived_cl14, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a > a > $o, X2 : a > b > b > b, X3 : a, X4 : b]:
+       (~ (rBT_inv2_a_b @ X0)
+        | ~ (rBT_inv1_a_b @ X0)
+        |  (rBT_inv1l_a_b @ (rBT_rbt_ins_a_b @ X1 @ X2 @ X3 @ X4 @ X0)))),
+    inference('cnf', [status(esa)], [fact_18_ord_Oins__inv1__inv2_I4_J])).
+thf(zip_derived_cl28013, plain,
+    (![X0 : rBT_rbt_a_b, X1 : b, X2 : a, X3 : a > b > b > b, X4 : a > a > $o]:
+       ( (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ X4 @ X3 @ X2 @ X1 @ X0))
+        | ~ (rBT_inv1_a_b @ X0)
+        | ~ (rBT_inv2_a_b @ X0))),
+    inference('sup+', [status(thm)], [zip_derived_cl1679, zip_derived_cl14])).
+thf(fact_15_ord_Oins__inv1__inv2_I1_J, axiom,
+  (![T:rBT_rbt_a_b,Less:( a > a > $o ),F:( a > b > b > b ),K:a,X3:b]:
+   ( ( rBT_inv1_a_b @ T ) =>
+     ( ( rBT_inv2_a_b @ T ) =>
+       ( rBT_inv2_a_b @ ( rBT_rbt_ins_a_b @ Less @ F @ K @ X3 @ T ) ) ) ))).
+thf(zip_derived_cl11, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a > a > $o, X2 : a > b > b > b, X3 : a, X4 : b]:
+       (~ (rBT_inv2_a_b @ X0)
+        | ~ (rBT_inv1_a_b @ X0)
+        |  (rBT_inv2_a_b @ (rBT_rbt_ins_a_b @ X1 @ X2 @ X3 @ X4 @ X0)))),
+    inference('cnf', [status(esa)], [fact_15_ord_Oins__inv1__inv2_I1_J])).
+thf(zip_derived_cl68, plain,
+    (![X0 : a > a > $o, X1 : a > b > b > b, X2 : a, X3 : b, X4 : rBT_rbt_a_b]:
+       ((rBT_rb894920950ey_a_b @ X0 @ X1 @ X2 @ X3 @ X4)
+         = (rBT_paint_a_b @ rBT_B @ 
+            (rBT_rbt_ins_a_b @ X0 @ X1 @ X2 @ X3 @ X4)))),
+    inference('cnf', [status(esa)],
+              [fact_82_ord_Orbt__insert__with__key__def])).
+thf(fact_477_paint__inv2, axiom,
+  (![T:rBT_rbt_a_b,C:rBT_color]:
+   ( ( rBT_inv2_a_b @ T ) => ( rBT_inv2_a_b @ ( rBT_paint_a_b @ C @ T ) ) ))).
+thf(zip_derived_cl244, plain,
+    (![X0 : rBT_rbt_a_b, X1 : rBT_color]:
+       (~ (rBT_inv2_a_b @ X0) |  (rBT_inv2_a_b @ (rBT_paint_a_b @ X1 @ X0)))),
+    inference('cnf', [status(esa)], [fact_477_paint__inv2])).
+thf(zip_derived_cl1686, plain,
+    (![X0 : rBT_rbt_a_b, X1 : b, X2 : a, X3 : a > b > b > b, X4 : a > a > $o]:
+       ( (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ X4 @ X3 @ X2 @ X1 @ X0))
+        | ~ (rBT_inv2_a_b @ (rBT_rbt_ins_a_b @ X4 @ X3 @ X2 @ X1 @ X0)))),
+    inference('sup+', [status(thm)], [zip_derived_cl68, zip_derived_cl244])).
+thf(fact_29_rbt__insertwk__rbt__sorted, axiom,
+  (![T:rBT_rbt_a_b,F:( a > b > b > b ),K:a,X3:b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ T ) =>
+     ( rBT_rbt_sorted_a_b @
+       less @ ( rBT_rb894920950ey_a_b @ less @ F @ K @ X3 @ T ) ) ))).
+thf(zip_derived_cl21, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a > b > b > b, X2 : a, X3 : b]:
+       (~ (rBT_rbt_sorted_a_b @ less @ X0)
+        |  (rBT_rbt_sorted_a_b @ less @ 
+            (rBT_rb894920950ey_a_b @ less @ X1 @ X2 @ X3 @ X0)))),
+    inference('cnf', [status(esa)], [fact_29_rbt__insertwk__rbt__sorted])).
+thf(fact_51_ord_Ois__rbt__def, axiom,
+  (![Less2:( a > a > $o ),T2:rBT_rbt_a_b]:
+   ( ( rBT_is_rbt_a_b @ Less2 @ T2 ) <=>
+     ( ( rBT_inv1_a_b @ T2 ) & ( ( rBT_color_of_a_b @ T2 ) = ( rBT_B ) ) & 
+       ( rBT_rbt_sorted_a_b @ Less2 @ T2 ) & ( rBT_inv2_a_b @ T2 ) ) ))).
+thf(zip_derived_cl50, plain,
+    (![X0 : a > a > $o, X1 : rBT_rbt_a_b]:
+       ( (rBT_is_rbt_a_b @ X0 @ X1)
+        | ~ (rBT_inv2_a_b @ X1)
+        | ~ (rBT_rbt_sorted_a_b @ X0 @ X1)
+        | ((rBT_color_of_a_b @ X1) != (rBT_B))
+        | ~ (rBT_inv1_a_b @ X1))),
+    inference('cnf', [status(esa)], [fact_51_ord_Ois__rbt__def])).
+thf(conj_0, conjecture,
+  (rBT_is_rbt_a_b @ less @ ( rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t ))).
+thf(zf_stmt_0, negated_conjecture,
+  (~( rBT_is_rbt_a_b @
+      less @ ( rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t ) )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl258, plain,
+    (~ (rBT_is_rbt_a_b @ less @ 
+        (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(zip_derived_cl1247, plain,
+    ((~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ((rBT_color_of_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+          != (rBT_B))
+      | ~ (rBT_rbt_sorted_a_b @ less @ 
+           (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ~ (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('sup-', [status(thm)], [zip_derived_cl50, zip_derived_cl258])).
+thf(zip_derived_cl1286, plain,
+    ((~ (rBT_rbt_sorted_a_b @ less @ t)
+      | ~ (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ((rBT_color_of_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+          != (rBT_B))
+      | ~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('sup-', [status(thm)], [zip_derived_cl21, zip_derived_cl1247])).
+thf(fact_47_ord_Ois__rbt__rbt__sorted, axiom,
+  (![Less:( a > a > $o ),T:rBT_rbt_a_b]:
+   ( ( rBT_is_rbt_a_b @ Less @ T ) => ( rBT_rbt_sorted_a_b @ Less @ T ) ))).
+thf(zip_derived_cl41, plain,
+    (![X0 : a > a > $o, X1 : rBT_rbt_a_b]:
+       ( (rBT_rbt_sorted_a_b @ X0 @ X1) | ~ (rBT_is_rbt_a_b @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_47_ord_Ois__rbt__rbt__sorted])).
+thf(fact_16_inv, axiom, (rBT_is_rbt_a_b @ less @ t)).
+thf(zip_derived_cl12, plain, ( (rBT_is_rbt_a_b @ less @ t)),
+    inference('cnf', [status(esa)], [fact_16_inv])).
+thf(zip_derived_cl370, plain, ( (rBT_rbt_sorted_a_b @ less @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl41, zip_derived_cl12])).
+thf(zip_derived_cl1289, plain,
+    ((~ (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ((rBT_color_of_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+          != (rBT_B))
+      | ~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('demod', [status(thm)], [zip_derived_cl1286, zip_derived_cl370])).
+thf(fact_59_local_Orbt__insert__with__key__def, axiom,
+  (![F:( a > b > b > b ),K:a,V:b,T:rBT_rbt_a_b]:
+   ( ( rBT_rb894920950ey_a_b @ less @ F @ K @ V @ T ) =
+     ( rBT_paint_a_b @ rBT_B @ ( rBT_rbt_ins_a_b @ less @ F @ K @ V @ T ) ) ))).
+thf(zip_derived_cl58, plain,
+    (![X0 : a > b > b > b, X1 : a, X2 : b, X3 : rBT_rbt_a_b]:
+       ((rBT_rb894920950ey_a_b @ less @ X0 @ X1 @ X2 @ X3)
+         = (rBT_paint_a_b @ rBT_B @ 
+            (rBT_rbt_ins_a_b @ less @ X0 @ X1 @ X2 @ X3)))),
+    inference('cnf', [status(esa)],
+              [fact_59_local_Orbt__insert__with__key__def])).
+thf(fact_388_paint__color__of, axiom,
+  (![T:rBT_rbt_a_b]:
+   ( ( rBT_color_of_a_b @ ( rBT_paint_a_b @ rBT_B @ T ) ) = ( rBT_B ) ))).
+thf(zip_derived_cl172, plain,
+    (![X0 : rBT_rbt_a_b]:
+       ((rBT_color_of_a_b @ (rBT_paint_a_b @ rBT_B @ X0)) = (rBT_B))),
+    inference('cnf', [status(esa)], [fact_388_paint__color__of])).
+thf(zip_derived_cl1379, plain,
+    (![X0 : rBT_rbt_a_b, X1 : b, X2 : a, X3 : a > b > b > b]:
+       ((rBT_color_of_a_b @ 
+         (rBT_rb894920950ey_a_b @ less @ X3 @ X2 @ X1 @ X0)) = (rBT_B))),
+    inference('sup+', [status(thm)], [zip_derived_cl58, zip_derived_cl172])).
+thf(zip_derived_cl1479, plain,
+    ((~ (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ((rBT_B) != (rBT_B))
+      | ~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl1289, zip_derived_cl1379])).
+thf(zip_derived_cl1480, plain,
+    ((~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))
+      | ~ (rBT_inv2_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('simplify', [status(thm)], [zip_derived_cl1479])).
+thf(zip_derived_cl48443, plain,
+    ((~ (rBT_inv2_a_b @ (rBT_rbt_ins_a_b @ less @ f @ k @ x @ t))
+      | ~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('sup-', [status(thm)], [zip_derived_cl1686, zip_derived_cl1480])).
+thf(zip_derived_cl48490, plain,
+    ((~ (rBT_inv1_a_b @ t)
+      | ~ (rBT_inv2_a_b @ t)
+      | ~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t)))),
+    inference('sup-', [status(thm)], [zip_derived_cl11, zip_derived_cl48443])).
+thf(zip_derived_cl46, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a > a > $o]:
+       ( (rBT_inv1_a_b @ X0) | ~ (rBT_is_rbt_a_b @ X1 @ X0))),
+    inference('cnf', [status(esa)], [fact_51_ord_Ois__rbt__def])).
+thf(zip_derived_cl12, plain, ( (rBT_is_rbt_a_b @ less @ t)),
+    inference('cnf', [status(esa)], [fact_16_inv])).
+thf(zip_derived_cl308, plain, ( (rBT_inv1_a_b @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl46, zip_derived_cl12])).
+thf(fact_56_local_Ois__rbt__def, axiom,
+  (![T:rBT_rbt_a_b]:
+   ( ( rBT_is_rbt_a_b @ less @ T ) <=>
+     ( ( rBT_inv2_a_b @ T ) & ( rBT_rbt_sorted_a_b @ less @ T ) & 
+       ( ( rBT_color_of_a_b @ T ) = ( rBT_B ) ) & ( rBT_inv1_a_b @ T ) ) ))).
+thf(zip_derived_cl52, plain,
+    (![X0 : rBT_rbt_a_b]:
+       ( (rBT_inv2_a_b @ X0) | ~ (rBT_is_rbt_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_56_local_Ois__rbt__def])).
+thf(zip_derived_cl12, plain, ( (rBT_is_rbt_a_b @ less @ t)),
+    inference('cnf', [status(esa)], [fact_16_inv])).
+thf(zip_derived_cl298, plain, ( (rBT_inv2_a_b @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl52, zip_derived_cl12])).
+thf(zip_derived_cl48491, plain,
+    (~ (rBT_inv1_a_b @ (rBT_rb894920950ey_a_b @ less @ f @ k @ x @ t))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl48490, zip_derived_cl308, zip_derived_cl298])).
+thf(zip_derived_cl48494, plain,
+    ((~ (rBT_inv2_a_b @ t) | ~ (rBT_inv1_a_b @ t))),
+    inference('sup-', [status(thm)],
+              [zip_derived_cl28013, zip_derived_cl48491])).
+thf(zip_derived_cl298, plain, ( (rBT_inv2_a_b @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl52, zip_derived_cl12])).
+thf(zip_derived_cl308, plain, ( (rBT_inv1_a_b @ t)),
+    inference('sup+', [status(thm)], [zip_derived_cl46, zip_derived_cl12])).
+thf(zip_derived_cl48495, plain, ($false),
+    inference('demod', [status(thm)],
+              [zip_derived_cl48494, zip_derived_cl298, zip_derived_cl308])).
+
+% SZS output end Refutation

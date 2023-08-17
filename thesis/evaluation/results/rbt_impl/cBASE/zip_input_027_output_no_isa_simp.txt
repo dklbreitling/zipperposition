@@ -1,0 +1,66 @@
+% Output for zip_input_027 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 294 iterations in 1.254s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_027.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(rBT_color_type, type, rBT_color: $tType).
+thf(rBT_B_type, type, rBT_B: rBT_color).
+thf(rBT_rbt_sorted_a_b_type, type, rBT_rbt_sorted_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > $o).
+thf(rBT_is_rbt_a_b_type, type, rBT_is_rbt_a_b: (a > a > $o) > rBT_rbt_a_b > $o).
+thf(rBT_Empty_a_b_type, type, rBT_Empty_a_b: rBT_rbt_a_b).
+thf(a_type, type, a: $tType).
+thf(rBT_inv2_a_b_type, type, rBT_inv2_a_b: rBT_rbt_a_b > $o).
+thf(rBT_color_of_a_b_type, type, rBT_color_of_a_b: rBT_rbt_a_b > rBT_color).
+thf(less_type, type, less: a > a > $o).
+thf(rBT_inv1_a_b_type, type, rBT_inv1_a_b: rBT_rbt_a_b > $o).
+thf(conj_0, conjecture, (rBT_is_rbt_a_b @ less @ rBT_Empty_a_b)).
+thf(zf_stmt_0, negated_conjecture,
+  (~( rBT_is_rbt_a_b @ less @ rBT_Empty_a_b )),
+  inference('cnf.neg', [status(esa)], [conj_0])).
+thf(zip_derived_cl410, plain, (~ (rBT_is_rbt_a_b @ less @ rBT_Empty_a_b)),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_50_ord_Ois__rbt__def, axiom,
+  (![Less2:( a > a > $o ),T2:rBT_rbt_a_b]:
+   ( ( rBT_is_rbt_a_b @ Less2 @ T2 ) <=>
+     ( ( rBT_inv1_a_b @ T2 ) & ( ( rBT_color_of_a_b @ T2 ) = ( rBT_B ) ) & 
+       ( rBT_rbt_sorted_a_b @ Less2 @ T2 ) & ( rBT_inv2_a_b @ T2 ) ) ))).
+thf(zip_derived_cl44, plain,
+    (![X0 : a > a > $o, X1 : rBT_rbt_a_b]:
+       ( (rBT_is_rbt_a_b @ X0 @ X1)
+        | ~ (rBT_inv2_a_b @ X1)
+        | ~ (rBT_rbt_sorted_a_b @ X0 @ X1)
+        | ((rBT_color_of_a_b @ X1) != (rBT_B))
+        | ~ (rBT_inv1_a_b @ X1))),
+    inference('cnf', [status(esa)], [fact_50_ord_Ois__rbt__def])).
+thf(zip_derived_cl2589, plain,
+    ((~ (rBT_inv1_a_b @ rBT_Empty_a_b)
+      | ((rBT_color_of_a_b @ rBT_Empty_a_b) != (rBT_B))
+      | ~ (rBT_rbt_sorted_a_b @ less @ rBT_Empty_a_b)
+      | ~ (rBT_inv2_a_b @ rBT_Empty_a_b))),
+    inference('sup+', [status(thm)], [zip_derived_cl410, zip_derived_cl44])).
+thf(fact_234_inv1_Osimps_I1_J, axiom, (rBT_inv1_a_b @ rBT_Empty_a_b)).
+thf(zip_derived_cl253, plain, ( (rBT_inv1_a_b @ rBT_Empty_a_b)),
+    inference('cnf', [status(esa)], [fact_234_inv1_Osimps_I1_J])).
+thf(fact_202_color__of_Osimps_I1_J, axiom,
+  (( rBT_color_of_a_b @ rBT_Empty_a_b ) = ( rBT_B ))).
+thf(zip_derived_cl194, plain,
+    (((rBT_color_of_a_b @ rBT_Empty_a_b) = (rBT_B))),
+    inference('cnf', [status(esa)], [fact_202_color__of_Osimps_I1_J])).
+thf(fact_38_ord_Orbt__sorted_Osimps_I1_J, axiom,
+  (![Less:( a > a > $o )]: ( rBT_rbt_sorted_a_b @ Less @ rBT_Empty_a_b ))).
+thf(zip_derived_cl37, plain,
+    (![X0 : a > a > $o]:  (rBT_rbt_sorted_a_b @ X0 @ rBT_Empty_a_b)),
+    inference('cnf', [status(esa)], [fact_38_ord_Orbt__sorted_Osimps_I1_J])).
+thf(fact_248_inv2_Osimps_I1_J, axiom, (rBT_inv2_a_b @ rBT_Empty_a_b)).
+thf(zip_derived_cl273, plain, ( (rBT_inv2_a_b @ rBT_Empty_a_b)),
+    inference('cnf', [status(esa)], [fact_248_inv2_Osimps_I1_J])).
+thf(zip_derived_cl2604, plain, (((rBT_B) != (rBT_B))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl2589, zip_derived_cl253, zip_derived_cl194, 
+               zip_derived_cl37, zip_derived_cl273])).
+thf(zip_derived_cl2605, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl2604])).
+
+% SZS output end Refutation

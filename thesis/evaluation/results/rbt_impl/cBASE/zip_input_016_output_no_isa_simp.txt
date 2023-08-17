@@ -1,0 +1,235 @@
+% Output for zip_input_016 with isabelle_simp False:
+% ZIP_TIMELIMIT is 30.000, ZIP_ULIMIT is 35.
+% done 971 iterations in 7.344s
+% SZS status Theorem for '/home/david/programming/zipperposition/thesis/evaluation/infiles/rbt_impl/zip_input_016.p'
+% SZS output start Refutation
+thf(rBT_rbt_a_b_type, type, rBT_rbt_a_b: $tType).
+thf(set_a_type, type, set_a: $tType).
+thf(list_a_type, type, list_a: $tType).
+thf(rBT_color_type, type, rBT_color: $tType).
+thf(a_type, type, a: $tType).
+thf(b_type, type, b: $tType).
+thf(insert_a_type, type, insert_a: a > set_a > set_a).
+thf(rBT_rbt_less_a_b_type, type, rBT_rbt_less_a_b: (a > a > $o) > a > 
+                                                   rBT_rbt_a_b > $o).
+thf(rBT_rbt_sorted_a_b_type, type, rBT_rbt_sorted_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > $o).
+thf(rBT_keys_a_b_type, type, rBT_keys_a_b: rBT_rbt_a_b > list_a).
+thf(set_a2_type, type, set_a2: list_a > set_a).
+thf(rBT_Branch_a_b_type, type, rBT_Branch_a_b: rBT_color > rBT_rbt_a_b > a > 
+                                               b > rBT_rbt_a_b > rBT_rbt_a_b).
+thf(t2_type, type, t2: rBT_rbt_a_b).
+thf(v_type, type, v: b).
+thf(t1_type, type, t1: rBT_rbt_a_b).
+thf(cons_a_type, type, cons_a: a > list_a > list_a).
+thf(dom_a_b_type, type, dom_a_b: (a > option_b) > set_a).
+thf(append_a_type, type, append_a: list_a > list_a > list_a).
+thf(less_type, type, less: a > a > $o).
+thf(rBT_rbt_lookup_a_b_type, type, rBT_rbt_lookup_a_b: (a > a > $o) > 
+                                                       rBT_rbt_a_b > a > option_b).
+thf(sup_sup_set_a_type, type, sup_sup_set_a: set_a > set_a > set_a).
+thf(option_b_type, type, option_b: $tType).
+thf(k_type, type, k: a).
+thf(rBT_rbt_greater_a_b_type, type, rBT_rbt_greater_a_b: (a > a > $o) > a > 
+                                                         rBT_rbt_a_b > $o).
+thf(c_type, type, c: rBT_color).
+thf(fact_60_rbt__lookup__keys, axiom,
+  (![T:rBT_rbt_a_b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ T ) =>
+     ( ( dom_a_b @ ( rBT_rbt_lookup_a_b @ less @ T ) ) =
+       ( set_a2 @ ( rBT_keys_a_b @ T ) ) ) ))).
+thf(zip_derived_cl57, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((dom_a_b @ (rBT_rbt_lookup_a_b @ less @ X0))
+          = (set_a2 @ (rBT_keys_a_b @ X0)))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_60_rbt__lookup__keys])).
+thf(zip_derived_cl57, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((dom_a_b @ (rBT_rbt_lookup_a_b @ less @ X0))
+          = (set_a2 @ (rBT_keys_a_b @ X0)))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_60_rbt__lookup__keys])).
+thf(zip_derived_cl57, plain,
+    (![X0 : rBT_rbt_a_b]:
+       (((dom_a_b @ (rBT_rbt_lookup_a_b @ less @ X0))
+          = (set_a2 @ (rBT_keys_a_b @ X0)))
+        | ~ (rBT_rbt_sorted_a_b @ less @ X0))),
+    inference('cnf', [status(esa)], [fact_60_rbt__lookup__keys])).
+thf(conj_1, conjecture,
+  (( dom_a_b @
+     ( rBT_rbt_lookup_a_b @ less @ ( rBT_Branch_a_b @ c @ t1 @ k @ v @ t2 ) ) ) =
+   ( insert_a @
+     k @ 
+     ( sup_sup_set_a @
+       ( dom_a_b @ ( rBT_rbt_lookup_a_b @ less @ t1 ) ) @ 
+       ( dom_a_b @ ( rBT_rbt_lookup_a_b @ less @ t2 ) ) ) ))).
+thf(zf_stmt_0, negated_conjecture,
+  (( dom_a_b @
+     ( rBT_rbt_lookup_a_b @ less @ ( rBT_Branch_a_b @ c @ t1 @ k @ v @ t2 ) ) ) !=
+   ( insert_a @
+     k @ 
+     ( sup_sup_set_a @
+       ( dom_a_b @ ( rBT_rbt_lookup_a_b @ less @ t1 ) ) @ 
+       ( dom_a_b @ ( rBT_rbt_lookup_a_b @ less @ t2 ) ) ) )),
+  inference('cnf.neg', [status(esa)], [conj_1])).
+thf(zip_derived_cl686, plain,
+    (((dom_a_b @ 
+       (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (insert_a @ k @ 
+           (sup_sup_set_a @ (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t1)) @ 
+            (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t2)))))),
+    inference('cnf', [status(esa)], [zf_stmt_0])).
+thf(fact_45_Un__insert__right, axiom,
+  (![A3:set_a,A:a,B2:set_a]:
+   ( ( sup_sup_set_a @ A3 @ ( insert_a @ A @ B2 ) ) =
+     ( insert_a @ A @ ( sup_sup_set_a @ A3 @ B2 ) ) ))).
+thf(zip_derived_cl39, plain,
+    (![X0 : a, X1 : set_a, X2 : set_a]:
+       ((sup_sup_set_a @ X1 @ (insert_a @ X0 @ X2))
+         = (insert_a @ X0 @ (sup_sup_set_a @ X1 @ X2)))),
+    inference('cnf', [status(esa)], [fact_45_Un__insert__right])).
+thf(zip_derived_cl2253, plain,
+    (((dom_a_b @ 
+       (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (sup_sup_set_a @ (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t1)) @ 
+           (insert_a @ k @ (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t2)))))),
+    inference('demod', [status(thm)], [zip_derived_cl686, zip_derived_cl39])).
+thf(zip_derived_cl3611, plain,
+    ((((dom_a_b @ 
+        (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+        != (sup_sup_set_a @ (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t1)) @ 
+            (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2)))))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t2))),
+    inference('sup-', [status(thm)], [zip_derived_cl57, zip_derived_cl2253])).
+thf(fact_298_sup__commute, axiom,
+  (![X:set_a,Y2:set_a]:
+   ( ( sup_sup_set_a @ X @ Y2 ) = ( sup_sup_set_a @ Y2 @ X ) ))).
+thf(zip_derived_cl184, plain,
+    (![X0 : set_a, X1 : set_a]:
+       ((sup_sup_set_a @ X1 @ X0) = (sup_sup_set_a @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_298_sup__commute])).
+thf(fact_59_local_Orbt__sorted_Osimps_I2_J, axiom,
+  (![C:rBT_color,L:rBT_rbt_a_b,K:a,V:b,R:rBT_rbt_a_b]:
+   ( ( rBT_rbt_sorted_a_b @ less @ ( rBT_Branch_a_b @ C @ L @ K @ V @ R ) ) <=>
+     ( ( rBT_rbt_greater_a_b @ less @ K @ R ) & 
+       ( rBT_rbt_sorted_a_b @ less @ R ) & 
+       ( rBT_rbt_sorted_a_b @ less @ L ) & 
+       ( rBT_rbt_less_a_b @ less @ K @ L ) ) ))).
+thf(zip_derived_cl53, plain,
+    (![X0 : rBT_rbt_a_b, X1 : rBT_color, X2 : rBT_rbt_a_b, X3 : a, X4 : b]:
+       ( (rBT_rbt_sorted_a_b @ less @ X0)
+        | ~ (rBT_rbt_sorted_a_b @ less @ 
+             (rBT_Branch_a_b @ X1 @ X2 @ X3 @ X4 @ X0)))),
+    inference('cnf', [status(esa)], [fact_59_local_Orbt__sorted_Osimps_I2_J])).
+thf(fact_23__092_060open_062rbt__sorted_A_IBranch_Ac_At1_Ak_Av_At2_J_092_060close_062, axiom,
+  (rBT_rbt_sorted_a_b @ less @ ( rBT_Branch_a_b @ c @ t1 @ k @ v @ t2 ))).
+thf(zip_derived_cl26, plain,
+    ( (rBT_rbt_sorted_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2))),
+    inference('cnf', [status(esa)],
+              [fact_23__092_060open_062rbt__sorted_A_IBranch_Ac_At1_Ak_Av_At2_J_092_060close_062])).
+thf(zip_derived_cl3473, plain, ( (rBT_rbt_sorted_a_b @ less @ t2)),
+    inference('sup+', [status(thm)], [zip_derived_cl53, zip_derived_cl26])).
+thf(zip_derived_cl3637, plain,
+    (((dom_a_b @ 
+       (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (sup_sup_set_a @ (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2))) @ 
+           (dom_a_b @ (rBT_rbt_lookup_a_b @ less @ t1))))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl3611, zip_derived_cl184, zip_derived_cl3473])).
+thf(zip_derived_cl3696, plain,
+    ((((dom_a_b @ 
+        (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+        != (sup_sup_set_a @ 
+            (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2))) @ 
+            (set_a2 @ (rBT_keys_a_b @ t1))))
+      | ~ (rBT_rbt_sorted_a_b @ less @ t1))),
+    inference('sup-', [status(thm)], [zip_derived_cl57, zip_derived_cl3637])).
+thf(zip_derived_cl184, plain,
+    (![X0 : set_a, X1 : set_a]:
+       ((sup_sup_set_a @ X1 @ X0) = (sup_sup_set_a @ X0 @ X1))),
+    inference('cnf', [status(esa)], [fact_298_sup__commute])).
+thf(zip_derived_cl54, plain,
+    (![X0 : rBT_rbt_a_b, X1 : rBT_color, X2 : a, X3 : b, X4 : rBT_rbt_a_b]:
+       ( (rBT_rbt_sorted_a_b @ less @ X0)
+        | ~ (rBT_rbt_sorted_a_b @ less @ 
+             (rBT_Branch_a_b @ X1 @ X0 @ X2 @ X3 @ X4)))),
+    inference('cnf', [status(esa)], [fact_59_local_Orbt__sorted_Osimps_I2_J])).
+thf(zip_derived_cl26, plain,
+    ( (rBT_rbt_sorted_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2))),
+    inference('cnf', [status(esa)],
+              [fact_23__092_060open_062rbt__sorted_A_IBranch_Ac_At1_Ak_Av_At2_J_092_060close_062])).
+thf(zip_derived_cl3490, plain, ( (rBT_rbt_sorted_a_b @ less @ t1)),
+    inference('sup+', [status(thm)], [zip_derived_cl54, zip_derived_cl26])).
+thf(zip_derived_cl3699, plain,
+    (((dom_a_b @ 
+       (rBT_rbt_lookup_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (sup_sup_set_a @ (set_a2 @ (rBT_keys_a_b @ t1)) @ 
+           (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2)))))),
+    inference('demod', [status(thm)],
+              [zip_derived_cl3696, zip_derived_cl184, zip_derived_cl3490])).
+thf(zip_derived_cl3914, plain,
+    ((((set_a2 @ (rBT_keys_a_b @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+        != (sup_sup_set_a @ (set_a2 @ (rBT_keys_a_b @ t1)) @ 
+            (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2)))))
+      | ~ (rBT_rbt_sorted_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))),
+    inference('sup-', [status(thm)], [zip_derived_cl57, zip_derived_cl3699])).
+thf(zip_derived_cl26, plain,
+    ( (rBT_rbt_sorted_a_b @ less @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2))),
+    inference('cnf', [status(esa)],
+              [fact_23__092_060open_062rbt__sorted_A_IBranch_Ac_At1_Ak_Av_At2_J_092_060close_062])).
+thf(zip_derived_cl3916, plain,
+    (((set_a2 @ (rBT_keys_a_b @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (sup_sup_set_a @ (set_a2 @ (rBT_keys_a_b @ t1)) @ 
+           (insert_a @ k @ (set_a2 @ (rBT_keys_a_b @ t2)))))),
+    inference('demod', [status(thm)], [zip_derived_cl3914, zip_derived_cl26])).
+thf(fact_154_list_Osimps_I15_J, axiom,
+  (![X21:a,X22:list_a]:
+   ( ( set_a2 @ ( cons_a @ X21 @ X22 ) ) =
+     ( insert_a @ X21 @ ( set_a2 @ X22 ) ) ))).
+thf(zip_derived_cl130, plain,
+    (![X0 : a, X1 : list_a]:
+       ((set_a2 @ (cons_a @ X0 @ X1)) = (insert_a @ X0 @ (set_a2 @ X1)))),
+    inference('cnf', [status(esa)], [fact_154_list_Osimps_I15_J])).
+thf(zip_derived_cl5237, plain,
+    (((set_a2 @ (rBT_keys_a_b @ (rBT_Branch_a_b @ c @ t1 @ k @ v @ t2)))
+       != (sup_sup_set_a @ (set_a2 @ (rBT_keys_a_b @ t1)) @ 
+           (set_a2 @ (cons_a @ k @ (rBT_keys_a_b @ t2)))))),
+    inference('demod', [status(thm)], [zip_derived_cl3916, zip_derived_cl130])).
+thf(fact_142_keys__simps_I2_J, axiom,
+  (![C:rBT_color,L:rBT_rbt_a_b,K:a,V:b,R:rBT_rbt_a_b]:
+   ( ( rBT_keys_a_b @ ( rBT_Branch_a_b @ C @ L @ K @ V @ R ) ) =
+     ( append_a @
+       ( rBT_keys_a_b @ L ) @ ( cons_a @ K @ ( rBT_keys_a_b @ R ) ) ) ))).
+thf(zip_derived_cl126, plain,
+    (![X0 : rBT_rbt_a_b, X1 : a, X2 : rBT_rbt_a_b, X3 : rBT_color, X4 : b]:
+       ((rBT_keys_a_b @ (rBT_Branch_a_b @ X3 @ X0 @ X1 @ X4 @ X2))
+         = (append_a @ (rBT_keys_a_b @ X0) @ 
+            (cons_a @ X1 @ (rBT_keys_a_b @ X2))))),
+    inference('cnf', [status(esa)], [fact_142_keys__simps_I2_J])).
+thf(zip_derived_cl8770, plain,
+    (((set_a2 @ 
+       (append_a @ (rBT_keys_a_b @ t1) @ (cons_a @ k @ (rBT_keys_a_b @ t2))))
+       != (sup_sup_set_a @ (set_a2 @ (rBT_keys_a_b @ t1)) @ 
+           (set_a2 @ (cons_a @ k @ (rBT_keys_a_b @ t2)))))),
+    inference('demod', [status(thm)], [zip_derived_cl5237, zip_derived_cl126])).
+thf(fact_217_set__append, axiom,
+  (![Xs:list_a,Ys:list_a]:
+   ( ( set_a2 @ ( append_a @ Xs @ Ys ) ) =
+     ( sup_sup_set_a @ ( set_a2 @ Xs ) @ ( set_a2 @ Ys ) ) ))).
+thf(zip_derived_cl152, plain,
+    (![X0 : list_a, X1 : list_a]:
+       ((set_a2 @ (append_a @ X0 @ X1))
+         = (sup_sup_set_a @ (set_a2 @ X0) @ (set_a2 @ X1)))),
+    inference('cnf', [status(esa)], [fact_217_set__append])).
+thf(zip_derived_cl9169, plain,
+    (((set_a2 @ 
+       (append_a @ (rBT_keys_a_b @ t1) @ (cons_a @ k @ (rBT_keys_a_b @ t2))))
+       != (set_a2 @ 
+           (append_a @ (rBT_keys_a_b @ t1) @ 
+            (cons_a @ k @ (rBT_keys_a_b @ t2)))))),
+    inference('demod', [status(thm)], [zip_derived_cl8770, zip_derived_cl152])).
+thf(zip_derived_cl9170, plain, ($false),
+    inference('simplify', [status(thm)], [zip_derived_cl9169])).
+
+% SZS output end Refutation
